@@ -1,15 +1,15 @@
 import React from 'react';
 import Head from 'next/head';
-import Homepage from '../containers/Homepage/Homepage';
+import AddPerson from '../containers/Person/AddPerson';
 
 function PageIndex() {
   return (
     <>
       <Head>
-        <title>Cherish | Home</title>
+        <title>Cherish | Add Person</title>
       </Head>
 
-      <Homepage />
+      <AddPerson />
     </>
   );
 }

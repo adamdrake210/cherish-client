@@ -1,8 +1,15 @@
 // import App from 'next/app'
+import React from 'react';
 import '../styles/styles.scss';
+import Nav from '../components/Nav';
 
 function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />;
+  return (
+    <>
+      <Nav />
+      <Component {...pageProps} />
+    </>
+  );
 }
 
 // Only uncomment this method if you have blocking data requirements for

@@ -2,6 +2,7 @@
 import React from 'react';
 import '../styles/styles.scss';
 import Nav from '../components/Nav';
+import 'react-datepicker/dist/react-datepicker.css';
 
 function MyApp({ Component, pageProps }) {
   return (

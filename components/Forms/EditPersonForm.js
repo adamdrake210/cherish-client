@@ -11,6 +11,7 @@ export default function EditPersonForm({ success, setSuccess, setPersonId }) {
           initialValues={{
             firstName: '',
             lastName: '',
+            relationshiptype: '',
             email: '',
             birthday: '',
             userId: 'gbm98V9ySiU46PvoebGH',
@@ -36,17 +37,19 @@ export default function EditPersonForm({ success, setSuccess, setPersonId }) {
             <Form className="formContainer">
               <label htmlFor="firstName">First Name</label>
               <Field type="text" name="firstName" required />
-
               <ErrorMessage name="firstName" component="div" />
+
               <label htmlFor="lastName">Last Name</label>
               <Field type="text" name="lastName" required />
               <ErrorMessage name="lastName" component="div" />
+
               <label htmlFor="email">Email</label>
               <Field type="email" name="email" placeholder="Email" required />
               <ErrorMessage name="email" component="div" />
               <label htmlFor="birthday">Birthday</label>
               <Field type="text" name="birthday" required />
               <ErrorMessage name="birthday" component="div" />
+
               <button type="submit" disabled={isSubmitting}>
                 Submit
               </button>

@@ -5,24 +5,26 @@ import relationshipTypeArray from '../../constants';
 import DatePickerField from './Fields/DatePickerField';
 
 // TODO Do this.
-export default function EditPersonForm({
-  person,
-  success,
-  setSuccess,
-  setPersonId,
-}) {
+export default function EditPersonForm({ id, person, success, setSuccess }) {
   return (
     <div className="container">
       <div>
         <Formik
-          initialValues={person}
+          initialValues={{
+            firstName: person.firstName,
+            lastName: person.lastName,
+            relationshiptype: person.relationshiptype,
+            birthday: person.birthday.seconds * 1000,
+            email: person.email,
+            address: person.address,
+            link_1: person.link_1,
+          }}
           onSubmit={(values, { setSubmitting }) => {
             setTimeout(() => {
-              updatePerson(values)
+              updatePerson(id, values)
                 .then(docRef => {
-                  console.log('Document written with ID: ', docRef.id);
+                  console.log('Document written with ID: ', docRef);
                   setSubmitting(false);
-                  setPersonId(docRef.id);
                   setSuccess(true);
                 })
                 .catch(error => {
@@ -44,16 +46,18 @@ export default function EditPersonForm({
               <label htmlFor="relationshiptype">Relationship</label>
               <Field as="select" name="relationshiptype" required>
                 {relationshipTypeArray.map(relationship => (
-                  <option value={relationship}>{relationship}</option>
+                  <option key={relationship} value={relationship}>
+                    {relationship}
+                  </option>
                 ))}
               </Field>
               <ErrorMessage name="relationshiptype" component="div" />
               <label htmlFor="birthday">Birthday</label>
-              {/* <DatePickerField
+              <DatePickerField
                 name="birthday"
                 value={values.birthday}
                 onChange={setFieldValue}
-              /> */}
+              />
               <ErrorMessage name="birthday" component="div" />
               <label htmlFor="email">Email</label>
               <Field type="email" name="email" placeholder="Email" />
@@ -71,7 +75,7 @@ export default function EditPersonForm({
             </Form>
           )}
         </Formik>
-        {success && <p>This person has been added to your contacts!</p>}
+        {success && <p>{person.firstName}'s details have been updated.</p>}
       </div>
     </div>
   );

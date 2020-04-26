@@ -13,5 +13,8 @@ export function getPerson(id) {
 }
 
 export function updatePerson(id, values) {
-  return firestore.collection('people').doc(id).update(values);
+  return firestore
+    .collection('people')
+    .doc(id)
+    .set({ ...values });
 }

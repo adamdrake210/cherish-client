@@ -2,18 +2,7 @@ import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import DatePickerField from './Fields/DatePickerField';
 import { addPerson } from '../../firebase/firebaseapi';
-
-const relationshipTypeArray = [
-  'mother',
-  'father',
-  'son',
-  'daughter',
-  'brother',
-  'sister',
-  'cousin',
-  'Friend',
-  'colleague',
-];
+import relationshipTypeArray from '../../constants';
 
 export default function AddPersonForm({ success, setSuccess, setPersonId }) {
   const validateEmail = value => {

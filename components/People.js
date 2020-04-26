@@ -51,8 +51,8 @@ function People() {
           {people.map(peep => (
             <li key={peep.id}>
               {`${peep.data().firstName} ${peep.data().lastName}`}{' '}
-              <Link href={`/edit-person/${peep.id}`}>
-                <a>Edit Person</a>
+              <Link passHref href={`/edit-person/${peep.id}`}>
+                Edit Person
               </Link>
             </li>
           ))}

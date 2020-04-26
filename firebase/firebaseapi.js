@@ -11,3 +11,7 @@ export function addRelationship(values) {
 export function getPerson(id) {
   return firestore.collection('people').doc(id).get();
 }
+
+export function updatePerson(id, values) {
+  return firestore.collection('people').doc(id).update(values);
+}

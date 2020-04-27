@@ -1,12 +1,14 @@
 const relationshipTypeArray = [
-  'mother',
-  'father',
+  'husband',
+  'wife',
   'son',
   'daughter',
+  'Friend',
+  'father',
+  'mother',
   'brother',
   'sister',
   'cousin',
-  'Friend',
   'colleague',
 ];
 

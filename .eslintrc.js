@@ -34,6 +34,7 @@ module.exports = {
     'react/require-default-props': 0,
     'react/jsx-props-no-spreading': 0,
     'react/jsx-one-expression-per-line': 0,
+    'jsx-a11y/label-has-associated-control': 0,
     'no-console': 'off',
     'jest/no-disabled-tests': 'warn',
     'jest/no-focused-tests': 'error',

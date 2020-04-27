@@ -1,6 +1,13 @@
 import React, { useState } from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, Form } from 'formik';
 import { addRelationship } from '../../firebase/firebaseapi';
+import FirstName from './Fields/FirstName';
+import LastName from './Fields/LastName';
+import Address from './Fields/Address';
+import RelationshipType from './Fields/RelationshipType';
+import Email from './Fields/Email';
+import Birthday from './Fields/Birthday';
+import Comments from './Fields/Comments';
 
 export default function AddRelationshipForm({ personId }) {
   return (
@@ -14,6 +21,7 @@ export default function AddRelationshipForm({ personId }) {
             email: '',
             birthday: '',
             relationshiptype: '',
+            comments: '',
             peopleId: personId,
           }}
           onSubmit={(values, { setSubmitting }) => {
@@ -31,24 +39,19 @@ export default function AddRelationshipForm({ personId }) {
             }, 400);
           }}
         >
-          {({ isSubmitting }) => (
+          {({ isSubmitting, values, setFieldValue }) => (
             <Form className="formContainer">
-              <label htmlFor="firstName">First Name</label>
-              <Field type="text" name="firstName" required />
-
-              <ErrorMessage name="firstName" component="div" />
-              <label htmlFor="lastName">Last Name</label>
-              <Field type="text" name="lastName" required />
-              <ErrorMessage name="lastName" component="div" />
-              <label htmlFor="email">Email</label>
-              <Field type="email" name="email" placeholder="Email" required />
-              <ErrorMessage name="email" component="div" />
-              <label htmlFor="birthday">Birthday</label>
-              <Field type="text" name="birthday" required />
-              <ErrorMessage name="birthday" component="div" />
-              <label htmlFor="relationshiptype">Relationship</label>
-              <Field type="text" name="relationshiptype" required />
-              <ErrorMessage name="relationshiptype" component="div" />
+              <RelationshipType isEditable />
+              <FirstName isEditable />
+              <LastName isEditable />
+              <Birthday
+                isEditable
+                values={values}
+                setFieldValue={setFieldValue}
+              />
+              <Email isEditable />
+              <Address isEditable />
+              <Comments isEditable />
               <button type="submit" disabled={isSubmitting}>
                 Submit
               </button>

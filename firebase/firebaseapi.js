@@ -12,6 +12,10 @@ export function getPerson(id) {
   return firestore.collection('people').doc(id).get();
 }
 
+export function getPeople(id) {
+  return firestore.collection('people').where('userId', '==', id).get();
+}
+
 export function getRelationships(id) {
   return firestore.collection('relationship').where('peopleId', '==', id).get();
 }

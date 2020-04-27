@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { firestore } from '../firebase/firebase';
+import { getPeople } from '../firebase/firebaseapi';
 
 function People() {
   const [user, setUser] = useState();
   const [people, setPeople] = useState([]);
 
-  const getPeople = async id =>
-    firestore
-      .collection('people')
-      .where('userId', '==', id)
-      .get()
+  const handleGetPeople = async id =>
+    getPeople(id)
       .then(querySnapshot => {
         querySnapshot.docs.map(doc => ({
           ...doc.data(),
@@ -30,7 +28,7 @@ function People() {
       .then(querySnapshot => {
         querySnapshot.docs.map(doc => {
           setUser({ ...doc.data(), id: doc.id });
-          getPeople(doc.id);
+          handleGetPeople(doc.id);
         });
       })
       .catch(err => {
@@ -45,12 +43,15 @@ function People() {
     <div>
       <h1>Current User</h1>
       {user && <p>{`${user.firstName} ${user.lastName}`}</p>}
+
       <h2>All</h2>
       {people && (
         <ul>
           {people.map(peep => (
             <li key={peep.id}>
-              {`${peep.data().firstName} ${peep.data().lastName}`}{' '}
+              <Link passHref href={`/person/${peep.id}`}>
+                {`${peep.data().firstName} ${peep.data().lastName}`}
+              </Link>{' '}
               <Link passHref href={`/edit-person/${peep.id}`}>
                 Edit Person
               </Link>

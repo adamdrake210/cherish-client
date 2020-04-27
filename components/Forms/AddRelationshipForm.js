@@ -12,7 +12,6 @@ import Comments from './Fields/Comments';
 export default function AddRelationshipForm({ personId }) {
   return (
     <div className="container">
-      <p>Form for this id: {personId}</p>
       <div>
         <Formik
           initialValues={{

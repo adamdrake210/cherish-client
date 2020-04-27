@@ -6,13 +6,14 @@ import { getRelationships } from '../../firebase/firebaseapi';
 
 export default function EditPerson({ id, person }) {
   const [success, setSuccess] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isAddRelationship, setIsAddRelationship] = useState(false);
   const [relationships, setRelationships] = useState([]);
 
   useEffect(() => {
     getRelationships(id).then(querySnapshot => {
       setRelationships(querySnapshot.docs);
-      setLoading(false);
+      setIsLoading(false);
       querySnapshot.docs.map(doc => {
         console.log({ ...doc.data(), id: doc.id });
       });
@@ -31,25 +32,47 @@ export default function EditPerson({ id, person }) {
         />
       </div>
 
-      <h2>Current Relationship</h2>
-      {loading && <p>Loading...</p>}
+      <h2>Current Relationships</h2>
+      {isLoading && <p>Loading...</p>}
 
-      {!loading && relationships.length === 0 && (
+      {!isLoading && relationships.length === 0 && (
         <p>Currently there are no relationships for this person.</p>
       )}
-      {!loading &&
+      {!isLoading &&
         relationships.length > 0 &&
         relationships.map(relationship => (
           <EditRelationshipForm
-            key={relationship.data().peopleId}
+            key={relationship.id}
             relationship={relationship.data()}
             id={relationship.id}
           />
         ))}
 
       <div>
-        <h2>Add Relationship</h2>
-        <AddRelationshipForm personId={id} />
+        {isAddRelationship && (
+          <>
+            <h2>Add Relationship</h2>
+            <AddRelationshipForm personId={id} />
+          </>
+        )}
+
+        {isAddRelationship && (
+          <button
+            type="button"
+            onClick={() => setIsAddRelationship(!isAddRelationship)}
+          >
+            Cancel
+          </button>
+        )}
+
+        {!isAddRelationship && (
+          <button
+            type="button"
+            onClick={() => setIsAddRelationship(!isAddRelationship)}
+          >
+            Add Relationship
+          </button>
+        )}
       </div>
     </div>
   );

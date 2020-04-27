@@ -4,6 +4,8 @@ const relationshipTypeArray = [
   'son',
   'daughter',
   'Friend',
+  'girlfriend',
+  'boyfriend',
   'father',
   'mother',
   'brother',

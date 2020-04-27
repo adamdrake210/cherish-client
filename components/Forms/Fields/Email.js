@@ -17,7 +17,7 @@ export default function Email({ isEditable }) {
         type="email"
         name="email"
         placeholder="Email"
-        validate={validateEmail}
+        // validate={validateEmail}
         disabled={!isEditable}
       />
       <ErrorMessage name="email" component="div" />

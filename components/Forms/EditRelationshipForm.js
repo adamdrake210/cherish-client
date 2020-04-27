@@ -43,9 +43,10 @@ export default function EditRelationshipForm({ id, relationship }) {
           onSubmit={(values, { setSubmitting }) => {
             setTimeout(() => {
               updateRelationship(id, values)
-                .then(docRef => {
-                  console.log('Document written with ID: ', docRef.id);
+                .then(() => {
+                  console.log('Document updated');
                   setSubmitting(false);
+                  setIsEditable(false);
                 })
                 .catch(error => {
                   console.error('Error adding document: ', error);

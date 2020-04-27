@@ -12,6 +12,9 @@ export default function RelationshipType({ isEditable }) {
         required
         disabled={!isEditable}
       >
+        <option value="" disabled hidden>
+          Choose here
+        </option>
         {relationshipTypeArray.map(relationship => (
           <option key={relationship} value={relationship}>
             {relationship}

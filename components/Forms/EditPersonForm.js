@@ -7,21 +7,34 @@ import Address from './Fields/Address';
 import RelationshipType from './Fields/RelationshipType';
 import Email from './Fields/Email';
 import Birthday from './Fields/Birthday';
+import Comments from './Fields/Comments';
 
 export default function EditPersonForm({ id, person, success, setSuccess }) {
   const [isEditable, setIsEditable] = useState(false);
+
+  const {
+    firstName,
+    lastName,
+    email,
+    address,
+    birthday,
+    relationshiptype,
+    comments,
+    peopleId,
+  } = person;
 
   return (
     <div className="container">
       <div>
         <Formik
           initialValues={{
-            firstName: person.firstName,
-            lastName: person.lastName,
-            relationshiptype: person.relationshiptype,
-            birthday: person.birthday.seconds * 1000,
-            email: person.email,
-            address: person.address,
+            firstName,
+            lastName,
+            relationshiptype,
+            birthday: birthday.seconds * 1000,
+            email,
+            address,
+            comments,
             link_1: person.link_1,
             userId: 'gbm98V9ySiU46PvoebGH',
           }}
@@ -38,7 +51,6 @@ export default function EditPersonForm({ id, person, success, setSuccess }) {
                   console.error('Error adding document: ', error);
                   setSubmitting(false);
                 });
-              alert(JSON.stringify(values, null, 2));
             }, 400);
           }}
         >
@@ -54,6 +66,7 @@ export default function EditPersonForm({ id, person, success, setSuccess }) {
               />
               <Email isEditable={isEditable} />
               <Address isEditable={isEditable} />
+              <Comments isEditable={isEditable} />
               {/* // TODO Do this. */}
               <h3>Useful Links</h3>
               <label htmlFor="link_1">Link 1</label>

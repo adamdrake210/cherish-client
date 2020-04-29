@@ -14,6 +14,16 @@ function Nav() {
           <a>Add Person</a>
         </Link>
       </li>
+      <li>
+        <Link href="/login">
+          <a>Login</a>
+        </Link>
+      </li>
+      <li>
+        <Link href="/register">
+          <a>Register</a>
+        </Link>
+      </li>
     </ul>
   );
 }

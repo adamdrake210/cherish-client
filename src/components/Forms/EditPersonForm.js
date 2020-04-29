@@ -82,7 +82,10 @@ export default function EditPersonForm({ id, person, success, setSuccess }) {
           )}
         </Formik>
         {!isEditable && (
-          <button type="button" onClick={() => setIsEditable(!isEditable)}>
+          <button
+            type="button"
+            onClick={() => setIsEditable(prevIsEditable => !prevIsEditable)}
+          >
             Edit
           </button>
         )}

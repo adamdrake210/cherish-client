@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
 import EditPersonForm from '../../components/Forms/EditPersonForm';
 import AddRelationshipForm from '../../components/Forms/AddRelationshipForm';
 import EditRelationshipForm from '../../components/Forms/EditRelationshipForm';
@@ -15,7 +16,7 @@ export default function EditPerson({ id, person }) {
       setRelationships(querySnapshot.docs);
       setIsLoading(false);
       querySnapshot.docs.map(doc => {
-        console.log({ ...doc.data(), id: doc.id });
+        return console.log({ ...doc.data(), id: doc.id });
       });
     });
   }, []);
@@ -24,6 +25,9 @@ export default function EditPerson({ id, person }) {
     <div className="container">
       <div>
         <h1>Edit Person - {person.firstName}</h1>
+        <Link passHref href={`/person/${id}`}>
+          <a>View Person Details</a>
+        </Link>
         <EditPersonForm
           id={id}
           person={person}

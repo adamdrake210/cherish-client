@@ -13,7 +13,7 @@ export default function Person({ person, id }) {
       setRelationships(querySnapshot.docs);
       setIsLoading(false);
       querySnapshot.docs.map(doc => {
-        console.log({ ...doc.data(), id: doc.id });
+        return console.log({ ...doc.data(), id: doc.id });
       });
     });
   }, []);

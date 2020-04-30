@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { Formik, Form } from 'formik';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { firebase } from '../../firebase/firebase';
 import Email from './Fields/Email';
 import Password from './Fields/Password';
 
 export default function LoginForm() {
   const [firebaseError, setFirebaseError] = useState('');
+  const router = useRouter();
 
   function login(email, password) {
     return firebase.auth().signInWithEmailAndPassword(email, password);
@@ -24,6 +26,7 @@ export default function LoginForm() {
               login(values.email, values.password)
                 .then(response => {
                   setSubmitting(false);
+                  router.push('/');
                   console.log(response);
                 })
                 .catch(error => {

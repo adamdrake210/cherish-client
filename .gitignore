@@ -18,7 +18,8 @@
 # misc
 .DS_Store
 
-/src/firebase/config.js
+# config
+/config/firebaseConfig.js
 
 # debug
 npm-debug.log*

@@ -1,31 +1,46 @@
 import React from 'react';
 import { Formik, Form } from 'formik';
 import Link from 'next/link';
+import { firebase } from '../../firebase/firebase';
 import FirstName from './Fields/FirstName';
 import LastName from './Fields/LastName';
 import Email from './Fields/Email';
 import Password from './Fields/Password';
 
 export default function RegisterForm() {
+  async function register(firstName, email, password) {
+    const newUser = await firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password);
+    return newUser.user.updateProfile({
+      displayName: firstName,
+    });
+  }
+
   return (
     <div className="container">
       <div>
         <Formik
           initialValues={{
+            firstName: '',
+            lastName: '',
             email: '',
+            password: '',
           }}
           onSubmit={(values, { setSubmitting }) => {
             setTimeout(() => {
-              addPerson(values)
-                .then(docRef => {
-                  console.log('Document written with ID: ', docRef.id);
+              register(values.firstName, values.email, values.password)
+                .then(() => {
                   setSubmitting(false);
-                  setPersonId(docRef.id);
-                  setSuccess(true);
                 })
                 .catch(error => {
-                  console.error('Error adding document: ', error);
                   setSubmitting(false);
+                  // Handle Errors here.
+                  const errorCode = error.code;
+                  const errorMessage = error.message;
+                  console.log('errorCode', errorCode);
+                  console.log('errorMessage', errorMessage);
+                  // ...
                 });
               alert(JSON.stringify(values, null, 2));
             }, 400);
@@ -33,8 +48,8 @@ export default function RegisterForm() {
         >
           {({ isSubmitting }) => (
             <Form className="formContainer">
-              <FirstName />
-              <LastName />
+              <FirstName isEditable />
+              <LastName isEditable />
               <Email isEditable />
               <Password title="Choose a secure password" />
 

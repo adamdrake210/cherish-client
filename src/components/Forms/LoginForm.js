@@ -1,29 +1,39 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Formik, Form } from 'formik';
 import Link from 'next/link';
+import { firebase } from '../../firebase/firebase';
 import Email from './Fields/Email';
 import Password from './Fields/Password';
 
 export default function LoginForm() {
+  const [firebaseError, setFirebaseError] = useState('');
+
+  function login(email, password) {
+    return firebase.auth().signInWithEmailAndPassword(email, password);
+  }
   return (
     <div className="container">
       <div>
         <Formik
           initialValues={{
             email: '',
+            password: '',
           }}
           onSubmit={(values, { setSubmitting }) => {
             setTimeout(() => {
-              addPerson(values)
-                .then(docRef => {
-                  console.log('Document written with ID: ', docRef.id);
+              login(values.email, values.password)
+                .then(response => {
                   setSubmitting(false);
-                  setPersonId(docRef.id);
-                  setSuccess(true);
+                  console.log(response);
                 })
                 .catch(error => {
-                  console.error('Error adding document: ', error);
                   setSubmitting(false);
+                  // Handle Errors here.
+                  const errorCode = error.code;
+                  const errorMessage = error.message;
+                  console.log('errorCode', errorCode);
+                  console.log('errorMessage', errorMessage);
+                  setFirebaseError(errorMessage);
                 });
               alert(JSON.stringify(values, null, 2));
             }, 400);
@@ -33,7 +43,7 @@ export default function LoginForm() {
             <Form className="formContainer">
               <Email isEditable />
               <Password title="Enter Password here" />
-
+              {firebaseError && <p>{firebaseError}</p>}
               <button type="submit" disabled={isSubmitting}>
                 Submit
               </button>

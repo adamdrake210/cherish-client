@@ -31,7 +31,7 @@ export default function EditPersonForm({ id, person, success, setSuccess }) {
             firstName,
             lastName,
             relationshiptype,
-            birthday: birthday.seconds * 1000,
+            birthday: birthday ? birthday.seconds * 1000 : '',
             email,
             address,
             comments,

@@ -7,7 +7,7 @@ import Address from './Fields/Address';
 import RelationshipType from './Fields/RelationshipType';
 import Email from './Fields/Email';
 import Birthday from './Fields/Birthday';
-import Comments from './Fields/Comments';
+import Notes from './Fields/Notes';
 
 export default function EditPersonForm({ id, person, success, setSuccess }) {
   const [isEditable, setIsEditable] = useState(false);
@@ -19,8 +19,7 @@ export default function EditPersonForm({ id, person, success, setSuccess }) {
     address,
     birthday,
     relationshiptype,
-    comments,
-    peopleId,
+    notes,
   } = person;
 
   return (
@@ -34,9 +33,8 @@ export default function EditPersonForm({ id, person, success, setSuccess }) {
             birthday: birthday ? birthday.seconds * 1000 : '',
             email,
             address,
-            comments,
+            notes,
             link_1: person.link_1,
-            userId: 'gbm98V9ySiU46PvoebGH',
           }}
           onSubmit={(values, { setSubmitting }) => {
             setTimeout(() => {
@@ -66,7 +64,7 @@ export default function EditPersonForm({ id, person, success, setSuccess }) {
               />
               <Email isEditable={isEditable} />
               <Address isEditable={isEditable} />
-              <Comments isEditable={isEditable} />
+              <Notes isEditable={isEditable} />
               {/* // TODO Do this. */}
               <h3>Useful Links</h3>
               <label htmlFor="link_1">Link 1</label>

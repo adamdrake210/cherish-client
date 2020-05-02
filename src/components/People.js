@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { firestore } from '../firebase/firebase';
 import { getPeople } from '../firebase/firebaseapi';
 import { useUserContext } from '../context/userContext';
 
 function People() {
-  // const [user, setUser] = useState();
+  const [loading, setLoading] = useState(true);
   const [people, setPeople] = useState([]);
   const { user } = useUserContext();
 
@@ -17,28 +16,14 @@ function People() {
           id: doc.id,
         }));
         setPeople(querySnapshot.docs);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-
-  const getUser = async () =>
-    firestore
-      .collection('users')
-      .where('email', '==', 'adamgedrake@gmail.com')
-      .get()
-      .then(querySnapshot => {
-        querySnapshot.docs.map(doc => {
-          // setUser({ ...doc.data(), id: doc.id });
-          handleGetPeople(doc.id);
-        });
+        setLoading(false);
       })
       .catch(err => {
         console.log(err);
       });
 
   useEffect(() => {
-    getUser();
+    handleGetPeople(user.uid);
   }, []);
 
   return (
@@ -59,6 +44,15 @@ function People() {
             </li>
           ))}
         </ul>
+      )}
+      {loading && <p>Loading...</p>}
+      {!loading && people.length < 1 && (
+        <div className="flex-column-container">
+          <p>No People have been added yet</p>
+          <Link passHref href="/add-person">
+            Add Your First Person!
+          </Link>
+        </div>
       )}
     </div>
   );

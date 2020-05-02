@@ -7,7 +7,7 @@ import Address from './Fields/Address';
 import RelationshipType from './Fields/RelationshipType';
 import Email from './Fields/Email';
 import Birthday from './Fields/Birthday';
-import Comments from './Fields/Comments';
+import Notes from './Fields/Notes';
 
 export default function AddRelationshipForm({ personId }) {
   return (
@@ -20,7 +20,7 @@ export default function AddRelationshipForm({ personId }) {
             email: '',
             birthday: '',
             relationshiptype: '',
-            comments: '',
+            notes: '',
             peopleId: personId,
           }}
           onSubmit={(values, { setSubmitting }) => {
@@ -50,7 +50,7 @@ export default function AddRelationshipForm({ personId }) {
               />
               <Email isEditable />
               <Address isEditable />
-              <Comments isEditable />
+              <Notes isEditable />
               <button type="submit" disabled={isSubmitting}>
                 Submit
               </button>

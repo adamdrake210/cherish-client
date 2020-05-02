@@ -7,8 +7,11 @@ import Address from './Fields/Address';
 import RelationshipType from './Fields/RelationshipType';
 import Email from './Fields/Email';
 import Birthday from './Fields/Birthday';
+import Notes from './Fields/Notes';
+import { useUserContext } from '../../context/userContext';
 
 export default function AddPersonForm({ success, setSuccess, setPersonId }) {
+  const { user } = useUserContext();
   return (
     <div className="container">
       <div>
@@ -21,7 +24,8 @@ export default function AddPersonForm({ success, setSuccess, setPersonId }) {
             email: '',
             address: '',
             link_1: '',
-            userId: 'gbm98V9ySiU46PvoebGH',
+            notes: '',
+            userId: user.uid,
           }}
           onSubmit={(values, { setSubmitting }) => {
             setTimeout(() => {
@@ -42,12 +46,13 @@ export default function AddPersonForm({ success, setSuccess, setPersonId }) {
         >
           {({ isSubmitting, values, setFieldValue }) => (
             <Form className="formContainer">
-              <FirstName />
-              <LastName />
-              <RelationshipType />
+              <FirstName isEditable />
+              <LastName isEditable />
+              <RelationshipType isEditable />
               <Birthday values={values} setFieldValue={setFieldValue} />
-              <Email />
-              <Address />
+              <Email isEditable />
+              <Address isEditable />
+              <Notes isEditable />
               <h3>Useful Links</h3>
               <label htmlFor="link_1">Link 1</label>
               <Field type="text" name="link_1" placeholder="Enter a url here" />

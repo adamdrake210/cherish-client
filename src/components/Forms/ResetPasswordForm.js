@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Formik, Form } from 'formik';
-import { useRouter } from 'next/router';
 import { firebase } from '../../firebase/firebase';
 import Email from './Fields/Email';
 
@@ -8,7 +7,6 @@ export default function ResetPasswordForm() {
   const [firebaseError, setFirebaseError] = useState(null);
   const [isPasswordReset, setIsPasswordReset] = useState(false);
   const [loading, setLoading] = useState(false);
-  const router = useRouter();
 
   function resetPassword(email) {
     setLoading(true);

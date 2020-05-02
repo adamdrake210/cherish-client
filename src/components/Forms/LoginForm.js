@@ -7,7 +7,7 @@ import Email from './Fields/Email';
 import Password from './Fields/Password';
 
 export default function LoginForm() {
-  const [firebaseError, setFirebaseError] = useState('');
+  const [firebaseError, setFirebaseError] = useState(null);
   const router = useRouter();
 
   function login(email, password) {
@@ -25,6 +25,7 @@ export default function LoginForm() {
             setTimeout(() => {
               login(values.email, values.password)
                 .then(response => {
+                  setFirebaseError(null);
                   setSubmitting(false);
                   router.push('/');
                   console.log(response);
@@ -46,13 +47,13 @@ export default function LoginForm() {
             <Form className="formContainer">
               <Email isEditable />
               <Password title="Enter Password here" />
-              {firebaseError && <p>{firebaseError}</p>}
               <button type="submit" disabled={isSubmitting}>
                 Submit
               </button>
             </Form>
           )}
         </Formik>
+        {firebaseError && <p>{firebaseError}</p>}
         <div className="login-link-container">
           <Link href="/reset-password">
             <a>Forgot Password?</a>

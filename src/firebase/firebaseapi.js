@@ -24,12 +24,12 @@ export function updatePerson(id, values) {
   return firestore
     .collection('people')
     .doc(id)
-    .set({ ...values });
+    .set({ ...values }, { merge: true });
 }
 
 export function updateRelationship(id, values) {
   return firestore
     .collection('relationship')
     .doc(id)
-    .set({ ...values });
+    .set({ ...values }, { merge: true });
 }

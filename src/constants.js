@@ -6,6 +6,8 @@ const relationshipTypeArray = [
   'Friend',
   'girlfriend',
   'boyfriend',
+  'fiance',
+  'fiancée',
   'father',
   'mother',
   'brother',

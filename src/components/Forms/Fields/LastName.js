@@ -5,7 +5,7 @@ export default function LasttName({ isEditable }) {
   return (
     <>
       <label htmlFor="lastName">Last Name</label>
-      <Field type="text" name="lastName" required disabled={!isEditable} />
+      <Field type="text" name="lastName" disabled={!isEditable} />
       <ErrorMessage name="lastName" component="div" />
     </>
   );

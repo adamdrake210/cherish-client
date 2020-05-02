@@ -3,6 +3,10 @@ import { Field, ErrorMessage } from 'formik';
 import relationshipTypeArray from '../../../constants';
 
 export default function RelationshipType({ isEditable }) {
+  function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
   return (
     <>
       <label htmlFor="relationshiptype">Relationship</label>
@@ -17,7 +21,7 @@ export default function RelationshipType({ isEditable }) {
         </option>
         {relationshipTypeArray.map(relationship => (
           <option key={relationship} value={relationship}>
-            {relationship}
+            {capitalizeFirstLetter(relationship)}
           </option>
         ))}
       </Field>

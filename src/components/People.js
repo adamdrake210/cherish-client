@@ -36,10 +36,10 @@ function People() {
           {people.map(peep => (
             <li key={peep.id}>
               <Link passHref href={`/person/${peep.id}`}>
-                {`${peep.data().firstName} ${peep.data().lastName}`}
+                <a>{`${peep.data().firstName} ${peep.data().lastName}`}</a>
               </Link>{' '}
               <Link passHref href={`/edit-person/${peep.id}`}>
-                Edit Person
+                <a>Edit Person</a>
               </Link>
             </li>
           ))}
@@ -50,7 +50,7 @@ function People() {
         <div className="flex-column-container">
           <p>No People have been added yet</p>
           <Link passHref href="/add-person">
-            Add Your First Person!
+            <a>Add Your First Person!</a>
           </Link>
         </div>
       )}

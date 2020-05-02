@@ -20,6 +20,11 @@
   }
 }
 
+.login-link-container {
+  display: flex;
+  flex-direction: column;
+}
+
 .logout-container {
   display: flex;
 }

@@ -17,6 +17,7 @@ export default function Email({ isEditable }) {
         type="email"
         name="email"
         placeholder="Email"
+        autoComplete="off"
         // validate={validateEmail}
         disabled={!isEditable}
       />

@@ -3,12 +3,15 @@ import React from 'react';
 import '../styles/styles.scss';
 import Nav from '../components/Nav';
 import 'react-datepicker/dist/react-datepicker.css';
+import { UserProvider } from '../context/userContext';
 
 function MyApp({ Component, pageProps }) {
   return (
     <>
-      <Nav />
-      <Component {...pageProps} />
+      <UserProvider>
+        <Nav />
+        <Component {...pageProps} />
+      </UserProvider>
     </>
   );
 }

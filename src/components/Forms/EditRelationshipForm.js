@@ -78,7 +78,10 @@ export default function EditRelationshipForm({ id, relationship }) {
           )}
         </Formik>
         {!isEditable && (
-          <button type="button" onClick={() => setIsEditable(!isEditable)}>
+          <button
+            type="button"
+            onClick={() => setIsEditable(prevIsEditable => !prevIsEditable)}
+          >
             Edit
           </button>
         )}

@@ -9,6 +9,7 @@ export default function PersonDetails({ person, id }) {
     birthday,
     relationshiptype,
     comments,
+    links,
     peopleId,
   } = person;
 
@@ -29,6 +30,18 @@ export default function PersonDetails({ person, id }) {
         </li>
         <li>Address: {address || 'No address at this time'}</li>
         <li>Comments: {comments || 'No comments at this time.'}</li>
+        <li>
+          Useful Links:{' '}
+          {links ? (
+            <ul>
+              {links.map(link => (
+                <li>{link}</li>
+              ))}
+            </ul>
+          ) : (
+            'No comments at this time.'
+          )}
+        </li>
       </ul>
     </div>
   );

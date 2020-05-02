@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, Form } from 'formik';
 import Link from 'next/link';
 import { addPerson } from '../../firebase/firebaseapi';
 import FirstName from './Fields/FirstName';
@@ -9,6 +9,7 @@ import RelationshipType from './Fields/RelationshipType';
 import Email from './Fields/Email';
 import Birthday from './Fields/Birthday';
 import Notes from './Fields/Notes';
+import Links from './Fields/Links';
 import { useUserContext } from '../../context/userContext';
 
 export default function AddPersonForm({ success, setSuccess, setPersonId }) {
@@ -28,7 +29,7 @@ export default function AddPersonForm({ success, setSuccess, setPersonId }) {
             birthday: '',
             email: '',
             address: '',
-            link_1: '',
+            links: [''],
             notes: '',
             userId: user.uid,
           }}
@@ -64,12 +65,8 @@ export default function AddPersonForm({ success, setSuccess, setPersonId }) {
               <Email isEditable={isEditable} />
               <Address isEditable={isEditable} />
               <Notes isEditable={isEditable} />
-              <h3>Useful Links</h3>
-              <label htmlFor="link_1">Link 1</label>
-              <Field type="text" name="link_1" placeholder="Enter a url here" />
-              <ErrorMessage name="link_1" component="div" />
-              {/* TODO get this add new button working */}
-              <button type="button">Add New Link</button>
+
+              <Links values={values} />
 
               {!success && (
                 <button type="submit" disabled={isSubmitting}>

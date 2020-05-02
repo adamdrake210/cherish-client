@@ -8,6 +8,7 @@ import RelationshipType from './Fields/RelationshipType';
 import Email from './Fields/Email';
 import Birthday from './Fields/Birthday';
 import Notes from './Fields/Notes';
+import Links from './Fields/Links';
 
 export default function AddRelationshipForm({ personId }) {
   return (
@@ -20,6 +21,7 @@ export default function AddRelationshipForm({ personId }) {
             email: '',
             birthday: '',
             relationshiptype: '',
+            links: '',
             notes: '',
             peopleId: personId,
           }}
@@ -51,6 +53,7 @@ export default function AddRelationshipForm({ personId }) {
               <Email isEditable />
               <Address isEditable />
               <Notes isEditable />
+              <Links values={values} />
               <button type="submit" disabled={isSubmitting}>
                 Submit
               </button>

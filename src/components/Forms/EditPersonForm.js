@@ -31,7 +31,7 @@ export default function EditPersonForm({ id, person, success, setSuccess }) {
             firstName,
             lastName,
             relationshiptype,
-            birthday: birthday.seconds * 1000,
+            birthday: birthday ? birthday.seconds * 1000 : '',
             email,
             address,
             comments,
@@ -82,7 +82,10 @@ export default function EditPersonForm({ id, person, success, setSuccess }) {
           )}
         </Formik>
         {!isEditable && (
-          <button type="button" onClick={() => setIsEditable(!isEditable)}>
+          <button
+            type="button"
+            onClick={() => setIsEditable(prevIsEditable => !prevIsEditable)}
+          >
             Edit
           </button>
         )}

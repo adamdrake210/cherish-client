@@ -9,3 +9,17 @@
   flex-direction: column;
   width: 200px;
 }
+
+.navigation {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  list-style: none;
+  li {
+    padding: 10px 20px;
+  }
+}
+
+.logout-container {
+  display: flex;
+}

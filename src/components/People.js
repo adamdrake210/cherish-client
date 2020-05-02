@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { firestore } from '../firebase/firebase';
 import { getPeople } from '../firebase/firebaseapi';
+import { useUserContext } from '../context/userContext';
 
 function People() {
-  const [user, setUser] = useState();
+  // const [user, setUser] = useState();
   const [people, setPeople] = useState([]);
+  const { user } = useUserContext();
 
   const handleGetPeople = async id =>
     getPeople(id)
@@ -27,7 +29,7 @@ function People() {
       .get()
       .then(querySnapshot => {
         querySnapshot.docs.map(doc => {
-          setUser({ ...doc.data(), id: doc.id });
+          // setUser({ ...doc.data(), id: doc.id });
           handleGetPeople(doc.id);
         });
       })
@@ -42,8 +44,7 @@ function People() {
   return (
     <div>
       <h1>Current User</h1>
-      {user && <p>{`${user.firstName} ${user.lastName}`}</p>}
-
+      <p>Welcome {user && `${user.displayName}!`}</p>
       <h2>All</h2>
       {people && (
         <ul>

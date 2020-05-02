@@ -2,16 +2,17 @@ import React from 'react';
 import Head from 'next/head';
 import EditPerson from '../../containers/Person/EditPerson';
 import { getPerson } from '../../firebase/firebaseapi';
+import ProtectedRoute from '../../HOC/ProtectedRoute';
 
 function EditPersonPage({ id, person }) {
   return (
-    <>
+    <ProtectedRoute>
       <Head>
         <title>Cherish | Edit Person</title>
       </Head>
 
       <EditPerson person={person} id={id} />
-    </>
+    </ProtectedRoute>
   );
 }
 

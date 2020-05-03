@@ -7,10 +7,11 @@ export default function AddPerson() {
   const [personId, setPersonId] = useState('');
 
   return (
-    <div className="container">
+    <div>
       <div>
         <h1>Add Person</h1>
         <AddPersonForm
+          className="container"
           success={success}
           setSuccess={setSuccess}
           setPersonId={setPersonId}
@@ -18,7 +19,7 @@ export default function AddPerson() {
       </div>
       {success && (
         <div>
-          <AddRelationshipForm personId={personId} />
+          <AddRelationshipForm className="container" personId={personId} />
         </div>
       )}
     </div>

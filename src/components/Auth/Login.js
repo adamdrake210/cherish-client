@@ -3,7 +3,7 @@ import LoginForm from '../Forms/LoginForm';
 
 export default function Login() {
   return (
-    <div>
+    <div className="container">
       <h2>Login</h2>
       <LoginForm />
     </div>

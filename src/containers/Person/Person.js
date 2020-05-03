@@ -21,7 +21,7 @@ export default function Person({ person, id }) {
   }, []);
 
   return (
-    <>
+    <div className="container">
       <h1>Details</h1>
       <Link passHref href={`/edit-person/${id}`}>
         <a>Edit Person</a>
@@ -44,6 +44,6 @@ export default function Person({ person, id }) {
             id={relationship.id}
           />
         ))}
-    </>
+    </div>
   );
 }

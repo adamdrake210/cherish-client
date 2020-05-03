@@ -14,7 +14,7 @@ export default function LoginForm() {
     return firebase.auth().signInWithEmailAndPassword(email, password);
   }
   return (
-    <div className="container">
+    <div>
       <div>
         <Formik
           initialValues={{

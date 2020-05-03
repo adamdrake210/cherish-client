@@ -25,7 +25,7 @@ export default function EditPersonForm({ id, person, success, setSuccess }) {
   } = person;
 
   return (
-    <div className="container">
+    <div>
       <div>
         <Formik
           initialValues={{

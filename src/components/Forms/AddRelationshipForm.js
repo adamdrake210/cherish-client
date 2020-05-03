@@ -15,7 +15,7 @@ export default function AddRelationshipForm({
   setIsAddRelationship,
 }) {
   return (
-    <div className="container">
+    <div>
       <div>
         <Formik
           initialValues={{

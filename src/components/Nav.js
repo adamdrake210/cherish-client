@@ -7,8 +7,9 @@ function Nav() {
   const { user } = useUserContext();
 
   return (
-    <>
-      <ul className="navigation">
+    <div className="navigation-container">
+      <span className="cherish-logo">Cherish</span>
+      <ul className="navigation-links">
         <li>
           <Link href="/">
             <a>Home</a>
@@ -38,8 +39,7 @@ function Nav() {
           )}
         </li>
       </ul>
-      <p>Cherish Logo</p>
-    </>
+    </div>
   );
 }
 

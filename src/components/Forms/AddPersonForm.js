@@ -19,7 +19,7 @@ export default function AddPersonForm({ success, setSuccess, setPersonId }) {
 
   const { user } = useUserContext();
   return (
-    <div className="container">
+    <div>
       <div>
         <Formik
           initialValues={{

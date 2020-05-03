@@ -1,23 +1,15 @@
-.container {
-  width: 100%;
-  max-width: 900px;
-  margin: 0 auto;
-}
+@import 'variables';
+@import 'normalize';
+@import 'mixins';
+@import 'base';
+
+@import 'modules/nav.scss';
+@import 'modules/homepage.scss';
 
 .formContainer {
   display: flex;
   flex-direction: column;
   width: 200px;
-}
-
-.navigation {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  list-style: none;
-  li {
-    padding: 10px 20px;
-  }
 }
 
 .login-link-container {

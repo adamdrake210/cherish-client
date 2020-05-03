@@ -2,17 +2,20 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { getPeople } from '../firebase/firebaseapi';
 import { useUserContext } from '../context/userContext';
+import sortLastName from '../helpers/helpers';
 
 function People() {
   const [isLoading, setIsLoading] = useState(true);
-  const [people, setPeople] = useState([]);
+  const [peopleList, setPeopleList] = useState([]);
+  const [filteredList, setFilteredList] = useState([]);
   const { user } = useUserContext();
 
   function handleSnapshot(snapshot) {
     const peopleArray = snapshot.docs.map(doc => {
       return { id: doc.id, ...doc.data() };
     });
-    setPeople(peopleArray);
+    setPeopleList(sortLastName(peopleArray));
+    setFilteredList(sortLastName(peopleArray));
     setIsLoading(false);
   }
 
@@ -20,14 +23,41 @@ function People() {
     getPeople(user.uid, handleSnapshot);
   }, []);
 
+  function handleChange(e) {
+    let currentList = [];
+    let newList = [];
+
+    if (e.target.value !== '') {
+      currentList = peopleList;
+      newList = currentList.filter(item => {
+        const firstNameLowerCase = item.firstName.toLowerCase();
+        const lastNameLowerCase = item.lastName.toLowerCase();
+        const filterLowerCase = e.target.value.toLowerCase();
+        return (
+          firstNameLowerCase.includes(filterLowerCase) ||
+          lastNameLowerCase.includes(filterLowerCase)
+        );
+      });
+    } else {
+      newList = peopleList;
+    }
+
+    const sortedNewList = sortLastName(newList);
+    setFilteredList(sortedNewList);
+  }
+
   return (
     <div>
-      <h1>Current User</h1>
-      <p>Welcome {user && `${user.displayName}!`}</p>
-      <h2>All</h2>
-      {people && (
+      <h2>All People</h2>
+      <input
+        type="text"
+        className="input"
+        placeholder="Search..."
+        onChange={e => handleChange(e)}
+      />
+      {filteredList && (
         <ul>
-          {people.map(person => (
+          {filteredList.map(person => (
             <li key={person.id}>
               <Link passHref href={`/person/${person.id}`}>
                 <a>{`${person.firstName} ${person.lastName}`}</a>
@@ -40,7 +70,7 @@ function People() {
         </ul>
       )}
       {isLoading && <p>Loading...</p>}
-      {!isLoading && people.length < 1 && (
+      {!isLoading && peopleList.length < 1 && (
         <div className="flex-column-container">
           <p>No People have been added yet</p>
           <Link passHref href="/add-person">

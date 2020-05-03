@@ -10,7 +10,10 @@ import Birthday from './Fields/Birthday';
 import Notes from './Fields/Notes';
 import Links from './Fields/Links';
 
-export default function AddRelationshipForm({ personId }) {
+export default function AddRelationshipForm({
+  personId,
+  setIsAddRelationship,
+}) {
   return (
     <div className="container">
       <div>
@@ -31,6 +34,7 @@ export default function AddRelationshipForm({ personId }) {
                 .then(docRef => {
                   console.log('Document written with ID: ', docRef.id);
                   setSubmitting(false);
+                  setIsAddRelationship(false);
                 })
                 .catch(error => {
                   console.error('Error adding document: ', error);

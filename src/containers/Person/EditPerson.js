@@ -58,7 +58,10 @@ export default function EditPerson({ id, person }) {
         {isAddRelationship && (
           <>
             <h2>Add Relationship</h2>
-            <AddRelationshipForm personId={id} />
+            <AddRelationshipForm
+              personId={id}
+              setIsAddRelationship={setIsAddRelationship}
+            />
           </>
         )}
 

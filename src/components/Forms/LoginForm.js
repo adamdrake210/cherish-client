@@ -22,25 +22,20 @@ export default function LoginForm() {
             password: '',
           }}
           onSubmit={(values, { setSubmitting }) => {
-            setTimeout(() => {
-              login(values.email, values.password)
-                .then(response => {
-                  setFirebaseError(null);
-                  setSubmitting(false);
-                  router.push('/');
-                  console.log(response);
-                })
-                .catch(error => {
-                  setSubmitting(false);
-                  // Handle Errors here.
-                  const errorCode = error.code;
-                  const errorMessage = error.message;
-                  console.log('errorCode', errorCode);
-                  console.log('errorMessage', errorMessage);
-                  setFirebaseError(errorMessage);
-                });
-              alert(JSON.stringify(values, null, 2));
-            }, 400);
+            login(values.email, values.password)
+              .then(() => {
+                setFirebaseError(null);
+                setSubmitting(false);
+                router.push('/');
+              })
+              .catch(error => {
+                setSubmitting(false);
+                // Handle Errors here.
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log('errorCode', errorCode);
+                setFirebaseError(errorMessage);
+              });
           }}
         >
           {({ isSubmitting }) => (

@@ -8,14 +8,16 @@ export default function Person({ person, id }) {
   const [relationships, setRelationships] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    getRelationships(id).then(querySnapshot => {
-      setRelationships(querySnapshot.docs);
-      setIsLoading(false);
-      querySnapshot.docs.map(doc => {
-        return console.log({ ...doc.data(), id: doc.id });
-      });
+  function handleSnapshot(snapshot) {
+    const relationshipsArray = snapshot.docs.map(doc => {
+      return { id: doc.id, ...doc.data() };
     });
+    setRelationships(relationshipsArray);
+    setIsLoading(false);
+  }
+
+  useEffect(() => {
+    getRelationships(id, handleSnapshot);
   }, []);
 
   return (
@@ -38,7 +40,7 @@ export default function Person({ person, id }) {
         relationships.map(relationship => (
           <RelationshipDetails
             key={relationship.id}
-            relationship={relationship.data()}
+            relationship={relationship}
             id={relationship.id}
           />
         ))}

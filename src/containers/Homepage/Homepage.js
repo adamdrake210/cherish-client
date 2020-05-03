@@ -1,6 +1,6 @@
 import React from 'react';
 import People from '../../components/People';
-import Login from '../../components/Auth/Login';
+import HomepageNotLoggedIn from '../../components/HomepageNotLoggedIn';
 import { useUserContext } from '../../context/userContext';
 
 export default function Homepage() {
@@ -8,10 +8,7 @@ export default function Homepage() {
 
   return (
     <div className="container">
-      <div>
-        <h1>Cherish</h1>
-        {user ? <People /> : <Login />}
-      </div>
+      <div>{user ? <People /> : <HomepageNotLoggedIn />}</div>
     </div>
   );
 }

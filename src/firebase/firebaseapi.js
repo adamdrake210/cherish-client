@@ -12,12 +12,18 @@ export function getPerson(id) {
   return firestore.collection('people').doc(id).get();
 }
 
-export function getPeople(id) {
-  return firestore.collection('people').where('userId', '==', id).get();
+export function getPeople(id, callback) {
+  return firestore
+    .collection('people')
+    .where('userId', '==', id)
+    .onSnapshot(callback);
 }
 
-export function getRelationships(id) {
-  return firestore.collection('relationship').where('peopleId', '==', id).get();
+export function getRelationships(id, callback) {
+  return firestore
+    .collection('relationship')
+    .where('peopleId', '==', id)
+    .onSnapshot(callback);
 }
 
 export function updatePerson(id, values) {

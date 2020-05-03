@@ -22,7 +22,7 @@ export default function Person({ person, id }) {
     <>
       <h1>Details</h1>
       <Link passHref href={`/edit-person/${id}`}>
-        Edit Person
+        <a>Edit Person</a>
       </Link>
       <PersonDetails person={person} id={id} />
 

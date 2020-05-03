@@ -7,7 +7,8 @@ import Address from './Fields/Address';
 import RelationshipType from './Fields/RelationshipType';
 import Email from './Fields/Email';
 import Birthday from './Fields/Birthday';
-import Comments from './Fields/Comments';
+import Notes from './Fields/Notes';
+import Links from './Fields/Links';
 
 export default function EditRelationshipForm({ id, relationship }) {
   const [isEditable, setIsEditable] = useState(false);
@@ -19,7 +20,8 @@ export default function EditRelationshipForm({ id, relationship }) {
     address,
     birthday,
     relationshiptype,
-    comments,
+    notes,
+    links,
     peopleId,
   } = relationship;
 
@@ -37,7 +39,8 @@ export default function EditRelationshipForm({ id, relationship }) {
             birthday: birthday.seconds * 1000,
             relationshiptype,
             address,
-            comments,
+            notes,
+            links,
             peopleId,
           }}
           onSubmit={(values, { setSubmitting }) => {
@@ -68,7 +71,9 @@ export default function EditRelationshipForm({ id, relationship }) {
               />
               <Email isEditable={isEditable} />
               <Address isEditable={isEditable} />
-              <Comments isEditable={isEditable} />
+              <Notes isEditable={isEditable} />
+              <Links values={values} />
+
               {isEditable && (
                 <button type="submit" disabled={isSubmitting}>
                   Update

@@ -1,44 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { firestore } from '../firebase/firebase';
 import { getPeople } from '../firebase/firebaseapi';
 import { useUserContext } from '../context/userContext';
 
 function People() {
-  // const [user, setUser] = useState();
+  const [isLoading, setIsLoading] = useState(true);
   const [people, setPeople] = useState([]);
   const { user } = useUserContext();
 
-  const handleGetPeople = async id =>
-    getPeople(id)
-      .then(querySnapshot => {
-        querySnapshot.docs.map(doc => ({
-          ...doc.data(),
-          id: doc.id,
-        }));
-        setPeople(querySnapshot.docs);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-
-  const getUser = async () =>
-    firestore
-      .collection('users')
-      .where('email', '==', 'adamgedrake@gmail.com')
-      .get()
-      .then(querySnapshot => {
-        querySnapshot.docs.map(doc => {
-          // setUser({ ...doc.data(), id: doc.id });
-          handleGetPeople(doc.id);
-        });
-      })
-      .catch(err => {
-        console.log(err);
-      });
+  function handleSnapshot(snapshot) {
+    const peopleArray = snapshot.docs.map(doc => {
+      return { id: doc.id, ...doc.data() };
+    });
+    setPeople(peopleArray);
+    setIsLoading(false);
+  }
 
   useEffect(() => {
-    getUser();
+    getPeople(user.uid, handleSnapshot);
   }, []);
 
   return (
@@ -48,17 +27,26 @@ function People() {
       <h2>All</h2>
       {people && (
         <ul>
-          {people.map(peep => (
-            <li key={peep.id}>
-              <Link passHref href={`/person/${peep.id}`}>
-                {`${peep.data().firstName} ${peep.data().lastName}`}
+          {people.map(person => (
+            <li key={person.id}>
+              <Link passHref href={`/person/${person.id}`}>
+                <a>{`${person.firstName} ${person.lastName}`}</a>
               </Link>{' '}
-              <Link passHref href={`/edit-person/${peep.id}`}>
-                Edit Person
+              <Link passHref href={`/edit-person/${person.id}`}>
+                <a>Edit Person</a>
               </Link>
             </li>
           ))}
         </ul>
+      )}
+      {isLoading && <p>Loading...</p>}
+      {!isLoading && people.length < 1 && (
+        <div className="flex-column-container">
+          <p>No People have been added yet</p>
+          <Link passHref href="/add-person">
+            <a>Add Your First Person!</a>
+          </Link>
+        </div>
       )}
     </div>
   );

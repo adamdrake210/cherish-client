@@ -11,14 +11,16 @@ export default function EditPerson({ id, person }) {
   const [isAddRelationship, setIsAddRelationship] = useState(false);
   const [relationships, setRelationships] = useState([]);
 
-  useEffect(() => {
-    getRelationships(id).then(querySnapshot => {
-      setRelationships(querySnapshot.docs);
-      setIsLoading(false);
-      querySnapshot.docs.map(doc => {
-        return console.log({ ...doc.data(), id: doc.id });
-      });
+  function handleSnapshot(snapshot) {
+    const relationshipsArray = snapshot.docs.map(doc => {
+      return { id: doc.id, ...doc.data() };
     });
+    setRelationships(relationshipsArray);
+    setIsLoading(false);
+  }
+
+  useEffect(() => {
+    getRelationships(id, handleSnapshot);
   }, []);
 
   return (
@@ -39,16 +41,16 @@ export default function EditPerson({ id, person }) {
       <h2>Current Relationships</h2>
       {isLoading && <p>Loading...</p>}
 
-      {!isLoading && relationships.length === 0 && (
+      {!isLoading && relationships.length < 1 && (
         <p>Currently there are no relationships for this person.</p>
       )}
       {!isLoading &&
         relationships.length > 0 &&
         relationships.map(relationship => (
           <EditRelationshipForm
-            key={relationship.id}
-            relationship={relationship.data()}
+            relationship={relationship}
             id={relationship.id}
+            key={relationship.id}
           />
         ))}
 

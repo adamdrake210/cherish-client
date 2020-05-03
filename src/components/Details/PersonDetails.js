@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function PersonDetails({ person, id }) {
+export default function PersonDetails({ person }) {
   const {
     firstName,
     lastName,
@@ -8,8 +8,8 @@ export default function PersonDetails({ person, id }) {
     address,
     birthday,
     relationshiptype,
-    comments,
-    peopleId,
+    notes,
+    links,
   } = person;
 
   return (
@@ -28,7 +28,23 @@ export default function PersonDetails({ person, id }) {
           Relationship: {relationshiptype || 'Relationship needs updating'}
         </li>
         <li>Address: {address || 'No address at this time'}</li>
-        <li>Comments: {comments || 'No comments at this time.'}</li>
+        <li>Notes: {notes || 'No comments at this time.'}</li>
+        <li>
+          Useful Links:{' '}
+          {links ? (
+            <ul>
+              {links.map(link => (
+                <li>
+                  <a href={link} target="_blank" rel="noopener noreferrer">
+                    {link}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            'No comments at this time.'
+          )}
+        </li>
       </ul>
     </div>
   );

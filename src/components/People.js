@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { getPeople } from '../firebase/firebaseapi';
 import { useUserContext } from '../context/userContext';
-import sortLastName from '../helpers/helpers';
+import { sortLastName } from '../helpers/helpers';
 
 function People() {
   const [isLoading, setIsLoading] = useState(true);

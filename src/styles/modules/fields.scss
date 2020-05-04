@@ -1,0 +1,21 @@
+.field-container {
+  width: 450px;
+  .field {
+    display: flex;
+    label {
+      font-size: 20px;
+      width: 200px;
+      display: flex;
+      align-items: center;
+      color: $darkblue;
+    }
+    input {
+      border-color: #000;
+      width: 400px;
+    }
+  }
+  .error-message {
+    color: red;
+    font-size: 11px;
+  }
+}

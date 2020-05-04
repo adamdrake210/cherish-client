@@ -34,19 +34,21 @@ export default function PersonDetails({ person }) {
         </li>
         <li>Address: {address || 'No address at this time'}</li>
         <li>
-          Useful Links:{' '}
-          {links ? (
-            <ul>
-              {links.map(link => (
-                <li key={link}>
-                  <a href={link} target="_blank" rel="noopener noreferrer">
-                    {link}
-                  </a>
-                </li>
-              ))}
-            </ul>
+          {links.length > 1 ? (
+            <>
+              <span>Useful Links:</span>
+              <ul>
+                {links.map(link => (
+                  <li key={link}>
+                    <a href={link} target="_blank" rel="noopener noreferrer">
+                      {link}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </>
           ) : (
-            'No comments at this time.'
+            'No links at this time.'
           )}
         </li>
       </ul>

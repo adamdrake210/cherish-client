@@ -74,7 +74,7 @@ export default function EditPersonForm({ id, person, success, setSuccess }) {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="button button-sm button-green"
+                  className="button button-lg button-green"
                 >
                   Update
                 </button>

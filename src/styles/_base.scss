@@ -15,7 +15,7 @@ body {
   width: 100%;
   background-color: $yellow;
   max-width: 900px;
-  height: 100vh;
+  min-height: 100vh;
   margin: 0 auto;
   padding: 16px 32px;
 }
@@ -65,11 +65,6 @@ select {
 }
 
 // TODO integrate into modules
-.formContainer {
-  display: flex;
-  flex-direction: column;
-  width: 200px;
-}
 
 .login-link-container {
   display: flex;

@@ -58,7 +58,11 @@ export default function AddRelationshipForm({
               <Address isEditable />
               <Notes isEditable />
               <Links values={values} />
-              <button type="submit" disabled={isSubmitting}>
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="button button-lg button-green"
+              >
                 Submit
               </button>
             </Form>

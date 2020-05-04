@@ -64,12 +64,34 @@ select {
   border-radius: 5px;
 }
 
-// TODO integrate into modules
-
-.login-link-container {
-  display: flex;
-  flex-direction: column;
+.cherish-logo {
+  font-family: $pacifico;
+  color: $fontcolor2;
+  text-decoration: none;
+  font-size: 36px;
+  line-height: 46px;
+  margin-right: 1em;
 }
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+}
+
+// Margins
+@include list-loop('.m-t-', 'margin-top');
+@include list-loop('.m-r-', 'margin-right');
+@include list-loop('.m-b-', 'margin-bottom');
+@include list-loop('.m-l-', 'margin-left');
+@include list-loop('.m-x-', 'margin');
+// Paddings
+@include list-loop('.p-t-', 'padding-top');
+@include list-loop('.p-r-', 'padding-right');
+@include list-loop('.p-b-', 'padding-bottom');
+@include list-loop('.p-l-', 'padding-left');
+@include list-loop('.p-x-', 'padding');
+
+// TODO integrate into modules
 
 .logout-container {
   display: flex;

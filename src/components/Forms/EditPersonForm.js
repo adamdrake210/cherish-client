@@ -68,7 +68,7 @@ export default function EditPersonForm({ id, person, success, setSuccess }) {
               <Address isEditable={isEditable} />
               <Notes isEditable={isEditable} />
               {/* // TODO Do this. */}
-              <Links values={values} />
+              <Links values={values} isEditable={isEditable} />
 
               {isEditable && (
                 <button
@@ -86,7 +86,7 @@ export default function EditPersonForm({ id, person, success, setSuccess }) {
           <button
             type="button"
             onClick={() => setIsEditable(prevIsEditable => !prevIsEditable)}
-            className="button button-sm button-blue"
+            className="button button-lg button-green"
           >
             Edit
           </button>

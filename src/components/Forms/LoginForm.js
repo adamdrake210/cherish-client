@@ -42,7 +42,11 @@ export default function LoginForm() {
             <Form className="formContainer">
               <Email isEditable />
               <Password title="Enter Password here" />
-              <button type="submit" disabled={isSubmitting}>
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="button button-lg button-blue m-t-20 m-b-20"
+              >
                 Submit
               </button>
             </Form>

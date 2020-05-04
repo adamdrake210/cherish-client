@@ -30,11 +30,14 @@ export default function PersonDetails({ person }) {
           Relationship: {relationshiptype || 'Relationship needs updating'}
         </li>
         <li>
-          Email: <a href={`mailto:${email}`}>{email}</a>
+          Email:{' '}
+          <a href={`mailto:${email}`} target="_blank" rel="noopener noreferrer">
+            {email}
+          </a>
         </li>
         <li>Address: {address || 'No address at this time'}</li>
         <li>
-          {links.length > 1 ? (
+          {links.length > 0 ? (
             <>
               <span>Useful Links:</span>
               <ul>

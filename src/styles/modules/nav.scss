@@ -1,14 +1,21 @@
 .navigation-container {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
   max-width: 900px;
   margin: 0 auto;
-  span {
+  background-color: $yellow;
+
+  .cherish-logo {
     font-family: $pacifico;
     color: $fontcolor2;
+    text-decoration: none;
     font-size: 36px;
     line-height: 46px;
+    margin-right: 1em;
+    &:hover {
+      color: lighten($fontcolor2, 10%);
+    }
   }
   .navigation-links {
     display: flex;

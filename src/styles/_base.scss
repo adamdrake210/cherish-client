@@ -7,14 +7,16 @@ body {
   margin: 0;
   font-family: $quicksand;
   color: $fontcolor1;
-  background-color: $yellow;
   min-width: 320px;
 }
 
 .container {
   width: 100%;
+  background-color: $yellow;
   max-width: 900px;
+  height: 100vh;
   margin: 0 auto;
+  padding: 16px 32px;
 }
 
 .desktop {

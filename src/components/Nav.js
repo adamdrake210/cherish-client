@@ -8,13 +8,10 @@ function Nav() {
 
   return (
     <div className="navigation-container">
-      <span className="cherish-logo">Cherish</span>
+      <Link href="/">
+        <a className="cherish-logo">Cherish</a>
+      </Link>
       <ul className="navigation-links">
-        <li>
-          <Link href="/">
-            <a>Home</a>
-          </Link>
-        </li>
         {user && (
           <li>
             <Link href="/add-person">
@@ -31,13 +28,14 @@ function Nav() {
         )}
         <li>
           {user ? (
-            <Logout user={user} />
+            <Logout />
           ) : (
             <Link href="/login">
               <a>Login</a>
             </Link>
           )}
         </li>
+        <li>{user ? user.displayName : ''}</li>
       </ul>
     </div>
   );

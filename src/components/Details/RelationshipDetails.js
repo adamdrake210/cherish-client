@@ -1,4 +1,5 @@
 import React from 'react';
+import { capitalizeFirstLetter } from '../../helpers/helpers';
 
 export default function RelationshipDetails({ relationship, id }) {
   const {
@@ -15,7 +16,7 @@ export default function RelationshipDetails({ relationship, id }) {
   return (
     <div>
       <p>
-        {relationshiptype} - {firstName} {lastName}
+        {capitalizeFirstLetter(relationshiptype)} - {firstName} {lastName}
       </p>
     </div>
   );

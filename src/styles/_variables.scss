@@ -1,0 +1,37 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;700&display=swap');
+// Breakpoints
+$xlg-breakpoint: 1280px;
+$lg-breakpoint: 1080px;
+$md-breakpoint: 767px;
+$sm-breakpoint: 600px;
+
+//Colours
+$yellow: #fffed0;
+$lightblue: #59bfff;
+$darkblue: #4789b3;
+$reddy: #ff7474;
+$green: #8ef060;
+$grey: #959595;
+$white: #ffffff;
+
+$darkgold: #907543;
+$lightgold: #f6efde;
+$offwhite: #fbf8f2;
+$offwhite2: #e1e1e1;
+$footergold: rgba(144, 117, 67, 0.63);
+
+$fontcolor1: $lightblue;
+$fontcolor2: $reddy;
+$fontcolor3: $grey;
+$background1: $lightgold;
+$background2: $offwhite;
+$background3: $footergold;
+
+// Font
+$quicksand: 'Quicksand', sans-serif;
+$pacifico: 'Pacifico', sans-serif;
+
+// Others
+$enable-flex: true;
+$enable-grid-classes: true;

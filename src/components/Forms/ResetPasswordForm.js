@@ -13,7 +13,7 @@ export default function ResetPasswordForm() {
     return firebase.auth().sendPasswordResetEmail(email);
   }
   return (
-    <div className="container">
+    <div>
       <div>
         <Formik
           initialValues={{

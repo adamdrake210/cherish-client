@@ -1,0 +1,76 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  font-family: $quicksand;
+  color: $fontcolor1;
+  min-width: 320px;
+  background-color: lighten($fontcolor1, 25%);
+}
+
+.container {
+  width: 100%;
+  background-color: $yellow;
+  max-width: 900px;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 16px 32px;
+}
+
+.desktop {
+  display: block;
+  @include break($md-breakpoint) {
+    display: none;
+  }
+}
+
+.mobile {
+  display: none;
+  @include break($md-breakpoint) {
+    display: block;
+  }
+}
+
+h1 {
+  font-size: 36px;
+  line-height: 46px;
+  font-weight: 300;
+}
+
+h2 {
+  font-size: 30px;
+  line-height: 40px;
+  font-weight: 300;
+}
+
+h3 {
+  font-size: 26px;
+  line-height: 36px;
+  font-weight: 300;
+}
+
+input,
+select {
+  width: 450px;
+  padding: 12px 10px;
+  margin: 8px 0;
+  font-size: 20px;
+  color: $fontcolor3;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+// TODO integrate into modules
+
+.login-link-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.logout-container {
+  display: flex;
+}

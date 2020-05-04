@@ -19,7 +19,7 @@ export default function AddPersonForm({ success, setSuccess, setPersonId }) {
 
   const { user } = useUserContext();
   return (
-    <div className="container">
+    <div>
       <div>
         <Formik
           initialValues={{
@@ -69,7 +69,11 @@ export default function AddPersonForm({ success, setSuccess, setPersonId }) {
               <Links values={values} />
 
               {!success && (
-                <button type="submit" disabled={isSubmitting}>
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="button button-lg button-green"
+                >
                   Submit
                 </button>
               )}

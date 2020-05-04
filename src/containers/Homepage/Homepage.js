@@ -7,7 +7,7 @@ export default function Homepage() {
   const { user } = useUserContext();
 
   return (
-    <div className="container">
+    <div>
       <div>{user ? <People /> : <HomepageNotLoggedIn />}</div>
     </div>
   );

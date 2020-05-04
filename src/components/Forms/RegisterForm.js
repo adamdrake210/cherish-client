@@ -22,7 +22,7 @@ export default function RegisterForm() {
   }
 
   return (
-    <div className="container">
+    <div>
       <div>
         <Formik
           initialValues={{

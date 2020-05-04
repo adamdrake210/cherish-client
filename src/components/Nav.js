@@ -7,39 +7,46 @@ function Nav() {
   const { user } = useUserContext();
 
   return (
-    <>
-      <ul className="navigation">
-        <li>
-          <Link href="/">
-            <a>Home</a>
-          </Link>
-        </li>
-        {user && (
-          <li>
-            <Link href="/add-person">
-              <a>Add Person</a>
-            </Link>
-          </li>
-        )}
-        {!user && (
-          <li>
-            <Link href="/register">
-              <a>Register</a>
-            </Link>
-          </li>
-        )}
-        <li>
-          {user ? (
-            <Logout user={user} />
-          ) : (
-            <Link href="/login">
-              <a>Login</a>
-            </Link>
+    <div className="navigation-container">
+      <div className="navigation-list-container">
+        <Link href="/">
+          <a className="cherish-logo">Cherish</a>
+        </Link>
+        <ul className="navigation-links">
+          {user && (
+            <>
+              <li>
+                <Link href="/add-person">
+                  <a>Add Person</a>
+                </Link>
+              </li>
+              <li>
+                <Link href="/calendar">
+                  <a>Calendar</a>
+                </Link>
+              </li>
+            </>
           )}
-        </li>
-      </ul>
-      <p>Cherish Logo</p>
-    </>
+          {!user && (
+            <li>
+              <Link href="/register">
+                <a>Register</a>
+              </Link>
+            </li>
+          )}
+          <li>
+            {user ? (
+              <Logout />
+            ) : (
+              <Link href="/login">
+                <a>Login</a>
+              </Link>
+            )}
+          </li>
+          <li>{user ? user.displayName : ''}</li>
+        </ul>
+      </div>
+    </div>
   );
 }
 

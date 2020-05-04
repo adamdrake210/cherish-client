@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { getPeople } from '../firebase/firebaseapi';
 import { useUserContext } from '../context/userContext';
-import sortLastName from '../helpers/helpers';
+import { sortLastName } from '../helpers/helpers';
 
 function People() {
   const [isLoading, setIsLoading] = useState(true);
@@ -47,23 +47,28 @@ function People() {
   }
 
   return (
-    <div>
-      <h2>All People</h2>
-      <input
-        type="text"
-        className="input"
-        placeholder="Search..."
-        onChange={e => handleChange(e)}
-      />
+    <div className="container homepage">
+      <div className="homepage-search">
+        <input
+          type="text"
+          className="homepage-search-input"
+          placeholder="Search Peeps..."
+          onChange={e => handleChange(e)}
+        />
+      </div>
+      <h2>All</h2>
       {filteredList && (
-        <ul>
+        <ul className="homepage-people-list">
           {filteredList.map(person => (
             <li key={person.id}>
               <Link passHref href={`/person/${person.id}`}>
-                <a>{`${person.firstName} ${person.lastName}`}</a>
+                <a>
+                  <p>{`${person.firstName} ${person.lastName}`}</p>
+                  <span>{person.relationshiptype}</span>
+                </a>
               </Link>{' '}
               <Link passHref href={`/edit-person/${person.id}`}>
-                <a>Edit Person</a>
+                <a>Edit</a>
               </Link>
             </li>
           ))}

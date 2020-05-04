@@ -26,7 +26,7 @@ export default function EditRelationshipForm({ id, relationship }) {
   } = relationship;
 
   return (
-    <div className="container">
+    <div>
       <p>
         {firstName} {lastName}:
       </p>

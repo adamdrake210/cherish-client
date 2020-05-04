@@ -5,18 +5,4 @@
 
 @import 'modules/nav.scss';
 @import 'modules/homepage.scss';
-
-.formContainer {
-  display: flex;
-  flex-direction: column;
-  width: 200px;
-}
-
-.login-link-container {
-  display: flex;
-  flex-direction: column;
-}
-
-.logout-container {
-  display: flex;
-}
+@import 'modules/button.scss';

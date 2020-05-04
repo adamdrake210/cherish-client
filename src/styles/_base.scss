@@ -8,6 +8,7 @@ body {
   font-family: $quicksand;
   color: $fontcolor1;
   min-width: 320px;
+  background-color: lighten($fontcolor1, 25%);
 }
 
 .container {
@@ -61,4 +62,20 @@ select {
   display: inline-block;
   border: 1px solid #ccc;
   border-radius: 5px;
+}
+
+// TODO integrate into modules
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+}
+
+.login-link-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.logout-container {
+  display: flex;
 }

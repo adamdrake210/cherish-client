@@ -8,35 +8,44 @@ function Nav() {
 
   return (
     <div className="navigation-container">
-      <Link href="/">
-        <a className="cherish-logo">Cherish</a>
-      </Link>
-      <ul className="navigation-links">
-        {user && (
-          <li>
-            <Link href="/add-person">
-              <a>Add Person</a>
-            </Link>
-          </li>
-        )}
-        {!user && (
-          <li>
-            <Link href="/register">
-              <a>Register</a>
-            </Link>
-          </li>
-        )}
-        <li>
-          {user ? (
-            <Logout />
-          ) : (
-            <Link href="/login">
-              <a>Login</a>
-            </Link>
+      <div className="navigation-list-container">
+        <Link href="/">
+          <a className="cherish-logo">Cherish</a>
+        </Link>
+        <ul className="navigation-links">
+          {user && (
+            <>
+              <li>
+                <Link href="/add-person">
+                  <a>Add Person</a>
+                </Link>
+              </li>
+              <li>
+                <Link href="/calendar">
+                  <a>Calendar</a>
+                </Link>
+              </li>
+            </>
           )}
-        </li>
-        <li>{user ? user.displayName : ''}</li>
-      </ul>
+          {!user && (
+            <li>
+              <Link href="/register">
+                <a>Register</a>
+              </Link>
+            </li>
+          )}
+          <li>
+            {user ? (
+              <Logout />
+            ) : (
+              <Link href="/login">
+                <a>Login</a>
+              </Link>
+            )}
+          </li>
+          <li>{user ? user.displayName : ''}</li>
+        </ul>
+      </div>
     </div>
   );
 }

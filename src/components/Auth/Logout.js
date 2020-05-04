@@ -8,7 +8,11 @@ export default function Logout() {
 
   return (
     <div className="logout-container">
-      <button type="button" onClick={handleLogout}>
+      <button
+        className="button button-sm button-blue"
+        type="button"
+        onClick={handleLogout}
+      >
         Logout
       </button>
     </div>

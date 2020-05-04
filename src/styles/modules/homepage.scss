@@ -1,4 +1,7 @@
 .homepage {
+  h2 {
+    margin-bottom: 0;
+  }
   &-search {
     width: 100%;
     display: flex;
@@ -13,6 +16,7 @@
     list-style: none;
     padding-left: 0;
     max-width: 450px;
+    margin-top: 0;
     li {
       padding: 16px 0;
       display: flex;

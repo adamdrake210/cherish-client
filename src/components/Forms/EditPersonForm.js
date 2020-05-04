@@ -71,7 +71,11 @@ export default function EditPersonForm({ id, person, success, setSuccess }) {
               <Links values={values} />
 
               {isEditable && (
-                <button type="submit" disabled={isSubmitting}>
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="button button-sm button-green"
+                >
                   Update
                 </button>
               )}
@@ -82,6 +86,7 @@ export default function EditPersonForm({ id, person, success, setSuccess }) {
           <button
             type="button"
             onClick={() => setIsEditable(prevIsEditable => !prevIsEditable)}
+            className="button button-sm button-blue"
           >
             Edit
           </button>

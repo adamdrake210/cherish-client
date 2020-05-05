@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { updatePerson } from '../../firebase/firebaseapi';
 import FirstName from './Fields/FirstName';
@@ -9,9 +9,11 @@ import Email from './Fields/Email';
 import Birthday from './Fields/Birthday';
 import Notes from './Fields/Notes';
 import Links from './Fields/Links';
+import { dateObjectFromTimeStamp } from '../../helpers/dateHelpers';
 
 export default function EditPersonForm({ id, person, success, setSuccess }) {
   const [isEditable, setIsEditable] = useState(false);
+  const [day, setDay] = useState(null);
 
   const {
     firstName,
@@ -24,6 +26,14 @@ export default function EditPersonForm({ id, person, success, setSuccess }) {
     links,
   } = person;
 
+  useEffect(() => {
+    if (birthday) {
+      const convertedDate = dateObjectFromTimeStamp(birthday.seconds);
+      setDay(convertedDate.day);
+      console.log('day1:', convertedDate.day);
+    }
+  }, []);
+
   return (
     <div>
       <div>
@@ -33,6 +43,7 @@ export default function EditPersonForm({ id, person, success, setSuccess }) {
             lastName,
             relationshiptype,
             birthday: birthday ? birthday.seconds * 1000 : '',
+            day,
             email,
             address,
             notes,
@@ -54,16 +65,12 @@ export default function EditPersonForm({ id, person, success, setSuccess }) {
             }, 400);
           }}
         >
-          {({ isSubmitting, values, setFieldValue }) => (
+          {({ isSubmitting, values, setFieldValues }) => (
             <Form className="formContainer">
               <FirstName isEditable={isEditable} />
               <LastName isEditable={isEditable} />
               <RelationshipType isEditable={isEditable} />
-              <Birthday
-                values={values}
-                setFieldValue={setFieldValue}
-                isEditable={isEditable}
-              />
+              <Birthday values={values} isEditable={isEditable} />
               <Email isEditable={isEditable} />
               <Address isEditable={isEditable} />
               <Notes isEditable={isEditable} />

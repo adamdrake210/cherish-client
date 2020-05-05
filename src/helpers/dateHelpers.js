@@ -1,4 +1,4 @@
-const getIntlDateTimeString = dateObj => {
+export const getIntlDateTimeString = dateObj => {
   const locale = 'en-US';
   const options = {
     day: 'numeric',
@@ -14,4 +14,10 @@ const getIntlDateTimeString = dateObj => {
   }
 };
 
-export default getIntlDateTimeString;
+export const dateObjectFromTimeStamp = timestamp => {
+  const date = new Date(timestamp * 1000);
+  console.log('date: ', date);
+  const day = date.getDate();
+
+  return { day };
+};

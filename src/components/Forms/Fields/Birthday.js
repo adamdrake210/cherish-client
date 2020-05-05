@@ -1,15 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Field, ErrorMessage } from 'formik';
 import { monthsArray } from '../../../constants';
+import { dateObjectFromTimeStamp } from '../../../helpers/dateHelpers';
 
 export default function Birthday({ values, isEditable }) {
   const [day, setDay] = useState(null);
   const [birthMonth, setBirthMonth] = useState(null);
   const [year, setYear] = useState(null);
 
+  // useEffect(() => {
+  //   if (values.birthday) {
+  //     const convertedDate = dateObjectFromTimeStamp(values.birthday);
+  //     setDay(convertedDate.day);
+  //     // console.log('day:', convertedDate.day);
+  //   }
+  // }, []);
+
   values.birthday = new Date(Date.UTC(year, birthMonth, day));
 
-  console.log(values.birthday);
+  console.log(values.day);
 
   return (
     <div className="field-container">

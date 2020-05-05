@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { useUserContext } from '../context/userContext';
 import Logout from './Auth/Logout';
+import UserAvatar from './UserAvatar';
 
 function Nav() {
   const { user } = useUserContext();
@@ -10,7 +11,7 @@ function Nav() {
     <div className="navigation-container">
       <div className="navigation-list-container">
         <Link href="/">
-          <a className="cherish-logo">Cherish</a>
+          <a className="cherish-logo cherish-logo-nav">Cherish</a>
         </Link>
         <ul className="navigation-links">
           {user && (
@@ -43,7 +44,7 @@ function Nav() {
               </Link>
             )}
           </li>
-          <li>{user ? user.displayName : ''}</li>
+          <li>{user ? <UserAvatar displayName={user.displayName} /> : ''}</li>
         </ul>
       </div>
     </div>

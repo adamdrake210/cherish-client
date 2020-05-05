@@ -57,7 +57,7 @@ export default function AddRelationshipForm({
               <Email isEditable />
               <Address isEditable />
               <Notes isEditable />
-              <Links values={values} />
+              <Links values={values} isEditable />
               <button
                 type="submit"
                 disabled={isSubmitting}

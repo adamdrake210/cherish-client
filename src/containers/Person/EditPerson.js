@@ -58,6 +58,15 @@ export default function EditPerson({ id, person }) {
         {isAddRelationship && (
           <>
             <h2>Add Relationship</h2>
+            {isAddRelationship && (
+              <button
+                type="button"
+                className="button button-sm button-white"
+                onClick={() => setIsAddRelationship(!isAddRelationship)}
+              >
+                Cancel
+              </button>
+            )}
             <AddRelationshipForm
               personId={id}
               setIsAddRelationship={setIsAddRelationship}
@@ -65,18 +74,10 @@ export default function EditPerson({ id, person }) {
           </>
         )}
 
-        {isAddRelationship && (
-          <button
-            type="button"
-            onClick={() => setIsAddRelationship(!isAddRelationship)}
-          >
-            Cancel
-          </button>
-        )}
-
         {!isAddRelationship && (
           <button
             type="button"
+            className="button button-lg button-blue"
             onClick={() => setIsAddRelationship(!isAddRelationship)}
           >
             Add Relationship

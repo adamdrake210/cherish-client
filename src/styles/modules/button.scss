@@ -11,7 +11,7 @@
 .button-lg {
   padding: 10px 16px;
   font-size: 20px;
-  min-width: 200px;
+  width: 200px;
 }
 
 .button-blue {
@@ -20,6 +20,15 @@
   &:hover {
     cursor: pointer;
     background-color: lighten($lightblue, 5%);
+  }
+}
+
+.button-red {
+  background-color: $reddy;
+  color: $white;
+  &:hover {
+    cursor: pointer;
+    background-color: lighten($reddy, 5%);
   }
 }
 
@@ -35,4 +44,17 @@
 .button-white {
   background-color: $white;
   color: $grey;
+}
+
+button:disabled,
+button[disabled] {
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+  &:hover {
+    cursor: default;
+    border: 1px solid #999999;
+    background-color: #cccccc;
+    color: #666666;
+  }
 }

@@ -1,0 +1,16 @@
+.login-container {
+  max-width: 500px;
+  width: 100%;
+  .login-link-container {
+    display: flex;
+
+    justify-content: space-evenly;
+    a {
+      color: $fontcolor2;
+      text-decoration: none;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}

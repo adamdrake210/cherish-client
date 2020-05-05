@@ -43,3 +43,21 @@
     }
   }
 }
+
+.homepagen-nli-container {
+  text-align: center;
+  .cherish-logo-lg {
+    font-size: 60px;
+  }
+  .sign-up-links {
+    color: $fontcolor2;
+    font-size: 2em;
+    a {
+      color: $fontcolor2;
+      text-decoration: none;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}

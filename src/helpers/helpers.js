@@ -13,3 +13,5 @@ export function sortLastName(array) {
 export function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
+
+export const getFirstLetter = word => word?.charAt(0).toUpperCase();

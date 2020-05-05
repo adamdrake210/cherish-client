@@ -75,7 +75,11 @@ export default function EditRelationshipForm({ id, relationship }) {
               <Links values={values} />
 
               {isEditable && (
-                <button type="submit" disabled={isSubmitting}>
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="button button-lg button-green"
+                >
                   Update
                 </button>
               )}
@@ -85,6 +89,7 @@ export default function EditRelationshipForm({ id, relationship }) {
         {!isEditable && (
           <button
             type="button"
+            className="button button-lg button-green"
             onClick={() => setIsEditable(prevIsEditable => !prevIsEditable)}
           >
             Edit

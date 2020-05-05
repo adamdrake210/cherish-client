@@ -3,9 +3,11 @@ import LoginForm from '../Forms/LoginForm';
 
 export default function Login() {
   return (
-    <div className="container">
-      <h2>Login</h2>
-      <LoginForm />
+    <div className="container flex-center">
+      <div className="login-container">
+        <h2>Login</h2>
+        <LoginForm />
+      </div>
     </div>
   );
 }

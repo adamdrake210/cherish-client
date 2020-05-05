@@ -56,12 +56,12 @@ export default function AddPersonForm({ success, setSuccess, setPersonId }) {
             }, 400);
           }}
         >
-          {({ isSubmitting, values, setFieldValue }) => (
+          {({ isSubmitting, values }) => (
             <Form className="formContainer">
               <FirstName isEditable={isEditable} />
               <LastName isEditable={isEditable} />
               <RelationshipType isEditable={isEditable} />
-              <Birthday values={values} setFieldValue={setFieldValue} />
+              <Birthday values={values} isEditable={isEditable} />
               <Email isEditable={isEditable} />
               <Address isEditable={isEditable} />
               <Notes isEditable={isEditable} />

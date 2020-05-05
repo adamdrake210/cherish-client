@@ -1,6 +1,6 @@
 import React from 'react';
 import { Field, ErrorMessage } from 'formik';
-import relationshipTypeArray from '../../../constants';
+import { relationshipTypeArray } from '../../../constants';
 import { capitalizeFirstLetter } from '../../../helpers/helpers';
 
 export default function RelationshipType({ isEditable }) {

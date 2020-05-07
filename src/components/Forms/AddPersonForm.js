@@ -27,6 +27,8 @@ export default function AddPersonForm({ success, setSuccess, setPersonId }) {
             lastName: '',
             relationshiptype: '',
             birthday: '',
+            birthmonth: '',
+            birthyear: '',
             email: '',
             address: '',
             links: [''],
@@ -56,12 +58,12 @@ export default function AddPersonForm({ success, setSuccess, setPersonId }) {
             }, 400);
           }}
         >
-          {({ isSubmitting, values }) => (
+          {({ isSubmitting, values, setFieldValue }) => (
             <Form className="formContainer">
               <FirstName isEditable={isEditable} />
               <LastName isEditable={isEditable} />
               <RelationshipType isEditable={isEditable} />
-              <Birthday values={values} isEditable={isEditable} />
+              <Birthday isEditable={isEditable} />
               <Email isEditable={isEditable} />
               <Address isEditable={isEditable} />
               <Notes isEditable={isEditable} />

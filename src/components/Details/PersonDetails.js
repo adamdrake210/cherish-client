@@ -1,5 +1,5 @@
 import React from 'react';
-import getIntlDateTimeString from '../../helpers/dateHelpers';
+import { getAge } from '../../helpers/dateHelpers';
 
 export default function PersonDetails({ person }) {
   const {
@@ -8,6 +8,8 @@ export default function PersonDetails({ person }) {
     email,
     address,
     birthday,
+    birthmonth,
+    birthyear,
     relationshiptype,
     notes,
     links,
@@ -21,9 +23,11 @@ export default function PersonDetails({ person }) {
       <ul>
         <li>
           Birthday:{' '}
-          {birthday
-            ? getIntlDateTimeString(birthday.seconds * 1000)
-            : 'No birthday set'}
+          {`${birthday} ${birthmonth} ${birthyear || ''} - Currently ${getAge(
+            birthday,
+            birthmonth,
+            birthyear,
+          )}` || 'No birthday set'}
         </li>
         <li>Notes: {notes || 'No comments at this time.'}</li>
         <li>

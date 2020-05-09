@@ -1,21 +1,71 @@
+input,
+select {
+  width: 100%;
+  max-width: 350px;
+  padding: 12px 10px;
+  margin: 8px 0;
+  font-size: 20px;
+  color: $fontcolor3;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+select {
+  border-color: $black;
+  background-color: $white;
+  height: 60px;
+}
+
 .field-container {
-  width: 450px;
   .field {
     display: flex;
+    justify-content: space-between;
+    width: 100%;
     label {
       font-size: 20px;
-      width: 200px;
+      width: 140px;
       display: flex;
       align-items: center;
       color: $darkblue;
     }
     input {
       border-color: #000;
-      width: 400px;
     }
   }
   .error-message {
     color: red;
     font-size: 11px;
+  }
+}
+
+// Birthday Field
+
+.field-container {
+  .field-birthday {
+    display: flex;
+    flex-direction: column;
+    .helper-label {
+      display: flex;
+      justify-content: flex-end;
+      p {
+        margin-top: 0;
+      }
+    }
+    .input-fields {
+      display: flex;
+      justify-content: space-between;
+      .day-input {
+        width: 80px;
+        margin-right: 8px;
+      }
+      .month-input {
+        margin-right: 8px;
+        width: 150px;
+      }
+      .year-input {
+        width: 80px;
+      }
+    }
   }
 }

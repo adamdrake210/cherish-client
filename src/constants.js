@@ -1,4 +1,4 @@
-const relationshipTypeArray = [
+export const relationshipTypeArray = [
   'husband',
   'wife',
   'son',
@@ -16,4 +16,19 @@ const relationshipTypeArray = [
   'colleague',
 ];
 
-export default relationshipTypeArray;
+export const daysArray = Array.from(Array(32).keys());
+
+export const monthsArray = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];

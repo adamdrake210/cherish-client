@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, Form } from 'formik';
 import { updatePerson } from '../../firebase/firebaseapi';
 import FirstName from './Fields/FirstName';
 import LastName from './Fields/LastName';
@@ -19,6 +19,8 @@ export default function EditPersonForm({ id, person, success, setSuccess }) {
     email,
     address,
     birthday,
+    birthmonth,
+    birthyear,
     relationshiptype,
     notes,
     links,
@@ -32,7 +34,9 @@ export default function EditPersonForm({ id, person, success, setSuccess }) {
             firstName,
             lastName,
             relationshiptype,
-            birthday: birthday ? birthday.seconds * 1000 : '',
+            birthday,
+            birthmonth,
+            birthyear,
             email,
             address,
             notes,
@@ -54,16 +58,12 @@ export default function EditPersonForm({ id, person, success, setSuccess }) {
             }, 400);
           }}
         >
-          {({ isSubmitting, values, setFieldValue }) => (
+          {({ isSubmitting, values }) => (
             <Form className="formContainer">
               <FirstName isEditable={isEditable} />
               <LastName isEditable={isEditable} />
               <RelationshipType isEditable={isEditable} />
-              <Birthday
-                values={values}
-                setFieldValue={setFieldValue}
-                isEditable={isEditable}
-              />
+              <Birthday isEditable={isEditable} />
               <Email isEditable={isEditable} />
               <Address isEditable={isEditable} />
               <Notes isEditable={isEditable} />

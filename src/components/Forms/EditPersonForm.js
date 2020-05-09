@@ -43,19 +43,17 @@ export default function EditPersonForm({ id, person, success, setSuccess }) {
             links,
           }}
           onSubmit={(values, { setSubmitting }) => {
-            setTimeout(() => {
-              updatePerson(id, values)
-                .then(docRef => {
-                  console.log('Document written with ID: ', docRef);
-                  setSubmitting(false);
-                  setSuccess(true);
-                  setIsEditable(false);
-                })
-                .catch(error => {
-                  console.error('Error adding document: ', error);
-                  setSubmitting(false);
-                });
-            }, 400);
+            updatePerson(id, values)
+              .then(docRef => {
+                console.log('Document written with ID: ', docRef);
+                setSubmitting(false);
+                setSuccess(true);
+                setIsEditable(false);
+              })
+              .catch(error => {
+                console.error('Error adding document: ', error);
+                setSubmitting(false);
+              });
           }}
         >
           {({ isSubmitting, values }) => (

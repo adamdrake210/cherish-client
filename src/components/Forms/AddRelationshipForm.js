@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Formik, Form } from 'formik';
 import { addRelationship } from '../../firebase/firebaseapi';
 import FirstName from './Fields/FirstName';
@@ -23,25 +23,24 @@ export default function AddRelationshipForm({
             lastName: '',
             email: '',
             birthday: '',
+            birthmonth: '',
+            birthyear: '',
             relationshiptype: '',
             links: '',
             notes: '',
             peopleId: personId,
           }}
           onSubmit={(values, { setSubmitting }) => {
-            setTimeout(() => {
-              addRelationship(values)
-                .then(docRef => {
-                  console.log('Document written with ID: ', docRef.id);
-                  setSubmitting(false);
-                  setIsAddRelationship(false);
-                })
-                .catch(error => {
-                  console.error('Error adding document: ', error);
-                  setSubmitting(false);
-                });
-              alert(JSON.stringify(values, null, 2));
-            }, 400);
+            addRelationship(values)
+              .then(docRef => {
+                console.log('Document written with ID: ', docRef.id);
+                setSubmitting(false);
+                setIsAddRelationship(false);
+              })
+              .catch(error => {
+                console.error('Error adding document: ', error);
+                setSubmitting(false);
+              });
           }}
         >
           {({ isSubmitting, values, setFieldValue }) => (

@@ -19,6 +19,8 @@ export default function EditRelationshipForm({ id, relationship }) {
     email,
     address,
     birthday,
+    birthmonth,
+    birthyear,
     relationshiptype,
     notes,
     links,
@@ -36,7 +38,9 @@ export default function EditRelationshipForm({ id, relationship }) {
             firstName,
             lastName,
             email,
-            birthday: birthday.seconds * 1000,
+            birthday,
+            birthmonth,
+            birthyear,
             relationshiptype,
             address,
             notes,
@@ -44,31 +48,24 @@ export default function EditRelationshipForm({ id, relationship }) {
             peopleId,
           }}
           onSubmit={(values, { setSubmitting }) => {
-            setTimeout(() => {
-              updateRelationship(id, values)
-                .then(() => {
-                  console.log('Document updated');
-                  setSubmitting(false);
-                  setIsEditable(false);
-                })
-                .catch(error => {
-                  console.error('Error adding document: ', error);
-                  setSubmitting(false);
-                });
-              alert(JSON.stringify(values, null, 2));
-            }, 400);
+            updateRelationship(id, values)
+              .then(() => {
+                console.log('Document updated');
+                setSubmitting(false);
+                setIsEditable(false);
+              })
+              .catch(error => {
+                console.error('Error adding document: ', error);
+                setSubmitting(false);
+              });
           }}
         >
-          {({ isSubmitting, values, setFieldValue }) => (
+          {({ isSubmitting, values }) => (
             <Form className="formContainer">
               <RelationshipType isEditable={isEditable} />
               <FirstName isEditable={isEditable} />
               <LastName isEditable={isEditable} />
-              <Birthday
-                isEditable={isEditable}
-                values={values}
-                setFieldValue={setFieldValue}
-              />
+              <Birthday isEditable={isEditable} />
               <Email isEditable={isEditable} />
               <Address isEditable={isEditable} />
               <Notes isEditable={isEditable} />

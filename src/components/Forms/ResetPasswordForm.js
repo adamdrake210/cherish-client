@@ -20,27 +20,24 @@ export default function ResetPasswordForm() {
             email: '',
           }}
           onSubmit={(values, { setSubmitting }) => {
-            setTimeout(() => {
-              resetPassword(values.email)
-                .then(response => {
-                  setLoading(false);
-                  setIsPasswordReset(true);
-                  setSubmitting(false);
-                  setFirebaseError(null);
-                  console.log(response);
-                })
-                .catch(error => {
-                  setLoading(false);
-                  setSubmitting(false);
-                  // Handle Errors here.
-                  const errorCode = error.code;
-                  const errorMessage = error.message;
-                  console.log('errorCode', errorCode);
-                  console.log('errorMessage', errorMessage);
-                  setFirebaseError(errorMessage);
-                });
-              alert(JSON.stringify(values, null, 2));
-            }, 400);
+            resetPassword(values.email)
+              .then(response => {
+                setLoading(false);
+                setIsPasswordReset(true);
+                setSubmitting(false);
+                setFirebaseError(null);
+                console.log(response);
+              })
+              .catch(error => {
+                setLoading(false);
+                setSubmitting(false);
+                // Handle Errors here.
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log('errorCode', errorCode);
+                console.log('errorMessage', errorMessage);
+                setFirebaseError(errorMessage);
+              });
           }}
         >
           {({ isSubmitting }) => (

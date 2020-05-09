@@ -36,29 +36,26 @@ export default function AddPersonForm({ success, setSuccess, setPersonId }) {
             userId: user.uid,
           }}
           onSubmit={(values, { setSubmitting }) => {
-            setTimeout(() => {
-              addPerson(values)
-                .then(docRef => {
-                  console.log('Document written with ID: ', docRef.id);
-                  setSubmitting(false);
-                  setPersonId(docRef.id);
-                  setNewPersonId(docRef.id);
-                  setIsEditable(false);
-                  setSuccess(true);
-                })
-                .catch(error => {
-                  const errorCode = error.code;
-                  const errorMessage = error.message;
-                  console.log('errorCode', errorCode);
-                  console.log('errorMessage', errorMessage);
-                  setFirebaseError(errorMessage);
-                  setSubmitting(false);
-                });
-              alert(JSON.stringify(values, null, 2));
-            }, 400);
+            addPerson(values)
+              .then(docRef => {
+                console.log('Document written with ID: ', docRef.id);
+                setSubmitting(false);
+                setPersonId(docRef.id);
+                setNewPersonId(docRef.id);
+                setIsEditable(false);
+                setSuccess(true);
+              })
+              .catch(error => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log('errorCode', errorCode);
+                console.log('errorMessage', errorMessage);
+                setFirebaseError(errorMessage);
+                setSubmitting(false);
+              });
           }}
         >
-          {({ isSubmitting, values, setFieldValue }) => (
+          {({ isSubmitting, values }) => (
             <Form className="formContainer">
               <FirstName isEditable={isEditable} />
               <LastName isEditable={isEditable} />

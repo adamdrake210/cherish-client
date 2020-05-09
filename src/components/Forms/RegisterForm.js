@@ -32,24 +32,21 @@ export default function RegisterForm() {
             password: '',
           }}
           onSubmit={(values, { setSubmitting }) => {
-            setTimeout(() => {
-              register(values.firstName, values.email, values.password)
-                .then(() => {
-                  setFirebaseError(null);
-                  setSubmitting(false);
-                  router.push('/');
-                })
-                .catch(error => {
-                  setSubmitting(false);
-                  // Handle Errors here.
-                  const errorCode = error.code;
-                  const errorMessage = error.message;
-                  console.log('errorCode', errorCode);
-                  console.log('errorMessage', errorMessage);
-                  setFirebaseError(errorMessage);
-                });
-              alert(JSON.stringify(values, null, 2));
-            }, 400);
+            register(values.firstName, values.email, values.password)
+              .then(() => {
+                setFirebaseError(null);
+                setSubmitting(false);
+                router.push('/');
+              })
+              .catch(error => {
+                setSubmitting(false);
+                // Handle Errors here.
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log('errorCode', errorCode);
+                console.log('errorMessage', errorMessage);
+                setFirebaseError(errorMessage);
+              });
           }}
         >
           {({ isSubmitting }) => (

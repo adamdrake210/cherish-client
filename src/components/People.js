@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { getPeople } from '../firebase/firebaseapi';
 import { useUserContext } from '../context/userContext';
 import { sortLastName } from '../helpers/helpers';
+import PeopleAvatar from './PeopleAvatar';
 
 function People() {
   const [isLoading, setIsLoading] = useState(true);
@@ -62,13 +63,16 @@ function People() {
           {filteredList.map(person => (
             <li key={person.id}>
               <Link passHref href={`/person/${person.id}`}>
-                <a>
-                  <p>{`${person.firstName} ${person.lastName}`}</p>
-                  <span>{person.relationshiptype}</span>
+                <a className="person-link">
+                  <PeopleAvatar
+                    firstName={person.firstName}
+                    lastName={person.lastName}
+                  />
+                  <div className="person-details">
+                    <p>{`${person.firstName} ${person.lastName}`}</p>
+                    <span>{person.relationshiptype}</span>
+                  </div>
                 </a>
-              </Link>{' '}
-              <Link passHref href={`/edit-person/${person.id}`}>
-                <a>Edit</a>
               </Link>
             </li>
           ))}

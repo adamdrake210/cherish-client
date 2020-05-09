@@ -21,15 +21,17 @@
       padding: 16px 0;
       display: flex;
       flex-direction: column;
-      border-bottom: 1px solid $reddy;
-      a {
+      a.person-link {
+        display: flex;
+        align-items: center;
         color: $fontcolor1;
         text-decoration: none;
-        &:hover {
-          text-decoration: underline;
+        .person-details {
+          border-bottom: 1px solid $reddy;
+          width: 90%;
         }
-        &:hover span {
-          text-decoration: none;
+        &:hover p {
+          text-decoration: underline;
         }
         p {
           font-size: 22px;
@@ -38,6 +40,19 @@
         span {
           font-size: 14px;
           color: $fontcolor2;
+        }
+        .people-avatar {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-size: 24px;
+          border: 2px solid $white;
+          height: 55px;
+          width: 55px;
+          border-radius: 50%;
+          background-color: $lightblue;
+          color: $white;
+          margin-right: 10px;
         }
       }
     }

@@ -11,7 +11,7 @@ export default function useAuth() {
         setAuthUser(user);
       } else {
         setAuthUser(null);
-        router.push('/');
+        router.push('/login');
       }
     });
 

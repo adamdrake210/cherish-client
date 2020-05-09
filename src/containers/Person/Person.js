@@ -21,14 +21,14 @@ export default function Person({ person, id }) {
   }, []);
 
   return (
-    <div className="container">
+    <div className="container details-container">
       <h1>Details</h1>
       <Link passHref href={`/edit-person/${id}`}>
         <a>Edit Person</a>
       </Link>
       <PersonDetails person={person} id={id} />
 
-      <h2>Current Relationships</h2>
+      <h2>Relationships</h2>
       {isLoading && <p>Loading...</p>}
 
       {!isLoading && relationships.length === 0 && (

@@ -1,23 +1,31 @@
 import React from 'react';
 import { capitalizeFirstLetter } from '../../helpers/helpers';
+import BirthdayDetails from './BirthdayDetails';
 
-export default function RelationshipDetails({ relationship, id }) {
+export default function RelationshipDetails({ relationship }) {
   const {
     firstName,
     lastName,
-    email,
-    address,
     birthday,
+    birthmonth,
+    birthyear,
     relationshiptype,
-    comments,
-    peopleId,
   } = relationship;
 
   return (
-    <div>
+    <div className="details-list">
       <p>
-        {capitalizeFirstLetter(relationshiptype)} - {firstName} {lastName}
+        <strong>{capitalizeFirstLetter(relationshiptype)}</strong> - {firstName}{' '}
+        {lastName}
       </p>
+      <span className="details-birthday">
+        <strong>Birthday:</strong>{' '}
+        <BirthdayDetails
+          birthday={birthday}
+          birthmonth={birthmonth}
+          birthyear={birthyear}
+        />
+      </span>
     </div>
   );
 }

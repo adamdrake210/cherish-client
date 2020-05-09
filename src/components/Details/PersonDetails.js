@@ -1,5 +1,5 @@
 import React from 'react';
-import { getAge } from '../../helpers/dateHelpers';
+import BirthdayDetails from './BirthdayDetails';
 
 export default function PersonDetails({ person }) {
   const {
@@ -16,34 +16,41 @@ export default function PersonDetails({ person }) {
   } = person;
 
   return (
-    <div>
+    <div className="details-list">
       <h2>
         {firstName} {lastName}
       </h2>
       <ul>
         <li>
-          Birthday:{' '}
-          {`${birthday} ${birthmonth} ${birthyear || ''} - Currently ${getAge(
-            birthday,
-            birthmonth,
-            birthyear,
-          )}` || 'No birthday set'}
-        </li>
-        <li>Notes: {notes || 'No comments at this time.'}</li>
-        <li>
-          Relationship: {relationshiptype || 'Relationship needs updating'}
+          <strong>Birthday:</strong>{' '}
+          <BirthdayDetails
+            birthday={birthday}
+            birthmonth={birthmonth}
+            birthyear={birthyear}
+          />
         </li>
         <li>
-          Email:{' '}
+          <strong>Notes:</strong> {notes || 'No comments at this time.'}
+        </li>
+        <li>
+          <strong>Relationship:</strong>{' '}
+          {relationshiptype || 'Relationship needs updating'}
+        </li>
+        <li>
+          <strong>Email:</strong>{' '}
           <a href={`mailto:${email}`} target="_blank" rel="noopener noreferrer">
             {email}
           </a>
         </li>
-        <li>Address: {address || 'No address at this time'}</li>
         <li>
-          {links.length > 0 ? (
+          <strong>Address:</strong> {address || 'No address at this time'}
+        </li>
+        <li>
+          {links.length > 0 && links[0] !== '' ? (
             <>
-              <span>Useful Links:</span>
+              <span>
+                <strong>Useful Links:</strong>
+              </span>
               <ul>
                 {links.map(link => (
                   <li key={link}>

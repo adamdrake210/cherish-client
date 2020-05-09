@@ -23,7 +23,7 @@ export default function PersonDetails({ person }) {
       <ul>
         <li>
           Birthday:{' '}
-          {`${birthday} ${birthmonth} - Currently ${getAge(
+          {`${birthday} ${birthmonth} ${birthyear || ''} - Currently ${getAge(
             birthday,
             birthmonth,
             birthyear,

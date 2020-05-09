@@ -16,7 +16,7 @@ export const relationshipTypeArray = [
   'colleague',
 ];
 
-export const daysArray = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+export const daysArray = Array.from(Array(32).keys());
 
 export const monthsArray = [
   'January',

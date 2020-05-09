@@ -1,3 +1,4 @@
+import moment from 'moment';
 import { monthsArray } from '../constants';
 
 export const getIntlDateTimeString = dateObj => {
@@ -26,16 +27,41 @@ export const dateObjectFromTimeStamp = timestamp => {
   return { day, month, year };
 };
 
+export const convertDateToTimeStamp = (day, month, year) => {
+  return new Date(Date.UTC(year, monthsArray.indexOf(month) - 1, day));
+};
+
 export const getAge = (day, month, year) => {
+  if (!year) {
+    return 'no year was selected. Unable to provide age.';
+  }
+
   const currentDate = new Date();
-  const dob = new Date(Date.UTC(year, monthsArray.indexOf(month) - 1, day));
+  const dob = convertDateToTimeStamp(day, month, year);
 
-  console.log('currentDate: ', currentDate);
-  console.log('day: ', day);
-  console.log('month: ', month);
-  console.log('year: ', year);
-  console.log('dob: ', dob);
+  const currentMonth = moment().month();
+  const currentDay = moment().date();
+  const dobMonth = monthsArray.indexOf(month);
 
-  const diff = new Date(currentDate - dob);
-  return Math.abs(diff.getUTCFullYear() - 1971);
+  const years = moment(currentDate).diff(dob, 'years');
+
+  if (currentMonth < dobMonth) {
+    return years - 1;
+  }
+  if (currentMonth === dobMonth && currentDay < day) {
+    return years - 1;
+  }
+
+  return years;
+};
+
+export const createYearsArray = startDate => {
+  const Start = new Date(startDate);
+  const End = new Date();
+  const years = moment(End).diff(Start, 'years');
+  const yearsBetween = [];
+  for (let year = 0; year < years + 2; year += 1) {
+    yearsBetween.push(Start.getFullYear() + year);
+  }
+  return yearsBetween;
 };

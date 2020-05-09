@@ -1,6 +1,7 @@
 import React from 'react';
 import { Field, ErrorMessage } from 'formik';
-import { monthsArray } from '../../../constants';
+import { daysArray, monthsArray } from '../../../constants';
+import { createYearsArray } from '../../../helpers/dateHelpers';
 
 export default function Birthday({ isEditable }) {
   return (
@@ -9,16 +10,30 @@ export default function Birthday({ isEditable }) {
         <div className="input-fields">
           <label htmlFor="birthday">Birthday</label>
           <Field
-            type="number"
-            className="day-input"
+            as="select"
             name="birthday"
+            className="month-input"
             required
             disabled={!isEditable}
-            placeholder="Day"
-          />
-          <Field as="select" name="birthmonth" className="month-input" required>
+          >
             <option value="" disabled hidden>
-              Choose month
+              Day
+            </option>
+            {daysArray.map(day => (
+              <option key={day} value={day}>
+                {day}
+              </option>
+            ))}
+          </Field>
+          <Field
+            as="select"
+            name="birthmonth"
+            className="month-input"
+            required
+            disabled={!isEditable}
+          >
+            <option value="" disabled hidden>
+              Month
             </option>
             {monthsArray.map(month => (
               <option key={month} value={month}>
@@ -30,14 +45,24 @@ export default function Birthday({ isEditable }) {
 
         <div className="input-fields">
           <label htmlFor="birthyear">Year of Birth</label>
+
           <Field
-            type="number"
+            as="select"
             name="birthyear"
-            className="year-input"
+            className="month-input"
             disabled={!isEditable}
-            placeholder="Year"
-            autoComplete="off"
-          />
+          >
+            <option value="" disabled hidden>
+              Year
+            </option>
+            {createYearsArray('June 26, 1915 11:13:00')
+              .reverse()
+              .map(year => (
+                <option key={year} value={year}>
+                  {year}
+                </option>
+              ))}
+          </Field>
         </div>
         <div className="helper-label">
           <p>If you don't know the year - leave it blank</p>

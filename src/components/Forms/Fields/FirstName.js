@@ -6,7 +6,13 @@ export default function FirstName({ isEditable }) {
     <div className="field-container">
       <div className="field">
         <label htmlFor="firstName">First name</label>
-        <Field type="text" name="firstName" required disabled={!isEditable} />
+        <Field
+          type="text"
+          name="firstName"
+          required
+          disabled={!isEditable}
+          autoComplete="off"
+        />
       </div>
       <div className="error-message">
         <ErrorMessage name="firstName" component="div" />

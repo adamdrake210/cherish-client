@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import router from 'next/router';
 import { firebase } from '../../firebase/firebase';
 
 export default function useAuth() {
@@ -10,6 +11,7 @@ export default function useAuth() {
         setAuthUser(user);
       } else {
         setAuthUser(null);
+        router.push('/');
       }
     });
 

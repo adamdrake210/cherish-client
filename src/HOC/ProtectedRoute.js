@@ -5,7 +5,11 @@ import { useUserContext } from '../context/userContext';
 function ProtectedRoute({ children }) {
   const { user } = useUserContext();
   if (user) return children;
-  return <p>please log in</p>;
+  return (
+    <div className="container">
+      <p>Loading...</p>
+    </div>
+  );
 }
 
 ProtectedRoute.propTypes = {

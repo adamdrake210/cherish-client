@@ -18,18 +18,21 @@ body {
   min-height: 100vh;
   margin: 0 auto;
   padding: 16px 32px;
+  @include break('max', $screen-sm) {
+    padding: 16px;
+  }
 }
 
 .desktop {
   display: block;
-  @include break($md-breakpoint) {
+  @include break('max', $screen-tablet) {
     display: none;
   }
 }
 
 .mobile {
   display: none;
-  @include break($md-breakpoint) {
+  @include break('max', $screen-tablet) {
     display: block;
   }
 }

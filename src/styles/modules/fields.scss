@@ -11,6 +11,12 @@ select {
   border-radius: 5px;
 }
 
+input:disabled,
+input[disabled],
+select[disabled] {
+  background-color: lighten($grey, 30%);
+}
+
 select {
   border-color: $black;
   background-color: $white;
@@ -35,7 +41,8 @@ select {
   }
   .error-message {
     color: red;
-    font-size: 11px;
+    font-size: 14px;
+    text-align: center;
   }
 }
 

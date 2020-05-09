@@ -12,13 +12,21 @@
     border-color: #000;
     margin-right: 10px;
   }
-  .link-input {
+  .link-input-container {
     display: flex;
-    align-items: center;
-    button {
-      &:nth-of-type(1) {
-        margin-right: 5px;
+    flex-direction: column;
+    .link-input {
+      display: flex;
+      align-items: center;
+      button {
+        &:nth-of-type(1) {
+          margin-right: 5px;
+        }
       }
+    }
+    .error-message {
+      color: red;
+      font-size: 14px;
     }
   }
 }

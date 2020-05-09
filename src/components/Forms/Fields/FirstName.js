@@ -5,7 +5,7 @@ export default function FirstName({ isEditable }) {
   return (
     <div className="field-container">
       <div className="field">
-        <label htmlFor="firstName">First name</label>
+        <label htmlFor="firstName">First name*</label>
         <Field
           type="text"
           name="firstName"

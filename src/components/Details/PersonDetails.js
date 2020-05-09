@@ -38,9 +38,17 @@ export default function PersonDetails({ person }) {
         </li>
         <li>
           <strong>Email:</strong>{' '}
-          <a href={`mailto:${email}`} target="_blank" rel="noopener noreferrer">
-            {email}
-          </a>
+          {email ? (
+            <a
+              href={`mailto:${email}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {email}
+            </a>
+          ) : (
+            'No email set at this time. '
+          )}
         </li>
         <li>
           <strong>Address:</strong> {address || 'No address at this time'}

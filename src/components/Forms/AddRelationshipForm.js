@@ -26,6 +26,7 @@ export default function AddRelationshipForm({
             birthmonth: '',
             birthyear: '',
             relationshiptype: '',
+            address: '',
             links: '',
             notes: '',
             peopleId: personId,

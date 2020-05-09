@@ -6,7 +6,6 @@ import EditRelationshipForm from '../../components/Forms/EditRelationshipForm';
 import { getRelationships } from '../../firebase/firebaseapi';
 
 export default function EditPerson({ id, person }) {
-  const [success, setSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isAddRelationship, setIsAddRelationship] = useState(false);
   const [relationships, setRelationships] = useState([]);
@@ -30,12 +29,7 @@ export default function EditPerson({ id, person }) {
         <Link passHref href={`/person/${id}`}>
           <a>View Person Details</a>
         </Link>
-        <EditPersonForm
-          id={id}
-          person={person}
-          success={success}
-          setSuccess={setSuccess}
-        />
+        <EditPersonForm id={id} person={person} />
       </div>
 
       <h2>Current Relationships</h2>

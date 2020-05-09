@@ -8,7 +8,7 @@ export default function Birthday({ isEditable }) {
     <div className="field-container">
       <div className="field field-birthday">
         <div className="input-fields">
-          <label htmlFor="birthday">Birthday</label>
+          <label htmlFor="birthday">Birthday*</label>
           <Field
             as="select"
             name="birthday"

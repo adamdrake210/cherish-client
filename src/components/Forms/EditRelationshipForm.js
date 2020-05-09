@@ -12,6 +12,7 @@ import Links from './Fields/Links';
 
 export default function EditRelationshipForm({ id, relationship }) {
   const [isEditable, setIsEditable] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   const {
     firstName,
@@ -52,6 +53,7 @@ export default function EditRelationshipForm({ id, relationship }) {
               .then(() => {
                 console.log('Document updated');
                 setSubmitting(false);
+                setSuccess(true);
                 setIsEditable(false);
               })
               .catch(error => {
@@ -69,7 +71,7 @@ export default function EditRelationshipForm({ id, relationship }) {
               <Email isEditable={isEditable} />
               <Address isEditable={isEditable} />
               <Notes isEditable={isEditable} />
-              <Links values={values} />
+              <Links values={values} isEditable={isEditable} />
 
               {isEditable && (
                 <button
@@ -91,6 +93,9 @@ export default function EditRelationshipForm({ id, relationship }) {
           >
             Edit
           </button>
+        )}
+        {success && (
+          <p>{relationship.firstName}'s details have been updated.</p>
         )}
       </div>
     </div>

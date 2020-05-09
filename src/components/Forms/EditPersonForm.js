@@ -10,8 +10,9 @@ import Birthday from './Fields/Birthday';
 import Notes from './Fields/Notes';
 import Links from './Fields/Links';
 
-export default function EditPersonForm({ id, person, success, setSuccess }) {
-  const [isEditable, setIsEditable] = useState(false);
+export default function EditPersonForm({ id, person }) {
+  const [isEditable, setIsEditable] = useState(true);
+  const [success, setSuccess] = useState(false);
 
   const {
     firstName,
@@ -65,7 +66,6 @@ export default function EditPersonForm({ id, person, success, setSuccess }) {
               <Email isEditable={isEditable} />
               <Address isEditable={isEditable} />
               <Notes isEditable={isEditable} />
-              {/* // TODO Do this. */}
               <Links values={values} isEditable={isEditable} />
 
               {isEditable && (

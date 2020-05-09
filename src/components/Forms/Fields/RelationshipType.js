@@ -7,7 +7,7 @@ export default function RelationshipType({ isEditable }) {
   return (
     <div className="field-container">
       <div className="field">
-        <label htmlFor="relationshiptype">Relationship</label>
+        <label htmlFor="relationshiptype">Relationship*</label>
         <Field
           as="select"
           name="relationshiptype"

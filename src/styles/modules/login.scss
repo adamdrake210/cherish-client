@@ -1,9 +1,28 @@
 .login-container {
+  @include flexcenter;
+  flex-direction: column;
   max-width: 500px;
   width: 100%;
+  border: 1px solid $grey;
+  height: 100%;
+  padding: 32px 16px;
+  border-radius: 5px;
+  @include boxshadow;
+  margin-top: 60px;
+  h2 {
+    margin-top: 0;
+    margin-bottom: 32px;
+  }
+  button {
+    width: 100%;
+  }
+  &-form {
+    max-width: 350px;
+    width: 100%;
+    text-align: center;
+  }
   .login-link-container {
     display: flex;
-
     justify-content: space-evenly;
     a {
       text-decoration: none;
@@ -11,5 +30,16 @@
         text-decoration: underline;
       }
     }
+  }
+}
+
+.google-button {
+  background-color: $white;
+  color: $grey;
+  &:hover {
+    background-color: darken($white, 3%);
+  }
+  svg {
+    margin-right: 12px;
   }
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Field, ErrorMessage } from 'formik';
 
-export default function Email({ isEditable }) {
+export default function Email({ isEditable, noLabel }) {
   const validateEmail = value => {
     let errorMessage;
     if (
@@ -18,7 +18,7 @@ export default function Email({ isEditable }) {
   return (
     <div className="field-container">
       <div className="field">
-        <label htmlFor="email">Email</label>
+        {!noLabel && <label htmlFor="email">Email</label>}
         <Field
           type="email"
           name="email"

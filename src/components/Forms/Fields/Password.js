@@ -1,11 +1,11 @@
 import React from 'react';
 import { Field, ErrorMessage } from 'formik';
 
-export default function Password({ title }) {
+export default function Password({ title, noLabel }) {
   return (
     <div className="field-container">
       <div className="field">
-        <label htmlFor="password">Password</label>
+        {!noLabel && <label htmlFor="password">Password</label>}
         <Field type="password" name="password" placeholder={title} />
       </div>
       <div className="error-message">

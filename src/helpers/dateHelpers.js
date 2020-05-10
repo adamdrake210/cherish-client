@@ -17,42 +17,33 @@ export const getIntlDateTimeString = dateObj => {
   }
 };
 
-export const dateObjectFromTimeStamp = timestamp => {
-  const date = new Date(timestamp * 1000);
-  console.log('date: ', date);
-  const day = date.getDate();
-  const month = date.getMonth();
-  const year = date.getFullYear();
+// export const dateObjectFromTimeStamp = timestamp => {
+//   const date = new Date(timestamp * 1000);
+//   console.log('date: ', date);
+//   const day = date.getDate();
+//   const month = date.getMonth();
+//   const year = date.getFullYear();
 
-  return { day, month, year };
+//   return { day, month, year };
+// };
+
+export const convertToMonthNumber = month => {
+  return monthsArray.indexOf(month);
 };
 
-export const convertDateToTimeStamp = (day, month, year) => {
-  return new Date(Date.UTC(year, monthsArray.indexOf(month) - 1, day));
-};
+// export const convertDateToTimeStamp = (day, month, year) => {
+//   return new Date(Date.UTC(year, convertToMonthNumber(month), day));
+// };
 
 export const getAge = (day, month, year) => {
   if (!year) {
     return 'no year was selected. Unable to provide age.';
   }
 
-  const currentDate = new Date();
-  const dob = convertDateToTimeStamp(day, month, year);
+  const dobMonth = convertToMonthNumber(month);
+  const dob = moment([year, dobMonth, day]);
 
-  const currentMonth = moment().month();
-  const currentDay = moment().date();
-  const dobMonth = monthsArray.indexOf(month);
-
-  const years = moment(currentDate).diff(dob, 'years');
-
-  if (currentMonth < dobMonth) {
-    return years - 1;
-  }
-  if (currentMonth === dobMonth && currentDay < day) {
-    return years - 1;
-  }
-
-  return years;
+  return moment(new Date()).diff(dob, 'years');
 };
 
 export const createYearsArray = startDate => {

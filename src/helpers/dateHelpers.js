@@ -37,13 +37,13 @@ export const convertDateToTimeStamp = (day, month, year) => {
 
 export const getAge = (day, month, year) => {
   if (!year) {
-    return 'no year was selected. Unable to provide age.';
+    return 'Unknown Age';
   }
 
   const dobMonth = convertToMonthNumber(month);
   const dob = moment([year, dobMonth, day]);
 
-  return moment(new Date()).diff(dob, 'years');
+  return `${moment(new Date()).diff(dob, 'years')} yrs`;
 };
 
 export const createYearsArray = startDate => {

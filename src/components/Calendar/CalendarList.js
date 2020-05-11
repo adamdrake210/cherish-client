@@ -4,6 +4,7 @@ import { getPeople, getRelationships } from '../../firebase/firebaseapi';
 import { useUserContext } from '../../context/userContext';
 import { formatDate, sortBirthdays } from '../../helpers/dateHelpers';
 import { monthsArray } from '../../constants';
+import AgeDetails from '../Details/AgeDetails';
 
 export default function CalendarList() {
   const [peopleList, setPeopleList] = useState([]);
@@ -17,19 +18,13 @@ export default function CalendarList() {
     });
     setPeopleList(peopleArray);
   }
+
   function handleRelationshipsSnapshot(snapshot) {
     const relationshipArray = snapshot.docs.map(doc => {
       return { id: doc.id, ...doc.data() };
     });
     setRelationshipsList(relationshipArray);
   }
-
-  useEffect(() => {
-    getPeople(user.uid, handlePeopleSnapshot);
-    getRelationships(user.uid, 'userId', handleRelationshipsSnapshot);
-
-    setCurrentMonth(new Date().getMonth());
-  }, []);
 
   function convertBirthdaysToSortedList(array, month) {
     const birthdayArray = [];
@@ -54,7 +49,23 @@ export default function CalendarList() {
             <li key={person.id}>
               <a className="person-link">
                 <div className="person-details">
-                  <p>{`${person.birthday} ${person.birthmonth} - ${person.firstName} ${person.lastName}`}</p>
+                  <p>
+                    {`${person.birthday} ${person.birthmonth} - `}
+                    <Link
+                      passHref
+                      href={`/person/${
+                        person.peopleId ? person.peopleId : person.id
+                      }`}
+                    >
+                      <a>{`${person.firstName} ${person.lastName}`}</a>
+                    </Link>{' '}
+                    -{' '}
+                    <AgeDetails
+                      birthday={person.birthday}
+                      birthmonth={person.birthmonth}
+                      birthyear={person.birthyear}
+                    />
+                  </p>
                 </div>
               </a>
             </li>
@@ -63,6 +74,12 @@ export default function CalendarList() {
       </div>
     );
   }
+
+  useEffect(() => {
+    getPeople(user.uid, handlePeopleSnapshot);
+    getRelationships(user.uid, 'userId', handleRelationshipsSnapshot);
+    setCurrentMonth(new Date().getMonth());
+  }, []);
 
   return (
     <div>

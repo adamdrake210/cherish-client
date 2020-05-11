@@ -31,7 +31,7 @@ export default function AddPersonForm({ success, setSuccess, setPersonId }) {
             birthyear: '',
             email: '',
             address: '',
-            links: [''],
+            links: [],
             notes: '',
             userId: user.uid,
           }}
@@ -65,7 +65,7 @@ export default function AddPersonForm({ success, setSuccess, setPersonId }) {
               <Address isEditable={isEditable} />
               <Notes isEditable={isEditable} />
 
-              <Links values={values} />
+              <Links values={values} isEditable={isEditable} />
 
               {!success && (
                 <button

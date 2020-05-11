@@ -5,6 +5,9 @@
 /.pnp
 .pnp.js
 
+# config
+config/firebaseConfig.js
+
 # testing
 /coverage
 
@@ -17,9 +20,6 @@
 
 # misc
 .DS_Store
-
-# config
-/config/firebaseConfig.js
 
 # debug
 npm-debug.log*

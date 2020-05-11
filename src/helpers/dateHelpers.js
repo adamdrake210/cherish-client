@@ -31,9 +31,9 @@ export const convertToMonthNumber = month => {
   return monthsArray.indexOf(month);
 };
 
-// export const convertDateToTimeStamp = (day, month, year) => {
-//   return new Date(Date.UTC(year, convertToMonthNumber(month), day));
-// };
+export const convertDateToTimeStamp = (day, month, year) => {
+  return new Date(Date.UTC(year, convertToMonthNumber(month), day));
+};
 
 export const getAge = (day, month, year) => {
   if (!year) {
@@ -56,3 +56,11 @@ export const createYearsArray = startDate => {
   }
   return yearsBetween;
 };
+
+export function sortBirthdays(array) {
+  return array.sort((a, b) => a.birthday - b.birthday);
+}
+
+export function formatDate() {
+  return moment().format('dddd, MMMM Do YYYY');
+}

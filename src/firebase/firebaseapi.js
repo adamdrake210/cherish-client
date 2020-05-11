@@ -19,10 +19,10 @@ export function getPeople(id, callback) {
     .onSnapshot(callback);
 }
 
-export function getRelationships(id, callback) {
+export function getRelationships(id, idType, callback) {
   return firestore
     .collection('relationship')
-    .where('peopleId', '==', id)
+    .where(idType, '==', id)
     .onSnapshot(callback);
 }
 

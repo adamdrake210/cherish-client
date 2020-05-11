@@ -31,19 +31,19 @@ export const convertToMonthNumber = month => {
   return monthsArray.indexOf(month);
 };
 
-// export const convertDateToTimeStamp = (day, month, year) => {
-//   return new Date(Date.UTC(year, convertToMonthNumber(month), day));
-// };
+export const convertDateToTimeStamp = (day, month, year) => {
+  return new Date(Date.UTC(year, convertToMonthNumber(month), day));
+};
 
 export const getAge = (day, month, year) => {
   if (!year) {
-    return 'no year was selected. Unable to provide age.';
+    return 'Unknown Age';
   }
 
   const dobMonth = convertToMonthNumber(month);
   const dob = moment([year, dobMonth, day]);
 
-  return moment(new Date()).diff(dob, 'years');
+  return `${moment(new Date()).diff(dob, 'years')} yrs`;
 };
 
 export const createYearsArray = startDate => {
@@ -56,3 +56,11 @@ export const createYearsArray = startDate => {
   }
   return yearsBetween;
 };
+
+export function sortBirthdays(array) {
+  return array.sort((a, b) => a.birthday - b.birthday);
+}
+
+export function formatDate() {
+  return moment().format('dddd, MMMM Do YYYY');
+}

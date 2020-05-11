@@ -19,7 +19,7 @@ export default function EditPerson({ id, person }) {
   }
 
   useEffect(() => {
-    getRelationships(id, handleSnapshot);
+    getRelationships(id, 'peopleId', handleSnapshot);
   }, []);
 
   return (

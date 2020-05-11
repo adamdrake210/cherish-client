@@ -9,11 +9,14 @@ import Email from './Fields/Email';
 import Birthday from './Fields/Birthday';
 import Notes from './Fields/Notes';
 import Links from './Fields/Links';
+import { useUserContext } from '../../context/userContext';
 
 export default function AddRelationshipForm({
   personId,
   setIsAddRelationship,
 }) {
+  const { user } = useUserContext();
+
   return (
     <div>
       <div>
@@ -30,6 +33,7 @@ export default function AddRelationshipForm({
             links: '',
             notes: '',
             peopleId: personId,
+            userId: user.uid,
           }}
           onSubmit={(values, { setSubmitting }) => {
             addRelationship(values)

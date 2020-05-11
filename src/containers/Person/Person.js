@@ -17,7 +17,7 @@ export default function Person({ person, id }) {
   }
 
   useEffect(() => {
-    getRelationships(id, handleSnapshot);
+    getRelationships(id, 'peopleId', handleSnapshot);
   }, []);
 
   return (

@@ -1,5 +1,5 @@
 const firebaseConfig = {
-  apiKey: process.env.FIREBASE_API_KEY,
+  apiKey: 'AIzaSyA4K4yoNB0H4DkOE0QLKJ0YyL6w-cHiiQ4',
   authDomain: 'cherish-v2.firebaseapp.com',
   databaseURL: 'https://cherish-v2.firebaseio.com',
   projectId: 'cherish-v2',

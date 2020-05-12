@@ -15,7 +15,6 @@ export const relationshipTypeArray = [
   'cousin',
   'colleague',
 ];
-
 export const daysArray = Array.from(Array(32).keys());
 
 export const monthsArray = [

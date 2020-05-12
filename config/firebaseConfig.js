@@ -1,11 +1,11 @@
 const firebaseConfig = {
-  apiKey: 'AIzaSyA4K4yoNB0H4DkOE0QLKJ0YyL6w-cHiiQ4',
-  authDomain: 'cherish-v2.firebaseapp.com',
-  databaseURL: 'https://cherish-v2.firebaseio.com',
-  projectId: 'cherish-v2',
+  apiKey: process.env.FIREBASE_PUBLIC_API_KEY,
+  authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+  databaseURL: process.env.FIREBASE_DATABASE_URL,
+  projectId: process.env.FIREBASE_PROJECT_ID,
   storageBucket: 'cherish-v2.appspot.com',
-  messagingSenderId: process.env.REACT_API_APP_ID,
-  appId: process.env.REACT_API_APP_ID,
+  messagingSenderId: process.env.FIREBASE_API_APP_ID,
+  appId: process.env.FIREBASE_API_APP_ID,
 };
 
 export default firebaseConfig;

@@ -44,7 +44,7 @@ export default function EditPersonForm({ id, person }) {
   } = person;
 
   return (
-    <div>
+    <div className="edit-form-container">
       <div>
         <Formik
           initialValues={{
@@ -85,13 +85,24 @@ export default function EditPersonForm({ id, person }) {
               <Links values={values} isEditable={isEditable} />
 
               {isEditable && (
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="button button-sm button-green"
-                >
-                  Update
-                </button>
+                <div className="flex-row">
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="button button-sm button-green m-r-10"
+                  >
+                    Update
+                  </button>
+                  <button
+                    type="button"
+                    className="button button-sm button-white"
+                    onClick={() =>
+                      setIsEditable(prevIsEditable => !prevIsEditable)
+                    }
+                  >
+                    Cancel
+                  </button>
+                </div>
               )}
             </Form>
           )}

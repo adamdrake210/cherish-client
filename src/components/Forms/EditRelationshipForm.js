@@ -45,10 +45,10 @@ export default function EditRelationshipForm({ id, relationship }) {
   } = relationship;
 
   return (
-    <div>
-      <p>
+    <div className="edit-form-container">
+      <h3>
         {firstName} {lastName}:
-      </p>
+      </h3>
       <div>
         <Formik
           initialValues={{
@@ -90,13 +90,24 @@ export default function EditRelationshipForm({ id, relationship }) {
               <Links values={values} isEditable={isEditable} />
 
               {isEditable && (
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="button button-sm button-green"
-                >
-                  Update
-                </button>
+                <div className="flex-row">
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="button button-sm button-green m-r-10"
+                  >
+                    Update
+                  </button>
+                  <button
+                    type="button"
+                    className="button button-sm button-white"
+                    onClick={() =>
+                      setIsEditable(prevIsEditable => !prevIsEditable)
+                    }
+                  >
+                    Cancel
+                  </button>
+                </div>
               )}
             </Form>
           )}

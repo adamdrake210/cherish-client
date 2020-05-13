@@ -71,7 +71,7 @@ export default function EditPerson({ id, person }) {
         {!isAddRelationship && (
           <button
             type="button"
-            className="button button-lg button-blue"
+            className="button button-lg button-blue m-t-20"
             onClick={() => setIsAddRelationship(!isAddRelationship)}
           >
             Add Relationship

@@ -3,3 +3,10 @@
   flex-direction: column;
   max-width: 500px;
 }
+
+.edit-form-container {
+  padding-bottom: 32px;
+  margin-bottom: 32px;
+  border-bottom: 1px solid $reddy;
+  box-shadow: 0 3px 2px -2px $grey;
+}

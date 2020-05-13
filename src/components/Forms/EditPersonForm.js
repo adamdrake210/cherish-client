@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Formik, Form } from 'formik';
-import { updatePerson } from '../../firebase/firebaseapi';
+import router from 'next/router';
+import { updatePerson, deleteDocument } from '../../firebase/firebaseapi';
 import FirstName from './Fields/FirstName';
 import LastName from './Fields/LastName';
 import Address from './Fields/Address';
@@ -11,8 +12,23 @@ import Notes from './Fields/Notes';
 import Links from './Fields/Links';
 
 export default function EditPersonForm({ id, person }) {
-  const [isEditable, setIsEditable] = useState(true);
+  const [isEditable, setIsEditable] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [firebaseError, setFirebaseError] = useState(null);
+
+  const handleDeletePerson = () => {
+    deleteDocument(id, 'people')
+      .then(() => {
+        // TODO Snackbar here
+        router.push('/');
+      })
+      .catch(error => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log('errorCode', errorCode);
+        setFirebaseError(errorMessage);
+      });
+  };
 
   const {
     firstName,
@@ -72,7 +88,7 @@ export default function EditPersonForm({ id, person }) {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="button button-lg button-green"
+                  className="button button-sm button-green"
                 >
                   Update
                 </button>
@@ -81,15 +97,25 @@ export default function EditPersonForm({ id, person }) {
           )}
         </Formik>
         {!isEditable && (
-          <button
-            type="button"
-            onClick={() => setIsEditable(prevIsEditable => !prevIsEditable)}
-            className="button button-lg button-green"
-          >
-            Edit
-          </button>
+          <>
+            <button
+              type="button"
+              onClick={() => setIsEditable(prevIsEditable => !prevIsEditable)}
+              className="button button-sm button-green m-r-10"
+            >
+              Edit
+            </button>
+            <button
+              type="button"
+              onClick={handleDeletePerson}
+              className="button button-sm button-red"
+            >
+              Delete
+            </button>
+          </>
         )}
         {success && <p>{person.firstName}'s details have been updated.</p>}
+        {firebaseError && <p className="error-message">{firebaseError}</p>}
       </div>
     </div>
   );

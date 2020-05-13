@@ -5,7 +5,7 @@ select {
   padding: 8px 10px;
   margin: 8px 0;
   font-size: 16px;
-  color: $fontcolor3;
+  color: $darkgrey;
   display: inline-block;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -14,7 +14,7 @@ select {
 input:disabled,
 input[disabled],
 select[disabled] {
-  background-color: lighten($grey, 30%);
+  background-color: lighten($grey, 35%);
 }
 
 select {

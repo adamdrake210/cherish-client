@@ -39,3 +39,7 @@ export function updateRelationship(id, values) {
     .doc(id)
     .set({ ...values }, { merge: true });
 }
+
+export function deleteDocument(id, collection) {
+  return firestore.collection(collection).doc(id).delete();
+}

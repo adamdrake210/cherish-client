@@ -4,14 +4,17 @@
 }
 
 .button-sm {
-  padding: 6px 16px;
+  padding: 6px 12px;
   font-size: 16px;
+  max-width: 110px;
+  width: 100%;
 }
 
 .button-lg {
   padding: 10px 16px;
   font-size: 20px;
-  width: 200px;
+  max-width: 190px;
+  width: 100%;
 }
 
 .button-blue {

@@ -1,29 +1,31 @@
 import React, { useState } from 'react';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import Divider from '@material-ui/core/Divider';
 import Drawer from '@material-ui/core/Drawer';
 import Link from 'next/link';
 import { useUserContext } from '../context/userContext';
 import Logout from './Auth/Logout';
 import UserAvatar from './UserAvatar';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles(theme => ({
   appbar: {
     backgroundColor: '#fffec1',
   },
-  list: {
-    width: 350,
-  },
   menuButton: {
+    display: 'block',
     color: 'red',
+    [theme.breakpoints.up('sm')]: {
+      display: 'none',
+    },
+  },
+  drawerPaper: {
+    backgroundColor: '#fffec1',
   },
 }));
 
@@ -32,7 +34,6 @@ export default function Nav() {
   const { user } = useUserContext();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
-  const theme = useTheme();
   const [isOpenDrawer, setIsOpenDrawer] = useState(false);
 
   const handleMenu = event => {
@@ -146,17 +147,21 @@ export default function Nav() {
           paper: classes.drawerPaper,
         }}
       >
-        <div className={classes.drawerHeader}>
+        <div
+          className={classes.drawerHeader}
+          role="presentation"
+          onKeyDown={handleDrawerClose}
+        >
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'rtl' ? (
-              <ChevronLeftIcon />
-            ) : (
-              <ChevronRightIcon />
-            )}
+            <ChevronRightIcon />
           </IconButton>
         </div>
-        <Divider />
-        <ul className="mobile-sidemenu-navigation-links">
+        <ul
+          className="mobile-sidemenu-navigation-links"
+          role="presentation"
+          onClick={handleDrawerClose}
+          onKeyDown={handleDrawerClose}
+        >
           <li>{user ? <UserAvatar displayName={user.displayName} /> : ''}</li>
           {user && (
             <>

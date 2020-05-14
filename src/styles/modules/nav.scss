@@ -39,6 +39,16 @@
   }
 }
 
+.cherish-logo {
+  font-family: $pacifico;
+  color: $fontcolor2;
+  text-decoration: none;
+  font-size: 36px;
+  line-height: 46px;
+  margin-right: 1em;
+  flex-grow: 1;
+}
+
 .firstLetter {
   display: flex;
   justify-content: center;
@@ -53,8 +63,8 @@
   @include break('max', $screen-sm) {
     font-size: 70px;
     border: 2px solid $white;
-    height: 140px;
-    width: 140px;
+    height: 120px;
+    width: 120px;
   }
 }
 
@@ -62,6 +72,7 @@
 
 .mobile-sidemenu {
   &-navigation-links {
+    width: 200px;
     list-style: none;
     padding-left: 0;
     display: flex;

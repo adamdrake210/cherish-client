@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import { useUserContext } from '../context/userContext';
 
 function ProtectedRoute({ children }) {
@@ -7,7 +8,10 @@ function ProtectedRoute({ children }) {
   if (user) return children;
   return (
     <div className="container">
-      <p>Loading...</p>
+      <div className="loading">
+        <CircularProgress color="secondary" />
+        <p>Loading...</p>
+      </div>
     </div>
   );
 }

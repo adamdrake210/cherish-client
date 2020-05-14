@@ -18,23 +18,23 @@ body {
   min-height: 100vh;
   margin: 0 auto;
   padding: 16px 32px;
-  margin-top: 60px;
+  margin-top: 54px;
   @include break('max', $screen-sm) {
     padding: 16px;
-    margin-top: 30px;
+    margin-top: 40px;
   }
 }
 
 .desktop {
   display: block;
-  @include break('max', $screen-tablet) {
+  @include break('max', $screen-sm) {
     display: none;
   }
 }
 
 .mobile {
   display: none;
-  @include break('max', $screen-tablet) {
+  @include break('max', $screen-sm) {
     display: block;
   }
 }
@@ -71,16 +71,6 @@ a {
   }
 }
 
-.cherish-logo {
-  font-family: $pacifico;
-  color: $fontcolor2;
-  text-decoration: none;
-  font-size: 36px;
-  line-height: 46px;
-  margin-right: 1em;
-  flex-grow: 1;
-}
-
 .flex-center {
   display: flex;
   justify-content: center;
@@ -88,6 +78,14 @@ a {
 
 .flex-row {
   display: flex;
+}
+
+.loading {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: $reddy;
 }
 
 // Margins

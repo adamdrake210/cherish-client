@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { getPeople } from '../firebase/firebaseapi';
 import { useUserContext } from '../context/userContext';
-import { sortLastName } from '../helpers/helpers';
+import { sortLastName, capitalizeFirstLetter } from '../helpers/helpers';
 import PeopleAvatar from './PeopleAvatar';
 
 function People() {
@@ -70,7 +70,9 @@ function People() {
                   />
                   <div className="person-details">
                     <p>{`${person.firstName} ${person.lastName}`}</p>
-                    <span>{person.relationshiptype}</span>
+                    <span>
+                      {capitalizeFirstLetter(person.relationshiptype)}
+                    </span>
                   </div>
                 </a>
               </Link>

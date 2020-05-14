@@ -1,21 +1,168 @@
-/* eslint-disable react/jsx-curly-newline */
 import React, { useState } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import Menu from '@material-ui/core/Menu';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import Drawer from '@material-ui/core/Drawer';
 import Link from 'next/link';
 import { useUserContext } from '../context/userContext';
 import Logout from './Auth/Logout';
 import UserAvatar from './UserAvatar';
 
-function Nav() {
-  const [isShowMenu, setIsShowMenu] = useState(false);
+const useStyles = makeStyles(theme => ({
+  appbar: {
+    backgroundColor: '#fffec1',
+  },
+  menuButton: {
+    display: 'block',
+    color: 'red',
+    [theme.breakpoints.up('sm')]: {
+      display: 'none',
+    },
+  },
+  drawerPaper: {
+    backgroundColor: '#fffec1',
+  },
+}));
+
+export default function Nav() {
+  const classes = useStyles();
   const { user } = useUserContext();
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const [isOpenDrawer, setIsOpenDrawer] = useState(false);
+
+  const handleMenu = event => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleDrawerOpen = () => {
+    setIsOpenDrawer(true);
+  };
+
+  const handleDrawerClose = () => {
+    setIsOpenDrawer(false);
+  };
 
   return (
-    <div className="navigation-container">
-      <nav className="navigation-list-container">
-        <Link href="/">
-          <a className="cherish-logo cherish-logo-nav">Cherish</a>
-        </Link>
-        <ul className="navigation-links">
+    <>
+      <div className="navigation-container">
+        <AppBar position="fixed" className={classes.appbar}>
+          <Toolbar className="navigation-list-container">
+            <Link href="/">
+              <a variant="h6" className="cherish-logo cherish-logo-nav">
+                Cherish
+              </a>
+            </Link>
+            <ul className="navigation-links">
+              {user && (
+                <>
+                  <li>
+                    <Link href="/add-person">
+                      <a>Add Person</a>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/calendar">
+                      <a>Calendar</a>
+                    </Link>
+                  </li>
+                </>
+              )}
+              {!user && (
+                <li>
+                  <Link href="/register">
+                    <a>Register</a>
+                  </Link>
+                </li>
+              )}
+              <li>
+                {!user && (
+                  <Link href="/login">
+                    <a>Login</a>
+                  </Link>
+                )}
+              </li>
+            </ul>
+            {user && (
+              <>
+                <div className="desktop">
+                  <IconButton
+                    aria-label="account of current user"
+                    aria-controls="menu-appbar"
+                    aria-haspopup="true"
+                    onClick={handleMenu}
+                    color="inherit"
+                  >
+                    <UserAvatar displayName={user.displayName} />
+                  </IconButton>
+                  <Menu
+                    id="menu-appbar"
+                    anchorEl={anchorEl}
+                    anchorOrigin={{
+                      vertical: 'top',
+                      horizontal: 'right',
+                    }}
+                    keepMounted
+                    transformOrigin={{
+                      vertical: 'top',
+                      horizontal: 'right',
+                    }}
+                    open={open}
+                    onClose={handleClose}
+                  >
+                    <MenuItem onClick={handleClose}>
+                      {user && <Logout />}
+                    </MenuItem>
+                  </Menu>
+                </div>
+                <IconButton
+                  color="inherit"
+                  aria-label="open drawer"
+                  onClick={handleDrawerOpen}
+                  edge="start"
+                  className={classes.menuButton}
+                >
+                  <MenuIcon />
+                </IconButton>
+              </>
+            )}
+          </Toolbar>
+        </AppBar>
+      </div>
+      <Drawer
+        className={classes.drawer}
+        variant="persistent"
+        anchor="right"
+        open={isOpenDrawer}
+        classes={{
+          paper: classes.drawerPaper,
+        }}
+      >
+        <div
+          className={classes.drawerHeader}
+          role="presentation"
+          onKeyDown={handleDrawerClose}
+        >
+          <IconButton onClick={handleDrawerClose}>
+            <ChevronRightIcon />
+          </IconButton>
+        </div>
+        <ul
+          className="mobile-sidemenu-navigation-links"
+          role="presentation"
+          onClick={handleDrawerClose}
+          onKeyDown={handleDrawerClose}
+        >
+          <li>{user ? <UserAvatar displayName={user.displayName} /> : ''}</li>
           {user && (
             <>
               <li>
@@ -46,108 +193,8 @@ function Nav() {
               </Link>
             )}
           </li>
-          <li>{user ? <UserAvatar displayName={user.displayName} /> : ''}</li>
         </ul>
-        <button
-          type="button"
-          className="mobile-menu-button"
-          onClick={() => setIsShowMenu(prevIsShowMenu => !prevIsShowMenu)}
-        >
-          <svg width="30" height="30">
-            <path d="M0,5 30,5" stroke="#ff7474" strokeWidth="5" />
-            <path d="M0,14 30,14" stroke="#ff7474" strokeWidth="5" />
-            <path d="M0,23 30,23" stroke="#ff7474" strokeWidth="5" />
-          </svg>
-        </button>
-      </nav>
-      <nav className={`mobile-sidemenu-container ${isShowMenu ? 'show' : ''}`}>
-        <ul className="mobile-sidemenu-navigation-links">
-          <button
-            type="button"
-            className="btn-close"
-            onClick={() => setIsShowMenu(prevIsShowMenu => !prevIsShowMenu)}
-          >
-            &times;
-          </button>
-          <li>{user ? <UserAvatar displayName={user.displayName} /> : ''}</li>
-          {user && (
-            <>
-              <li>
-                <Link href="/add-person">
-                  <a
-                    onClick={() =>
-                      setIsShowMenu(prevIsShowMenu => !prevIsShowMenu)
-                    }
-                    onKeyPress={() =>
-                      setIsShowMenu(prevIsShowMenu => !prevIsShowMenu)
-                    }
-                    role="button"
-                    tabIndex={0}
-                  >
-                    Add Person
-                  </a>
-                </Link>
-              </li>
-              <li>
-                <Link href="/calendar">
-                  <a
-                    onClick={() =>
-                      setIsShowMenu(prevIsShowMenu => !prevIsShowMenu)
-                    }
-                    onKeyPress={() =>
-                      setIsShowMenu(prevIsShowMenu => !prevIsShowMenu)
-                    }
-                    role="button"
-                    tabIndex={0}
-                  >
-                    Calendar
-                  </a>
-                </Link>
-              </li>
-            </>
-          )}
-          {!user && (
-            <li>
-              <Link href="/register">
-                <a
-                  onClick={() =>
-                    setIsShowMenu(prevIsShowMenu => !prevIsShowMenu)
-                  }
-                  onKeyPress={() =>
-                    setIsShowMenu(prevIsShowMenu => !prevIsShowMenu)
-                  }
-                  role="button"
-                  tabIndex={0}
-                >
-                  Register
-                </a>
-              </Link>
-            </li>
-          )}
-          <li>
-            {user ? (
-              <Logout />
-            ) : (
-              <Link href="/login">
-                <a
-                  onClick={() =>
-                    setIsShowMenu(prevIsShowMenu => !prevIsShowMenu)
-                  }
-                  onKeyPress={() =>
-                    setIsShowMenu(prevIsShowMenu => !prevIsShowMenu)
-                  }
-                  role="button"
-                  tabIndex={0}
-                >
-                  Login
-                </a>
-              </Link>
-            )}
-          </li>
-        </ul>
-      </nav>
-    </div>
+      </Drawer>
+    </>
   );
 }
-
-export default Nav;

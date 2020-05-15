@@ -8,7 +8,15 @@ export default function Homepage() {
 
   return (
     <div>
-      <div>{user ? <People /> : <HomepageNotLoggedIn />}</div>
+      <div>
+        {user ? (
+          <>
+            <People />
+          </>
+        ) : (
+          <HomepageNotLoggedIn />
+        )}
+      </div>
     </div>
   );
 }

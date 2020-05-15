@@ -4,6 +4,7 @@ import { getPeople } from '../firebase/firebaseapi';
 import { useUserContext } from '../context/userContext';
 import { sortLastName, capitalizeFirstLetter } from '../helpers/helpers';
 import PeopleAvatar from './PeopleAvatar';
+import Fabutton from './Fabutton';
 
 function People() {
   const [isLoading, setIsLoading] = useState(true);
@@ -89,6 +90,7 @@ function People() {
           </Link>
         </div>
       )}
+      <Fabutton />
     </div>
   );
 }

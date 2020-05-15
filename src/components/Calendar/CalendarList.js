@@ -5,6 +5,7 @@ import { useUserContext } from '../../context/userContext';
 import { formatDate, sortBirthdays } from '../../helpers/dateHelpers';
 import { monthsArray } from '../../constants';
 import AgeDetails from '../Details/AgeDetails';
+import Fabutton from '../Fabutton';
 
 export default function CalendarList() {
   const [peopleList, setPeopleList] = useState([]);
@@ -93,6 +94,7 @@ export default function CalendarList() {
           })}
         </>
       )}
+      <Fabutton />
     </div>
   );
 }

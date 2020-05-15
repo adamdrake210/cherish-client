@@ -3,6 +3,7 @@ import Link from 'next/link';
 import PersonDetails from '../../components/Details/PersonDetails';
 import RelationshipDetails from '../../components/Details/RelationshipDetails';
 import { getRelationships } from '../../firebase/firebaseapi';
+import Fabutton from '../../components/Fabutton';
 
 export default function Person({ person, id }) {
   const [relationships, setRelationships] = useState([]);
@@ -44,6 +45,7 @@ export default function Person({ person, id }) {
             id={relationship.id}
           />
         ))}
+      <Fabutton />
     </div>
   );
 }

@@ -10,12 +10,14 @@ import Birthday from './Fields/Birthday';
 import Notes from './Fields/Notes';
 import Links from './Fields/Links';
 import { useUserContext } from '../../context/userContext';
+import { useSnackbarDispatch } from '../../context/snackbarContext';
 
 export default function AddRelationshipForm({
   personId,
   setIsAddRelationship,
 }) {
   const { user } = useUserContext();
+  const snackbarDispatch = useSnackbarDispatch();
 
   return (
     <div>
@@ -37,14 +39,30 @@ export default function AddRelationshipForm({
           }}
           onSubmit={(values, { setSubmitting }) => {
             addRelationship(values)
-              .then(docRef => {
-                console.log('Document written with ID: ', docRef.id);
+              .then(() => {
                 setSubmitting(false);
                 setIsAddRelationship(false);
+                snackbarDispatch({
+                  type: 'show_snackbar',
+                  payload: {
+                    message: `Successfully added ${values.firstName}`,
+                    variant: 'success',
+                  },
+                });
               })
               .catch(error => {
-                console.error('Error adding document: ', error);
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log('errorCode', errorCode);
+                console.log('errorMessage', errorMessage);
                 setSubmitting(false);
+                snackbarDispatch({
+                  type: 'show_snackbar',
+                  payload: {
+                    message: errorMessage,
+                    variant: 'error',
+                  },
+                });
               });
           }}
         >

@@ -26,6 +26,7 @@ module.exports = {
     'import/no-unresolved': 0,
     'react/no-unescaped-entities': 0,
     'react/jsx-closing-bracket-location': 0,
+    'react/jsx-wrap-multilines': 0,
     'react/forbid-prop-types': 0,
     'no-nested-ternary': 0,
     'arrow-parens': 0,

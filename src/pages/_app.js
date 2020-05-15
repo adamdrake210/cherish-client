@@ -4,13 +4,19 @@ import '../styles/styles.scss';
 import Nav from '../components/Nav';
 import 'react-datepicker/dist/react-datepicker.css';
 import { UserProvider } from '../context/userContext';
+import { SnackbarProvider } from '../context/snackbarContext';
+
+import SnackbarContainer from '../containers/SnackbarContainer';
 
 function MyApp({ Component, pageProps }) {
   return (
     <>
       <UserProvider>
-        <Nav />
-        <Component {...pageProps} />
+        <SnackbarProvider>
+          <Nav />
+          <Component {...pageProps} />
+          <SnackbarContainer />
+        </SnackbarProvider>
       </UserProvider>
     </>
   );

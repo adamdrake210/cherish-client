@@ -11,11 +11,12 @@ import Birthday from './Fields/Birthday';
 import Notes from './Fields/Notes';
 import Links from './Fields/Links';
 import { useUserContext } from '../../context/userContext';
+import { useSnackbarDispatch } from '../../context/snackbarContext';
 
 export default function AddPersonForm({ success, setSuccess, setPersonId }) {
   const [newPersonId, setNewPersonId] = useState(null);
   const [isEditable, setIsEditable] = useState(true);
-  const [firebaseError, setFirebaseError] = useState(null);
+  const snackbarDispatch = useSnackbarDispatch();
 
   const { user } = useUserContext();
   return (
@@ -38,11 +39,17 @@ export default function AddPersonForm({ success, setSuccess, setPersonId }) {
           onSubmit={(values, { setSubmitting }) => {
             addPerson(values)
               .then(docRef => {
-                console.log('Document written with ID: ', docRef.id);
                 setSubmitting(false);
                 setPersonId(docRef.id);
                 setNewPersonId(docRef.id);
                 setIsEditable(false);
+                snackbarDispatch({
+                  type: 'show_snackbar',
+                  payload: {
+                    message: `Successfully added ${values.firstName}`,
+                    variant: 'success',
+                  },
+                });
                 setSuccess(true);
               })
               .catch(error => {
@@ -50,8 +57,14 @@ export default function AddPersonForm({ success, setSuccess, setPersonId }) {
                 const errorMessage = error.message;
                 console.log('errorCode', errorCode);
                 console.log('errorMessage', errorMessage);
-                setFirebaseError(errorMessage);
                 setSubmitting(false);
+                snackbarDispatch({
+                  type: 'show_snackbar',
+                  payload: {
+                    message: errorMessage,
+                    variant: 'error',
+                  },
+                });
               });
           }}
         >
@@ -84,8 +97,6 @@ export default function AddPersonForm({ success, setSuccess, setPersonId }) {
             <a>Edit Person</a>
           </Link>
         )}
-        {success && <p>This person has been added to your contacts!</p>}
-        {firebaseError && <p>{firebaseError}</p>}
       </div>
     </div>
   );

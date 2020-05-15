@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Formik, Form } from 'formik';
-import router from 'next/router';
 import { updateRelationship, deleteDocument } from '../../firebase/firebaseapi';
 import FirstName from './Fields/FirstName';
 import LastName from './Fields/LastName';
@@ -10,23 +9,34 @@ import Email from './Fields/Email';
 import Birthday from './Fields/Birthday';
 import Notes from './Fields/Notes';
 import Links from './Fields/Links';
+import { useSnackbarDispatch } from '../../context/snackbarContext';
 
 export default function EditRelationshipForm({ id, relationship }) {
   const [isEditable, setIsEditable] = useState(false);
-  const [success, setSuccess] = useState(false);
-  const [firebaseError, setFirebaseError] = useState(null);
+  const snackbarDispatch = useSnackbarDispatch();
 
   const handleDeletePerson = () => {
     deleteDocument(id, 'relationship')
       .then(() => {
-        // TODO Snackbar here
-        router.push(`/edit-person/${relationship.peopleId}`);
+        snackbarDispatch({
+          type: 'show_snackbar',
+          payload: {
+            message: `Successfully deleted ${relationship.firstName}`,
+            variant: 'success',
+          },
+        });
       })
       .catch(error => {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log('errorCode', errorCode);
-        setFirebaseError(errorMessage);
+        snackbarDispatch({
+          type: 'show_snackbar',
+          payload: {
+            message: errorMessage,
+            variant: 'error',
+          },
+        });
       });
   };
 
@@ -67,14 +77,28 @@ export default function EditRelationshipForm({ id, relationship }) {
           onSubmit={(values, { setSubmitting }) => {
             updateRelationship(id, values)
               .then(() => {
-                console.log('Document updated');
                 setSubmitting(false);
-                setSuccess(true);
                 setIsEditable(false);
+                snackbarDispatch({
+                  type: 'show_snackbar',
+                  payload: {
+                    message: `Successfully edited ${values.firstName}`,
+                    variant: 'success',
+                  },
+                });
               })
               .catch(error => {
-                console.error('Error adding document: ', error);
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.error(errorCode);
                 setSubmitting(false);
+                snackbarDispatch({
+                  type: 'show_snackbar',
+                  payload: {
+                    message: errorMessage,
+                    variant: 'error',
+                  },
+                });
               });
           }}
         >
@@ -130,10 +154,6 @@ export default function EditRelationshipForm({ id, relationship }) {
             </button>
           </>
         )}
-        {success && (
-          <p>{relationship.firstName}'s details have been updated.</p>
-        )}
-        {firebaseError && <p className="error-message">{firebaseError}</p>}
       </div>
     </div>
   );

@@ -7,6 +7,7 @@ import FirstName from './Fields/FirstName';
 import LastName from './Fields/LastName';
 import Email from './Fields/Email';
 import Password from './Fields/Password';
+import GoogleLoginButton from '../GoogleLoginButton';
 
 export default function RegisterForm() {
   const [firebaseError, setFirebaseError] = useState(null);
@@ -23,6 +24,12 @@ export default function RegisterForm() {
 
   return (
     <div className="login-container-form">
+      <GoogleLoginButton
+        setFirebaseError={setFirebaseError}
+        title="Register with Google"
+      />
+      <p>or</p>
+      <h3>Sign up with Email</h3>
       <Formik
         initialValues={{
           firstName: '',
@@ -39,7 +46,6 @@ export default function RegisterForm() {
             })
             .catch(error => {
               setSubmitting(false);
-              // Handle Errors here.
               const errorCode = error.code;
               const errorMessage = error.message;
               console.log('errorCode', errorCode);

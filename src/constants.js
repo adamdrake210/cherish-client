@@ -12,6 +12,7 @@ export const relationshipTypeArray = [
   'fiancée',
   'father',
   'mother',
+  'grandparent',
   'cousin',
   'colleague',
   'mother-in-law',

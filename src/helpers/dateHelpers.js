@@ -36,7 +36,7 @@ export const convertDateToTimeStamp = (day, month, year) => {
 };
 
 export const getAge = (day, month, year) => {
-  if (!year) {
+  if (!year || !month || !day) {
     return 'Unknown Age';
   }
 

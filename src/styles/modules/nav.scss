@@ -3,6 +3,9 @@
     flex-grow: 1;
     width: 100%;
     padding: 5px 0;
+    .appbar {
+      background-color: darken($yellow, 5%);
+    }
     @include break('max', $screen-sm) {
       padding: 8px;
     }
@@ -69,6 +72,10 @@
 }
 
 // Mobile Navigation
+
+.drawer-paper {
+  background-color: lighten($yellow, 3%) !important;
+}
 
 .mobile-sidemenu {
   &-navigation-links {

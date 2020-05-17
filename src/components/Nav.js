@@ -14,18 +14,12 @@ import Logout from './Auth/Logout';
 import UserAvatar from './UserAvatar';
 
 const useStyles = makeStyles(theme => ({
-  appbar: {
-    backgroundColor: '#fffec1',
-  },
   menuButton: {
     display: 'block',
     color: 'red',
     [theme.breakpoints.up('sm')]: {
       display: 'none',
     },
-  },
-  drawerPaper: {
-    backgroundColor: '#fffec1',
   },
 }));
 
@@ -55,7 +49,7 @@ export default function Nav() {
   return (
     <>
       <div className="navigation-container">
-        <AppBar position="fixed" className={classes.appbar}>
+        <AppBar position="fixed" className="appbar">
           <Toolbar className="navigation-list-container">
             <Link href="/">
               <a variant="h6" className="cherish-logo cherish-logo-nav">
@@ -144,7 +138,7 @@ export default function Nav() {
         anchor="right"
         open={isOpenDrawer}
         classes={{
-          paper: classes.drawerPaper,
+          paper: 'drawer-paper',
         }}
       >
         <div

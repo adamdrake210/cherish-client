@@ -8,12 +8,11 @@ export default function Birthday({ isEditable }) {
     <div className="field-container">
       <div className="field field-birthday">
         <div className="input-fields">
-          <label htmlFor="birthday">Birthday*</label>
+          <label htmlFor="birthday">Birthday</label>
           <Field
             as="select"
             name="birthday"
             className="month-input"
-            required
             disabled={!isEditable}
           >
             <option value="" disabled hidden>
@@ -29,7 +28,6 @@ export default function Birthday({ isEditable }) {
             as="select"
             name="birthmonth"
             className="month-input"
-            required
             disabled={!isEditable}
           >
             <option value="" disabled hidden>
@@ -65,7 +63,7 @@ export default function Birthday({ isEditable }) {
           </Field>
         </div>
         <div className="helper-label">
-          <p>If you don't know the year - leave it blank</p>
+          <p>If you don't know the brithday you can leave it blank</p>
         </div>
       </div>
       <div className="error-message">

@@ -10,7 +10,7 @@ import Fabutton from '../Fabutton';
 export default function CalendarList() {
   const [peopleList, setPeopleList] = useState([]);
   const [relationshipsList, setRelationshipsList] = useState([]);
-  const [currentMonth, setCurrentMonth] = useState(0);
+  const [, setCurrentMonth] = useState(0);
   const { user } = useUserContext();
 
   function handlePeopleSnapshot(snapshot) {
@@ -87,9 +87,10 @@ export default function CalendarList() {
       <p>
         Today is <strong>{formatDate()}</strong>
       </p>
+
       {peopleList && relationshipsList && (
         <>
-          {monthsArray.map((month, index) => {
+          {monthsArray.map(month => {
             return makeBirthdayList(month);
           })}
         </>

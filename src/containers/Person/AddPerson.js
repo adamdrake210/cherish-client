@@ -4,6 +4,7 @@ import AddRelationshipForm from '../../components/Forms/AddRelationshipForm';
 
 export default function AddPerson() {
   const [success, setSuccess] = useState(false);
+  const [isAddRelationship, setIsAddRelationship] = useState(false);
   const [personId, setPersonId] = useState('');
 
   return (
@@ -18,7 +19,34 @@ export default function AddPerson() {
       </div>
       {success && (
         <div>
-          <AddRelationshipForm personId={personId} />
+          {isAddRelationship && (
+            <>
+              <h2>Add Relationship</h2>
+              {isAddRelationship && (
+                <button
+                  type="button"
+                  className="button button-sm button-white"
+                  onClick={() => setIsAddRelationship(!isAddRelationship)}
+                >
+                  Cancel
+                </button>
+              )}
+              <AddRelationshipForm
+                personId={personId}
+                setIsAddRelationship={setIsAddRelationship}
+              />
+            </>
+          )}
+
+          {!isAddRelationship && (
+            <button
+              type="button"
+              className="button button-lg button-blue m-t-20"
+              onClick={() => setIsAddRelationship(!isAddRelationship)}
+            >
+              Add Relationship
+            </button>
+          )}
         </div>
       )}
     </div>

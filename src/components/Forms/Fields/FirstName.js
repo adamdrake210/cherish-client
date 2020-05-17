@@ -1,17 +1,18 @@
 import React from 'react';
 import { Field, ErrorMessage } from 'formik';
 
-export default function FirstName({ isEditable }) {
+export default function FirstName({ isEditable, noLabel }) {
   return (
     <div className="field-container">
       <div className="field">
-        <label htmlFor="firstName">First name*</label>
+        {!noLabel && <label htmlFor="firstName">First name*</label>}
         <Field
           type="text"
           name="firstName"
           required
           disabled={!isEditable}
           autoComplete="off"
+          placeholder={!noLabel ? '' : 'First Name*'}
         />
       </div>
       <div className="error-message">

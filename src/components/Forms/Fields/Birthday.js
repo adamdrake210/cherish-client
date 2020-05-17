@@ -19,7 +19,7 @@ export default function Birthday({ isEditable }) {
             <option value="" disabled hidden>
               Day
             </option>
-            {daysArray.map(day => (
+            {daysArray.slice(1).map(day => (
               <option key={day} value={day}>
                 {day}
               </option>

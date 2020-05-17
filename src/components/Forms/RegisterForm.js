@@ -22,46 +22,50 @@ export default function RegisterForm() {
   }
 
   return (
-    <div>
-      <div>
-        <Formik
-          initialValues={{
-            firstName: '',
-            lastName: '',
-            email: '',
-            password: '',
-          }}
-          onSubmit={(values, { setSubmitting }) => {
-            register(values.firstName, values.email, values.password)
-              .then(() => {
-                setFirebaseError(null);
-                setSubmitting(false);
-                router.push('/');
-              })
-              .catch(error => {
-                setSubmitting(false);
-                // Handle Errors here.
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.log('errorCode', errorCode);
-                console.log('errorMessage', errorMessage);
-                setFirebaseError(errorMessage);
-              });
-          }}
-        >
-          {({ isSubmitting }) => (
-            <Form className="formContainer">
-              <FirstName isEditable />
-              <LastName isEditable />
-              <Email isEditable />
-              <Password title="Choose a secure password" />
-              <button type="submit" disabled={isSubmitting}>
-                Submit
-              </button>
-            </Form>
-          )}
-        </Formik>
-        {firebaseError && <p>{firebaseError}</p>}
+    <div className="login-container-form">
+      <Formik
+        initialValues={{
+          firstName: '',
+          lastName: '',
+          email: '',
+          password: '',
+        }}
+        onSubmit={(values, { setSubmitting }) => {
+          register(values.firstName, values.email, values.password)
+            .then(() => {
+              setFirebaseError(null);
+              setSubmitting(false);
+              router.push('/');
+            })
+            .catch(error => {
+              setSubmitting(false);
+              // Handle Errors here.
+              const errorCode = error.code;
+              const errorMessage = error.message;
+              console.log('errorCode', errorCode);
+              console.log('errorMessage', errorMessage);
+              setFirebaseError(errorMessage);
+            });
+        }}
+      >
+        {({ isSubmitting }) => (
+          <Form className="formContainer">
+            <FirstName isEditable noLabel />
+            <LastName isEditable noLabel />
+            <Email isEditable noLabel />
+            <Password title="Choose a secure password" noLabel />
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="button button-lg button-blue m-t-5 m-b-20"
+            >
+              Sign Up
+            </button>
+          </Form>
+        )}
+      </Formik>
+      {firebaseError && <p>{firebaseError}</p>}
+      <div className="login-link-container">
         <Link href="/login">
           <a>Already have an account?</a>
         </Link>

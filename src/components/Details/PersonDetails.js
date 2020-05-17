@@ -1,5 +1,6 @@
 import React from 'react';
 import BirthdayDetails from './BirthdayDetails';
+import { capitalizeFirstLetter } from '../../helpers/helpers';
 
 export default function PersonDetails({ person }) {
   const {
@@ -34,7 +35,8 @@ export default function PersonDetails({ person }) {
         </li>
         <li>
           <strong>Relationship:</strong>{' '}
-          {relationshiptype || 'Relationship needs updating'}
+          {capitalizeFirstLetter(relationshiptype) ||
+            'Relationship needs updating'}
         </li>
         <li>
           <strong>Email:</strong>{' '}

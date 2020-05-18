@@ -4,10 +4,12 @@ import useAuth from '../components/Auth/useAuth';
 const UserContext = createContext(null);
 
 function UserProvider({ children }) {
-  const user = useAuth();
+  const { user, isLoading } = useAuth();
 
   return (
-    <UserContext.Provider value={{ user }}>{children}</UserContext.Provider>
+    <UserContext.Provider value={{ user, isLoading }}>
+      {children}
+    </UserContext.Provider>
   );
 }
 

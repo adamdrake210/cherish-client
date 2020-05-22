@@ -1,6 +1,6 @@
 import React from 'react';
 import Document, { Head, Main, NextScript } from 'next/document';
-import { GA_TRACKING_ID } from '../lib/gtag';
+import { GA_TRACKING_ID } from '../helpers/gtag';
 
 export default class extends Document {
   render() {

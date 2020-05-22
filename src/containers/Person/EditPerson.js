@@ -26,7 +26,7 @@ export default function EditPerson({ id, person }) {
     <div className="container">
       <div>
         <h1>Edit Person - {person.firstName}</h1>
-        <Link passHref href={`/person/${id}`}>
+        <Link passHref href="/person/[personId]" as={`/person/${id}`}>
           <a>View Person Details</a>
         </Link>
         <EditPersonForm id={id} person={person} />

@@ -63,7 +63,11 @@ function People() {
         <ul className="homepage-people-list">
           {filteredList.map(person => (
             <li key={person.id}>
-              <Link passHref href={`/person/${person.id}`}>
+              <Link
+                passHref
+                href="/person/[personId]"
+                as={`/person/${person.id}`}
+              >
                 <a className="person-link">
                   <PeopleAvatar
                     firstName={person.firstName}

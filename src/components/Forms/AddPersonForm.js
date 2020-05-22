@@ -93,7 +93,11 @@ export default function AddPersonForm({ success, setSuccess, setPersonId }) {
           )}
         </Formik>
         {newPersonId && (
-          <Link passHref href={`/edit-person/${newPersonId}`}>
+          <Link
+            passHref
+            href="/edit-person/[personId]"
+            as={`/edit-person/${newPersonId}`}
+          >
             <a>Edit Person</a>
           </Link>
         )}

@@ -54,7 +54,8 @@ export default function CalendarList() {
                     {`${person.birthday} ${person.birthmonth} - `}
                     <Link
                       passHref
-                      href={`/person/${
+                      href="/person/[personId]"
+                      as={`/person/${
                         person.peopleId ? person.peopleId : person.id
                       }`}
                     >

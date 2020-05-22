@@ -4,8 +4,9 @@ const firebaseConfig = {
   databaseURL: process.env.FIREBASE_DATABASE_URL,
   projectId: process.env.FIREBASE_PROJECT_ID,
   storageBucket: 'cherish-v2.appspot.com',
-  messagingSenderId: process.env.FIREBASE_API_APP_ID,
+  messagingSenderId: process.env.FIREBASE_API_MESSAGE_SENDER_ID,
   appId: process.env.FIREBASE_API_APP_ID,
+  measurementId: process.env.FIREBASE_MEASUREMENT_ID,
 };
 
 export default firebaseConfig;

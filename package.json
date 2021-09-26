@@ -20,10 +20,10 @@
     "firebase": "^7.14.3",
     "formik": "^2.1.4",
     "moment": "^2.25.3",
-    "next": "9.3.5",
-    "react": "16.13.1",
+    "next": "^11.1.2",
+    "react": "^17.0.2",
     "react-datepicker": "^2.15.0",
-    "react-dom": "16.13.1",
+    "react-dom": "^17.0.2",
     "sass": "^1.26.5"
   },
   "devDependencies": {
@@ -38,6 +38,7 @@
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-react-hooks": "^2.5.0",
     "jest": "^25.5.4",
-    "prettier": "^2.0.5"
+    "prettier": "^2.0.5",
+    "typescript": "^4.4.3"
   }
 }

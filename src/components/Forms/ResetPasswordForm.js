@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Formik, Form } from 'formik';
-import { firebase } from '../../firebase/firebase';
+import { firebase } from '../../services/firebase/firebase';
 import Email from './Fields/Email';
 
 export default function ResetPasswordForm() {

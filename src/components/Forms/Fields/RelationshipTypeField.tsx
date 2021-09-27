@@ -3,7 +3,11 @@ import { Field, ErrorMessage } from 'formik';
 import { relationshipTypeArray } from '../../../constants';
 import { capitalizeFirstLetter } from '../../../helpers/helpers';
 
-export default function RelationshipType({ isEditable }) {
+type Props = {
+  isEditable: boolean;
+};
+
+export default function RelationshipTypeField({ isEditable }: Props) {
   return (
     <div className="field-container">
       <div className="field">

@@ -1,10 +1,16 @@
 import React from 'react';
 import Head from 'next/head';
 import EditPerson from '../../containers/Person/EditPerson';
-import { getPerson } from '../../firebase/firebaseapi';
+import { getPerson } from '../../services/firebase/firebaseapi';
 import ProtectedRoute from '../../HOC/ProtectedRoute';
+import { PersonType } from '../../types/types';
 
-function EditPersonPage({ id, person }) {
+type Props = {
+  id: string;
+  person: PersonType;
+};
+
+function EditPersonPage({ id, person }: Props) {
   return (
     <ProtectedRoute>
       <Head>
@@ -16,7 +22,7 @@ function EditPersonPage({ id, person }) {
   );
 }
 
-EditPersonPage.getInitialProps = async ({ query }) => {
+export async function getServerSideProps({ query }) {
   let pageProps;
 
   await getPerson(query.personId)
@@ -27,10 +33,10 @@ EditPersonPage.getInitialProps = async ({ query }) => {
       };
     })
     .catch(error => {
-      console.log('Edit Page: ', error);
+      console.error('Edit Page: ', error);
     });
 
-  return pageProps;
-};
+  return { props: pageProps };
+}
 
 export default EditPersonPage;

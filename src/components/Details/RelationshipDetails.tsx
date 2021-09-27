@@ -1,8 +1,13 @@
 import React from 'react';
 import { capitalizeFirstLetter } from '../../helpers/helpers';
+import { RelationshipType } from '../../types/types';
 import BirthdayDetails from './BirthdayDetails';
 
-export default function RelationshipDetails({ relationship }) {
+type Props = {
+  relationship: RelationshipType;
+};
+
+export default function RelationshipDetails({ relationship }: Props) {
   const {
     firstName,
     lastName,

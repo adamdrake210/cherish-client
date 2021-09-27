@@ -2,7 +2,7 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/analytics';
 import 'firebase/auth';
-import firebaseConfig from '../../config/firebaseConfig';
+import firebaseConfig from '../../../config/firebaseConfig';
 
 // Initialize Firebase
 if (!firebase.apps.length) {

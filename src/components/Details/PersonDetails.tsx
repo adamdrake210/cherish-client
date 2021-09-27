@@ -2,7 +2,11 @@ import React from 'react';
 import BirthdayDetails from './BirthdayDetails';
 import { capitalizeFirstLetter } from '../../helpers/helpers';
 
-export default function PersonDetails({ person }) {
+type Props = {
+  person: any;
+};
+
+export default function PersonDetails({ person }: Props) {
   const {
     firstName,
     lastName,

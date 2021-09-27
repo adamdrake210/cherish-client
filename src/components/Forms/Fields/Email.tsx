@@ -1,11 +1,17 @@
 import React from 'react';
 import { Field, ErrorMessage } from 'formik';
 
-export default function Email({ isEditable, noLabel }) {
+type Props = {
+  isEditable: boolean;
+  noLabel?: boolean;
+};
+
+export default function Email({ isEditable, noLabel }: Props) {
   const validateEmail = value => {
     let errorMessage;
     if (
       value &&
+      // eslint-disable-next-line no-useless-escape
       !/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
         value,
       )

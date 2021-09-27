@@ -1,15 +1,20 @@
 import React from 'react';
 import { Field, FieldArray, ErrorMessage } from 'formik';
 
-export default function Links({ values, isEditable }) {
+type Props = {
+  values: any; // TODO type
+  isEditable: boolean;
+};
+
+export default function Links({ values, isEditable }: Props) {
   const validateUrl = value => {
     let errorMessage;
     const pattern = new RegExp(
       '^(https?:\\/\\/)?' + // protocol
-      '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
-      '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
-      '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
-      '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
+        '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
+        '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
+        '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
+        '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
         '(\\#[-a-z\\d_]*)?$',
       'i',
     ); // fragment locator
@@ -28,7 +33,7 @@ export default function Links({ values, isEditable }) {
           <div>
             {values.links && values.links.length > 0 ? (
               values.links.map((link, index) => (
-                <div className="link-input-container">
+                <div className="link-input-container" key={link}>
                   <div key={index} className="link-input">
                     <Field
                       name={`links.${index}`}

@@ -52,9 +52,7 @@ export default function Nav() {
         <AppBar position="fixed" className="appbar">
           <Toolbar className="navigation-list-container">
             <Link href="/">
-              <a variant="h6" className="cherish-logo cherish-logo-nav">
-                Cherish
-              </a>
+              <a className="cherish-logo cherish-logo-nav">Cherish</a>
             </Link>
             <ul className="navigation-links">
               {user && (
@@ -133,7 +131,6 @@ export default function Nav() {
         </AppBar>
       </div>
       <Drawer
-        className={classes.drawer}
         variant="persistent"
         anchor="right"
         open={isOpenDrawer}
@@ -141,11 +138,7 @@ export default function Nav() {
           paper: 'drawer-paper',
         }}
       >
-        <div
-          className={classes.drawerHeader}
-          role="presentation"
-          onKeyDown={handleDrawerClose}
-        >
+        <div role="presentation" onKeyDown={handleDrawerClose}>
           <IconButton onClick={handleDrawerClose}>
             <ChevronRightIcon />
           </IconButton>

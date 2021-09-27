@@ -2,7 +2,12 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import { firebase } from '../services/firebase/firebase';
 
-export default function GoogleLoginButton({ setFirebaseError, title }) {
+type Props = {
+  setFirebaseError: (arg: string) => void;
+  title: string;
+};
+
+export default function GoogleLoginButton({ setFirebaseError, title }: Props) {
   const router = useRouter();
 
   function handleGoogleAuth() {
@@ -18,7 +23,7 @@ export default function GoogleLoginButton({ setFirebaseError, title }) {
       .catch(error => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.log('errorCode', errorCode);
+        console.error('errorCode', errorCode);
         setFirebaseError(errorMessage);
       });
   }

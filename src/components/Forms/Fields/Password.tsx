@@ -1,7 +1,12 @@
 import React from 'react';
 import { Field, ErrorMessage } from 'formik';
 
-export default function Password({ title, noLabel }) {
+type Props = {
+  title: string;
+  noLabel: boolean;
+};
+
+export default function Password({ title, noLabel }: Props) {
   return (
     <div className="field-container">
       <div className="field">

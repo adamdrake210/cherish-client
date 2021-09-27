@@ -3,7 +3,11 @@ import { Field, ErrorMessage } from 'formik';
 import { daysArray, monthsArray } from '../../../constants';
 import { createYearsArray } from '../../../helpers/dateHelpers';
 
-export default function Birthday({ isEditable }) {
+type Props = {
+  isEditable: boolean;
+};
+
+export default function Birthday({ isEditable }: Props) {
   return (
     <div className="field-container">
       <div className="field field-birthday">
@@ -63,7 +67,7 @@ export default function Birthday({ isEditable }) {
           </Field>
         </div>
         <div className="helper-label">
-          <p>If you don't know the brithday you can leave it blank</p>
+          <p>If you don&apos;t know the brithday you can leave it blank</p>
         </div>
       </div>
       <div className="error-message">

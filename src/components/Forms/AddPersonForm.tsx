@@ -13,7 +13,17 @@ import Links from './Fields/Links';
 import { useUserContext } from '../../context/userContext';
 import { useSnackbarDispatch } from '../../context/snackbarContext';
 
-export default function AddPersonForm({ success, setSuccess, setPersonId }) {
+type Props = {
+  success: boolean;
+  setSuccess: (arg: boolean) => void;
+  setPersonId: (arg: string) => void;
+};
+
+export default function AddPersonForm({
+  success,
+  setSuccess,
+  setPersonId,
+}: Props) {
   const [newPersonId, setNewPersonId] = useState(null);
   const [isEditable, setIsEditable] = useState(true);
   const snackbarDispatch = useSnackbarDispatch();
@@ -55,8 +65,8 @@ export default function AddPersonForm({ success, setSuccess, setPersonId }) {
               .catch(error => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
-                console.log('errorCode', errorCode);
-                console.log('errorMessage', errorMessage);
+                console.error('errorCode', errorCode);
+                console.error('errorMessage', errorMessage);
                 setSubmitting(false);
                 snackbarDispatch({
                   type: 'show_snackbar',

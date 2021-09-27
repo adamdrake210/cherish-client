@@ -3,7 +3,11 @@ import PropTypes from 'prop-types';
 import Loader from '../components/Loader';
 import { useUserContext } from '../context/userContext';
 
-function ProtectedRoute({ children }) {
+type Props = {
+  children: React.Component;
+};
+
+function ProtectedRoute({ children }: Props) {
   const { user } = useUserContext();
   if (user) return children;
   return <Loader />;

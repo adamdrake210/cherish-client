@@ -5,7 +5,7 @@ export default function HomepageNotLoggedIn() {
   return (
     <div className="container homepagen-nli-container">
       <p className="cherish-logo cherish-logo-lg">Cherish</p>
-      <h1>You own private online address book</h1>
+      <h1>Your own private online address book</h1>
       <h2>Cherish those close to you</h2>
       <div className="sign-up-links">
         <Link href="/register">

@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
+
 import { getPeople } from '../services/firebase/firebaseapi';
 import { useUserContext } from '../context/userContext';
 import { sortLastName, capitalizeFirstLetter } from '../helpers/helpers';
 import PeopleAvatar from './PeopleAvatar';
 import Fabutton from './Fabutton';
+import { SearchField } from './Forms/Fields/SearchField';
 
 function People() {
   const [isLoading, setIsLoading] = useState(true);
@@ -50,14 +52,7 @@ function People() {
 
   return (
     <div className="container homepage">
-      <div className="homepage-search">
-        <input
-          type="text"
-          className="homepage-search-input"
-          placeholder="Search Peeps..."
-          onChange={e => handleChange(e)}
-        />
-      </div>
+      <SearchField handleChange={handleChange} />
       <h2>All</h2>
       {filteredList && (
         <ul className="homepage-people-list">

@@ -1,8 +1,8 @@
 // import App from 'next/app'
 import React from 'react';
 import App from 'next/app';
-import { ThemeProvider } from '@material-ui/styles';
-import { CssBaseline } from '@material-ui/core';
+import { ThemeProvider } from '@mui/styles';
+import { CssBaseline } from '@mui/material';
 import 'react-datepicker/dist/react-datepicker.css';
 
 import Nav from '../components/Nav';

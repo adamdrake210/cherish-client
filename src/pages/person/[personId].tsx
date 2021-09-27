@@ -1,10 +1,16 @@
 import React from 'react';
 import Head from 'next/head';
 import Person from '../../containers/Person/Person';
-import { getPerson } from '../../firebase/firebaseapi';
+import { getPerson } from '../../services/firebase/firebaseapi';
 import ProtectedRoute from '../../HOC/ProtectedRoute';
+import { PersonType } from '../../types/types';
 
-function PersonPage({ id, person }) {
+type Props = {
+  id: string;
+  person: PersonType;
+};
+
+function PersonPage({ id, person }: Props) {
   return (
     <ProtectedRoute>
       <Head>
@@ -16,7 +22,7 @@ function PersonPage({ id, person }) {
   );
 }
 
-PersonPage.getInitialProps = async ({ query }) => {
+export async function getServerSideProps({ query }) {
   let pageProps;
 
   await getPerson(query.personId)
@@ -27,10 +33,10 @@ PersonPage.getInitialProps = async ({ query }) => {
       };
     })
     .catch(error => {
-      console.log('Person Page: ', error);
+      console.error('Person Page: ', error);
     });
 
-  return pageProps;
-};
+  return { props: pageProps };
+}
 
 export default PersonPage;

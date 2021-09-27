@@ -1,4 +1,4 @@
-export function sortLastName(array) {
+export function sortLastName(array: Array<any>) {
   return array.sort((a, b) => {
     if (a.lastName > b.lastName) {
       return 1;
@@ -10,8 +10,8 @@ export function sortLastName(array) {
   });
 }
 
-export function capitalizeFirstLetter(string) {
+export function capitalizeFirstLetter(string: string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-export const getFirstLetter = word => word?.charAt(0).toUpperCase();
+export const getFirstLetter = (word: string) => word?.charAt(0).toUpperCase();

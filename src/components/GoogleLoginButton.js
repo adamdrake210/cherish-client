@@ -1,6 +1,6 @@
 import React from 'react';
 import { useRouter } from 'next/router';
-import { firebase } from '../firebase/firebase';
+import { firebase } from '../services/firebase/firebase';
 
 export default function GoogleLoginButton({ setFirebaseError, title }) {
   const router = useRouter();

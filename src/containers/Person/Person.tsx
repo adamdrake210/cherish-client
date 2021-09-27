@@ -2,10 +2,16 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import PersonDetails from '../../components/Details/PersonDetails';
 import RelationshipDetails from '../../components/Details/RelationshipDetails';
-import { getRelationships } from '../../firebase/firebaseapi';
+import { getRelationships } from '../../services/firebase/firebaseapi';
 import Fabutton from '../../components/Fabutton';
+import { PersonType } from '../../types/types';
 
-export default function Person({ person, id }) {
+type Props = {
+  person: PersonType;
+  id: string;
+};
+
+export default function Person({ person, id }: Props) {
   const [relationships, setRelationships] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -27,7 +33,7 @@ export default function Person({ person, id }) {
       <Link passHref href="/edit-person/[personId]" as={`/edit-person/${id}`}>
         <a>Edit Person</a>
       </Link>
-      <PersonDetails person={person} id={id} />
+      <PersonDetails person={person} />
 
       <h2>Relationships</h2>
       {isLoading && <p>Loading...</p>}
@@ -42,7 +48,6 @@ export default function Person({ person, id }) {
           <RelationshipDetails
             key={relationship.id}
             relationship={relationship}
-            id={relationship.id}
           />
         ))}
       <Fabutton />

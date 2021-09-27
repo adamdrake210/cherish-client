@@ -3,9 +3,15 @@ import Link from 'next/link';
 import EditPersonForm from '../../components/Forms/EditPersonForm';
 import AddRelationshipForm from '../../components/Forms/AddRelationshipForm';
 import EditRelationshipForm from '../../components/Forms/EditRelationshipForm';
-import { getRelationships } from '../../firebase/firebaseapi';
+import { getRelationships } from '../../services/firebase/firebaseapi';
+import { PersonType } from '../../types/types';
 
-export default function EditPerson({ id, person }) {
+type Props = {
+  id: string;
+  person: PersonType;
+};
+
+export default function EditPerson({ id, person }: Props) {
   const [isLoading, setIsLoading] = useState(true);
   const [isAddRelationship, setIsAddRelationship] = useState(false);
   const [relationships, setRelationships] = useState([]);

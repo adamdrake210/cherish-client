@@ -1,18 +1,27 @@
 import React, { useState } from 'react';
 import { Formik, Form } from 'formik';
 import router from 'next/router';
-import { updatePerson, deleteDocument } from '../../firebase/firebaseapi';
+import {
+  updatePerson,
+  deleteDocument,
+} from '../../services/firebase/firebaseapi';
 import FirstName from './Fields/FirstName';
 import LastName from './Fields/LastName';
 import Address from './Fields/Address';
-import RelationshipType from './Fields/RelationshipType';
+import RelationshipType from './Fields/RelationshipTypeField';
 import Email from './Fields/Email';
 import Birthday from './Fields/Birthday';
 import Notes from './Fields/Notes';
 import Links from './Fields/Links';
 import { useSnackbarDispatch } from '../../context/snackbarContext';
+import { PersonType } from '../../types/types';
 
-export default function EditPersonForm({ id, person }) {
+type Props = {
+  id: string;
+  person: PersonType;
+};
+
+export default function EditPersonForm({ id, person }: Props) {
   const [isEditable, setIsEditable] = useState(false);
   const snackbarDispatch = useSnackbarDispatch();
 
@@ -31,7 +40,7 @@ export default function EditPersonForm({ id, person }) {
       .catch(error => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.log('errorCode', errorCode);
+        console.error('errorCode: ', errorCode);
         snackbarDispatch({
           type: 'show_snackbar',
           payload: {

@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Formik, Form } from 'formik';
 import Link from 'next/link';
-import { addPerson } from '../../firebase/firebaseapi';
+import { addPerson } from '../../services/firebase/firebaseapi';
 import FirstName from './Fields/FirstName';
 import LastName from './Fields/LastName';
 import Address from './Fields/Address';
-import RelationshipType from './Fields/RelationshipType';
+import RelationshipTypeField from './Fields/RelationshipTypeField';
 import Email from './Fields/Email';
 import Birthday from './Fields/Birthday';
 import Notes from './Fields/Notes';
@@ -72,7 +72,7 @@ export default function AddPersonForm({ success, setSuccess, setPersonId }) {
             <Form className="formContainer">
               <FirstName isEditable={isEditable} />
               <LastName isEditable={isEditable} />
-              <RelationshipType isEditable={isEditable} />
+              <RelationshipTypeField isEditable={isEditable} />
               <Birthday isEditable={isEditable} />
               <Email isEditable={isEditable} />
               <Address isEditable={isEditable} />

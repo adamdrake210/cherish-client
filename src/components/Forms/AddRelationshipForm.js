@@ -1,10 +1,10 @@
 import React from 'react';
 import { Formik, Form } from 'formik';
-import { addRelationship } from '../../firebase/firebaseapi';
+import { addRelationship } from '../../services/firebase/firebaseapi';
 import FirstName from './Fields/FirstName';
 import LastName from './Fields/LastName';
 import Address from './Fields/Address';
-import RelationshipType from './Fields/RelationshipType';
+import RelationshipTypeField from './Fields/RelationshipTypeField';
 import Email from './Fields/Email';
 import Birthday from './Fields/Birthday';
 import Notes from './Fields/Notes';
@@ -68,7 +68,7 @@ export default function AddRelationshipForm({
         >
           {({ isSubmitting, values, setFieldValue }) => (
             <Form className="formContainer">
-              <RelationshipType isEditable />
+              <RelationshipTypeField isEditable />
               <FirstName isEditable />
               <LastName isEditable />
               <Birthday

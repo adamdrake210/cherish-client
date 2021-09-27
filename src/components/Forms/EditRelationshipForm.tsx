@@ -1,17 +1,26 @@
 import React, { useState } from 'react';
 import { Formik, Form } from 'formik';
-import { updateRelationship, deleteDocument } from '../../firebase/firebaseapi';
+import {
+  updateRelationship,
+  deleteDocument,
+} from '../../services/firebase/firebaseapi';
 import FirstName from './Fields/FirstName';
 import LastName from './Fields/LastName';
 import Address from './Fields/Address';
-import RelationshipType from './Fields/RelationshipType';
+import RelationshipTypeField from './Fields/RelationshipTypeField';
 import Email from './Fields/Email';
 import Birthday from './Fields/Birthday';
 import Notes from './Fields/Notes';
 import Links from './Fields/Links';
 import { useSnackbarDispatch } from '../../context/snackbarContext';
+import { RelationshipType } from '../../types/types';
 
-export default function EditRelationshipForm({ id, relationship }) {
+type Props = {
+  id: string;
+  relationship: RelationshipType;
+};
+
+export default function EditRelationshipForm({ id, relationship }: Props) {
   const [isEditable, setIsEditable] = useState(false);
   const snackbarDispatch = useSnackbarDispatch();
 
@@ -29,7 +38,7 @@ export default function EditRelationshipForm({ id, relationship }) {
       .catch(error => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.log('errorCode', errorCode);
+        console.error('errorCode', errorCode);
         snackbarDispatch({
           type: 'show_snackbar',
           payload: {
@@ -104,7 +113,7 @@ export default function EditRelationshipForm({ id, relationship }) {
         >
           {({ isSubmitting, values }) => (
             <Form className="formContainer">
-              <RelationshipType isEditable={isEditable} />
+              <RelationshipTypeField isEditable={isEditable} />
               <FirstName isEditable={isEditable} />
               <LastName isEditable={isEditable} />
               <Birthday isEditable={isEditable} />

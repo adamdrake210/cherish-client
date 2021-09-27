@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { getPeople } from '../firebase/firebaseapi';
+import { getPeople } from '../services/firebase/firebaseapi';
 import { useUserContext } from '../context/userContext';
 import { sortLastName, capitalizeFirstLetter } from '../helpers/helpers';
 import PeopleAvatar from './PeopleAvatar';

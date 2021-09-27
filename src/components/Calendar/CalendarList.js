@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { getPeople, getRelationships } from '../../firebase/firebaseapi';
+import {
+  getPeople,
+  getRelationships,
+} from '../../services/firebase/firebaseapi';
 import { useUserContext } from '../../context/userContext';
 import { formatDate, sortBirthdays } from '../../helpers/dateHelpers';
 import { monthsArray } from '../../constants';

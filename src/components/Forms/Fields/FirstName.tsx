@@ -1,7 +1,12 @@
 import React from 'react';
 import { Field, ErrorMessage } from 'formik';
 
-export default function FirstName({ isEditable, noLabel }) {
+type Props = {
+  isEditable: boolean;
+  noLabel?: boolean;
+};
+
+export default function FirstName({ isEditable, noLabel }: Props) {
   return (
     <div className="field-container">
       <div className="field">

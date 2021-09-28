@@ -69,6 +69,7 @@ export default function Links({ values, isEditable }: Props) {
                 disabled={!isEditable}
                 onClick={() => arrayHelpers.push('')}
                 variant="contained"
+                color="primary"
               >
                 {/* show this when user has removed all links from the list */}
                 Add a link

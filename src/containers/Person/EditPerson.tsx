@@ -5,6 +5,7 @@ import AddRelationshipForm from '../../components/Forms/AddRelationshipForm';
 import EditRelationshipForm from '../../components/Forms/EditRelationshipForm';
 import { getRelationships } from '../../services/firebase/firebaseapi';
 import { PersonType } from '../../types/types';
+import { Button } from '@mui/material';
 
 type Props = {
   id: string;
@@ -75,13 +76,14 @@ export default function EditPerson({ id, person }: Props) {
         )}
 
         {!isAddRelationship && (
-          <button
+          <Button
             type="button"
-            className="button button-lg button-blue m-t-20"
+            color="primary"
+            variant="contained"
             onClick={() => setIsAddRelationship(!isAddRelationship)}
           >
             Add Relationship
-          </button>
+          </Button>
         )}
       </div>
     </div>

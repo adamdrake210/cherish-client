@@ -1,5 +1,6 @@
 import React from 'react';
 import { Field, FieldArray, ErrorMessage } from 'formik';
+import { Button } from '@mui/material';
 
 type Props = {
   values: any; // TODO type
@@ -63,15 +64,16 @@ export default function Links({ values, isEditable }: Props) {
                 </div>
               ))
             ) : (
-              <button
+              <Button
                 type="button"
                 disabled={!isEditable}
-                className="button button-sm button-blue"
                 onClick={() => arrayHelpers.push('')}
+                variant="contained"
+                color="primary"
               >
                 {/* show this when user has removed all links from the list */}
                 Add a link
-              </button>
+              </Button>
             )}
           </div>
         )}

@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
+
 import { getPeople } from '../services/firebase/firebaseapi';
 import { useUserContext } from '../context/userContext';
 import { sortLastName, capitalizeFirstLetter } from '../helpers/helpers';
 import PeopleAvatar from './PeopleAvatar';
 import Fabutton from './Fabutton';
+import { SearchField } from './Forms/Fields/SearchField';
+import { Box } from '@mui/system';
+import { Typography } from '@mui/material';
 
 function People() {
   const [isLoading, setIsLoading] = useState(true);
@@ -49,16 +53,25 @@ function People() {
   }
 
   return (
-    <div className="container homepage">
-      <div className="homepage-search">
-        <input
-          type="text"
-          className="homepage-search-input"
-          placeholder="Search Peeps..."
-          onChange={e => handleChange(e)}
-        />
-      </div>
-      <h2>All</h2>
+    <Box
+      sx={{
+        width: '100%',
+        backgroundColor: 'primary.main',
+        maxWidth: 900,
+        minHeight: '100vh',
+        m: '0 auto',
+        mt: 6,
+        p: [2, 4],
+      }}
+    >
+      <SearchField handleChange={handleChange} />
+      <Typography
+        component="h2"
+        variant="h4"
+        sx={{ fontFamily: 'Raleway', mt: 2 }}
+      >
+        All
+      </Typography>
       {filteredList && (
         <ul className="homepage-people-list">
           {filteredList.map(person => (
@@ -95,7 +108,7 @@ function People() {
         </div>
       )}
       <Fabutton />
-    </div>
+    </Box>
   );
 }
 

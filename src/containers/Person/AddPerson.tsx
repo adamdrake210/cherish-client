@@ -1,3 +1,4 @@
+import { Button } from '@mui/material';
 import React, { useState } from 'react';
 import AddPersonForm from '../../components/Forms/AddPersonForm';
 import AddRelationshipForm from '../../components/Forms/AddRelationshipForm';
@@ -39,13 +40,13 @@ export default function AddPerson() {
           )}
 
           {!isAddRelationship && (
-            <button
+            <Button
               type="button"
               className="button button-lg button-blue m-t-20"
               onClick={() => setIsAddRelationship(!isAddRelationship)}
             >
               Add Relationship
-            </button>
+            </Button>
           )}
         </div>
       )}

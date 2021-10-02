@@ -14,9 +14,13 @@
     "setup": "npm install && npm run validate"
   },
   "dependencies": {
-    "@material-ui/core": "^4.9.14",
-    "@material-ui/icons": "^4.9.1",
-    "@material-ui/lab": "^4.0.0-alpha.53",
+    "@emotion/react": "^11.4.1",
+    "@emotion/server": "^11.4.0",
+    "@emotion/styled": "^11.3.0",
+    "@mui/icons-material": "^5.0.1",
+    "@mui/lab": "^5.0.0-alpha.48",
+    "@mui/material": "^5.0.1",
+    "@mui/styles": "^5.0.1",
     "firebase": "^7.14.3",
     "formik": "^2.1.4",
     "moment": "^2.25.3",

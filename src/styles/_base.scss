@@ -1,30 +1,3 @@
-* {
-  box-sizing: border-box;
-}
-
-body {
-  padding: 0;
-  margin: 0;
-  font-family: $quicksand;
-  // color: $fontcolor1;
-  min-width: 320px;
-  background-color: lighten($fontcolor1, 25%);
-}
-
-.container {
-  width: 100%;
-  background-color: $yellow;
-  max-width: 900px;
-  min-height: 100vh;
-  margin: 0 auto;
-  padding: 16px 32px;
-  margin-top: 54px;
-  @include break('max', $screen-sm) {
-    padding: 16px;
-    margin-top: 40px;
-  }
-}
-
 .desktop {
   display: block;
   @include break('max', $screen-sm) {
@@ -37,27 +10,6 @@ body {
   @include break('max', $screen-sm) {
     display: block;
   }
-}
-
-h1 {
-  font-size: 36px;
-  line-height: 46px;
-  font-weight: 300;
-  margin-bottom: 0;
-}
-
-h2 {
-  font-size: 30px;
-  line-height: 40px;
-  font-weight: 300;
-  margin-bottom: 0;
-}
-
-h3 {
-  font-size: 26px;
-  line-height: 36px;
-  font-weight: 300;
-  margin-bottom: 0;
 }
 
 p {

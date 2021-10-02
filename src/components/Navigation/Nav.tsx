@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Link from 'next/link';
 import makeStyles from '@mui/styles/makeStyles';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -7,26 +6,20 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import Drawer from '@mui/material/Drawer';
-import { Theme, useTheme } from '@mui/material';
+import { List, Theme, useTheme, Link } from '@mui/material';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
+import { Box } from '@mui/system';
 
-import { useUserContext } from '../context/userContext';
-import Logout from './Auth/Logout';
-import UserAvatar from './UserAvatar';
-import { ColorModeContext } from '../pages/_app';
+import { useUserContext } from '../../context/userContext';
+import Logout from '../Auth/Logout';
+import { NavDrawer } from './NavDrawer';
+import { LoggedInLinks } from './LoggedInLinks';
+import { LoggedOutLinks } from './LoggedOutLinks';
+import { ColorModeContext } from '../../pages/_app';
+import { AccountCircle } from '@mui/icons-material';
 
 const useStyles = makeStyles<Theme>(theme => ({
-  appBarContainer: {
-    flexGrow: 1,
-    width: '100%',
-    padding: theme.spacing(1, 0),
-  },
-  appBar: {
-    backgroundColor: theme.palette.primary.main,
-  },
   menuButton: {
     display: 'block',
     color: 'red',
@@ -34,9 +27,15 @@ const useStyles = makeStyles<Theme>(theme => ({
       display: 'none',
     },
   },
+  list: {
+    display: 'flex',
+    [theme.breakpoints.down('sm')]: {
+      display: 'none',
+    },
+  },
 }));
 
-export default function Nav() {
+const Nav = () => {
   const classes = useStyles();
   const theme = useTheme();
   const { user } = useUserContext();
@@ -57,48 +56,34 @@ export default function Nav() {
     setIsOpenDrawer(true);
   };
 
-  const handleDrawerClose = () => {
-    setIsOpenDrawer(false);
-  };
-
   return (
     <>
-      <div className={classes.appBarContainer}>
-        <AppBar position="fixed" className={classes.appBar}>
-          <Toolbar className="navigation-list-container">
-            <Link href="/">
+      <Box
+        sx={{
+          flexGrow: 1,
+          width: '100%',
+          p: 1,
+        }}
+      >
+        <AppBar position="fixed" sx={{ bgcolor: 'secondary.main' }}>
+          <Toolbar
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              maxWidth: 900,
+              width: '100%',
+              my: 0,
+              mx: 'auto',
+            }}
+            variant="dense"
+          >
+            <Link href="/" sx={{ flexGrow: 1 }}>
               <a className="cherish-logo cherish-logo-nav">Cherish</a>
             </Link>
-            <ul className="navigation-links">
-              {user && (
-                <>
-                  <li>
-                    <Link href="/add-person">
-                      <a>Add Person</a>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/calendar">
-                      <a>Calendar</a>
-                    </Link>
-                  </li>
-                </>
-              )}
-              {!user && (
-                <li>
-                  <Link href="/register">
-                    <a>Register</a>
-                  </Link>
-                </li>
-              )}
-              <li>
-                {!user && (
-                  <Link href="/login">
-                    <a>Login</a>
-                  </Link>
-                )}
-              </li>
-            </ul>
+            <List className={classes.list} dense>
+              {user ? <LoggedInLinks /> : <LoggedOutLinks />}
+            </List>
             {user && (
               <>
                 <div className="desktop">
@@ -121,7 +106,7 @@ export default function Nav() {
                     color="inherit"
                     size="large"
                   >
-                    <UserAvatar displayName={user.displayName} />
+                    <AccountCircle fontSize="large" />
                   </IconButton>
                   <Menu
                     id="menu-appbar"
@@ -157,59 +142,14 @@ export default function Nav() {
             )}
           </Toolbar>
         </AppBar>
-      </div>
-      <Drawer
-        variant="persistent"
-        anchor="right"
-        open={isOpenDrawer}
-        classes={{
-          paper: 'drawer-paper',
-        }}
-      >
-        <div role="presentation" onKeyDown={handleDrawerClose}>
-          <IconButton onClick={handleDrawerClose} size="large">
-            <ChevronRightIcon />
-          </IconButton>
-        </div>
-        <ul
-          className="mobile-sidemenu-navigation-links"
-          role="presentation"
-          onClick={handleDrawerClose}
-          onKeyDown={handleDrawerClose}
-        >
-          <li>{user ? <UserAvatar displayName={user.displayName} /> : ''}</li>
-          {user && (
-            <>
-              <li>
-                <Link href="/add-person">
-                  <a>Add Person</a>
-                </Link>
-              </li>
-              <li>
-                <Link href="/calendar">
-                  <a>Calendar</a>
-                </Link>
-              </li>
-            </>
-          )}
-          {!user && (
-            <li>
-              <Link href="/register">
-                <a>Register</a>
-              </Link>
-            </li>
-          )}
-          <li>
-            {user ? (
-              <Logout />
-            ) : (
-              <Link href="/login">
-                <a>Login</a>
-              </Link>
-            )}
-          </li>
-        </ul>
-      </Drawer>
+      </Box>
+      <NavDrawer
+        isOpenDrawer={isOpenDrawer}
+        user={user}
+        setIsOpenDrawer={setIsOpenDrawer}
+      />
     </>
   );
-}
+};
+
+export default Nav;

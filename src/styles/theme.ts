@@ -1,9 +1,9 @@
 import { PaletteMode } from '@mui/material';
-import { amber, deepOrange, grey } from '@mui/material/colors';
+import { blue, grey, yellow } from '@mui/material/colors';
 
 const getDesignTokens = (mode: PaletteMode) => ({
   typography: {
-    fontFamily: ['"Helvetica Neue"', 'Helvetica', 'sans-serif'].join(','),
+    fontFamily: ['Raleway', 'sans-serif'].join(','),
   },
   palette: {
     mode,
@@ -11,25 +11,31 @@ const getDesignTokens = (mode: PaletteMode) => ({
       ? {
           // palette values for light mode
           primary: {
-            main: '#fcfbba',
+            main: yellow[200],
           },
-          divider: amber[200],
+          secondary: {
+            main: yellow[400],
+          },
+          divider: yellow[200],
           text: {
-            primary: grey[900],
-            secondary: grey[800],
+            primary: blue[600],
+            secondary: blue[800],
+          },
+          background: {
+            paper: grey[100],
           },
         }
       : {
           // palette values for dark mode
-          primary: deepOrange,
-          divider: deepOrange[700],
+          primary: blue,
+          divider: blue[200],
           background: {
-            default: deepOrange[900],
-            paper: deepOrange[900],
+            default: blue[700],
+            paper: blue[700],
           },
           text: {
-            primary: '#fff',
-            secondary: grey[500],
+            primary: yellow[900],
+            secondary: yellow[200],
           },
         }),
   },

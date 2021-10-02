@@ -5,7 +5,6 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { ThemeProvider } from '@mui/styles';
 import { createTheme, CssBaseline, PaletteMode } from '@mui/material';
 
-import Nav from '../components/Nav';
 import { UserProvider } from '../context/userContext';
 import { SnackbarProvider } from '../context/snackbarContext';
 import SnackbarContainer from '../containers/SnackbarContainer';
@@ -46,7 +45,6 @@ export default function MyApp(props) {
           <CssBaseline />
           <UserProvider>
             <SnackbarProvider>
-              <Nav />
               <Component {...pageProps} />
               <SnackbarContainer />
             </SnackbarProvider>

@@ -1,7 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
 import Homepage from '../containers/Homepage/Homepage';
-import Nav from '../components/Navigation/Nav';
+import AppLayout from '@/containers/AppLayout';
 
 function PageIndex() {
   return (
@@ -9,8 +9,9 @@ function PageIndex() {
       <Head>
         <title>Cherish | Home</title>
       </Head>
-      <Nav />
-      <Homepage />
+      <AppLayout>
+        <Homepage />
+      </AppLayout>
     </>
   );
 }

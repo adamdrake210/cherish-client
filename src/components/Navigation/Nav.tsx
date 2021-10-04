@@ -10,6 +10,7 @@ import { List, Theme, useTheme, Link } from '@mui/material';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 import { Box } from '@mui/system';
+import { AccountCircle } from '@mui/icons-material';
 
 import { useUserContext } from '../../context/userContext';
 import Logout from '../Auth/Logout';
@@ -17,7 +18,6 @@ import { NavDrawer } from './NavDrawer';
 import { LoggedInLinks } from './LoggedInLinks';
 import { LoggedOutLinks } from './LoggedOutLinks';
 import { ColorModeContext } from '../../pages/_app';
-import { AccountCircle } from '@mui/icons-material';
 
 const useStyles = makeStyles<Theme>(theme => ({
   menuButton: {
@@ -65,7 +65,7 @@ const Nav = () => {
           p: 1,
         }}
       >
-        <AppBar position="fixed" sx={{ bgcolor: 'secondary.main' }}>
+        <AppBar position="fixed" sx={{ bgcolor: 'primary.main' }}>
           <Toolbar
             sx={{
               display: 'flex',
@@ -76,7 +76,6 @@ const Nav = () => {
               my: 0,
               mx: 'auto',
             }}
-            variant="dense"
           >
             <Link href="/" sx={{ flexGrow: 1 }}>
               <a className="cherish-logo cherish-logo-nav">Cherish</a>

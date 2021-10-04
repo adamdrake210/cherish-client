@@ -2,6 +2,7 @@ import React from 'react';
 import Head from 'next/head';
 import Calendar from '../containers/Calendar/Calendar';
 import ProtectedRoute from '../HOC/ProtectedRoute';
+import AppLayout from '@/containers/AppLayout';
 
 function PageIndex() {
   return (
@@ -9,8 +10,9 @@ function PageIndex() {
       <Head>
         <title>Cherish | Calendar</title>
       </Head>
-
-      <Calendar />
+      <AppLayout>
+        <Calendar />
+      </AppLayout>
     </ProtectedRoute>
   );
 }

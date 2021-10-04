@@ -1,9 +1,10 @@
 import React from 'react';
 import Head from 'next/head';
-import EditPerson from '../../containers/Person/EditPerson';
-import { getPerson } from '../../services/firebase/firebaseapi';
-import ProtectedRoute from '../../HOC/ProtectedRoute';
-import { PersonType } from '../../types/types';
+import EditPerson from '@/containers/Person/EditPerson';
+import { getPerson } from '@/services/firebase/firebaseapi';
+import ProtectedRoute from '@/HOC/ProtectedRoute';
+import { PersonType } from '@/types/types';
+import AppLayout from '@/containers/AppLayout';
 
 type Props = {
   id: string;
@@ -16,8 +17,9 @@ function EditPersonPage({ id, person }: Props) {
       <Head>
         <title>Cherish | Edit Person</title>
       </Head>
-
-      <EditPerson person={person} id={id} />
+      <AppLayout>
+        <EditPerson person={person} id={id} />
+      </AppLayout>
     </ProtectedRoute>
   );
 }

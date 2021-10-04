@@ -8,8 +8,8 @@ import { createTheme, CssBaseline, PaletteMode } from '@mui/material';
 import { UserProvider } from '../context/userContext';
 import { SnackbarProvider } from '../context/snackbarContext';
 import SnackbarContainer from '../containers/SnackbarContainer';
-import getDesignTokens from '../styles/theme';
 
+import getDesignTokens from '../styles/theme';
 import createEmotionCache from '../helpers/createEmotionCache';
 import '../styles/styles.scss';
 

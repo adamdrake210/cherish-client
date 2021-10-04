@@ -1,6 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
-import ResetPassword from '../components/Auth/ResetPassword';
+import ResetPassword from '@/components/Auth/ResetPassword';
+import AppLayout from '@/containers/AppLayout';
 
 function RegisterPage() {
   return (
@@ -8,8 +9,9 @@ function RegisterPage() {
       <Head>
         <title>Cherish | Reset Password</title>
       </Head>
-
-      <ResetPassword />
+      <AppLayout>
+        <ResetPassword />
+      </AppLayout>
     </>
   );
 }

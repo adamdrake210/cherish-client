@@ -1,7 +1,8 @@
 import React from 'react';
 import Head from 'next/head';
-import AddPerson from '../containers/Person/AddPerson';
-import ProtectedRoute from '../HOC/ProtectedRoute';
+import AddPerson from '@/containers/Person/AddPerson';
+import ProtectedRoute from '@/HOC/ProtectedRoute';
+import AppLayout from '@/containers/AppLayout';
 
 function PageIndex() {
   return (
@@ -9,8 +10,9 @@ function PageIndex() {
       <Head>
         <title>Cherish | Add Person</title>
       </Head>
-
-      <AddPerson />
+      <AppLayout>
+        <AddPerson />
+      </AppLayout>
     </ProtectedRoute>
   );
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
-import Register from '../components/Auth/Register';
+import Register from '@/components/Auth/Register';
+import AppLayout from '@/containers/AppLayout';
 
 function RegisterPage() {
   return (
@@ -8,8 +9,9 @@ function RegisterPage() {
       <Head>
         <title>Cherish | Register</title>
       </Head>
-
-      <Register />
+      <AppLayout>
+        <Register />
+      </AppLayout>
     </>
   );
 }

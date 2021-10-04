@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { Box } from '@mui/system';
 import { List, Typography } from '@mui/material';
 
 import { getPeople } from '@/services/firebase/firebaseapi';
@@ -53,17 +52,7 @@ function People() {
   }
 
   return (
-    <Box
-      sx={{
-        width: '100%',
-        backgroundColor: 'primary.main',
-        maxWidth: 900,
-        minHeight: '100vh',
-        m: '0 auto',
-        p: [2, 4],
-        mt: 5,
-      }}
-    >
+    <>
       <SearchField handleChange={handleChange} />
       <Typography component="h2" variant="h4" sx={{ mt: 2 }}>
         All Contacts
@@ -85,7 +74,7 @@ function People() {
         </div>
       )}
       <Fabutton />
-    </Box>
+    </>
   );
 }
 

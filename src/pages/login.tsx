@@ -1,6 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
-import Login from '../components/Auth/Login';
+import Login from '@/components/Auth/Login';
+import AppLayout from '@/containers/AppLayout';
 
 function LoginPage() {
   return (
@@ -8,8 +9,9 @@ function LoginPage() {
       <Head>
         <title>Cherish | Login</title>
       </Head>
-
-      <Login />
+      <AppLayout>
+        <Login />
+      </AppLayout>
     </>
   );
 }

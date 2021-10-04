@@ -1,5 +1,5 @@
 import React from 'react';
-import { getFirstLetter } from '../helpers/helpers';
+import { getFirstLetter } from '../../helpers/helpers';
 
 type Props = {
   firstName: string;

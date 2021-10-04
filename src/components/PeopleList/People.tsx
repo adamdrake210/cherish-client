@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-
-import { getPeople } from '../services/firebase/firebaseapi';
-import { useUserContext } from '../context/userContext';
-import { sortLastName, capitalizeFirstLetter } from '../helpers/helpers';
-import PeopleAvatar from './PeopleAvatar';
-import Fabutton from './Fabutton';
-import { SearchField } from './Forms/Fields/SearchField';
 import { Box } from '@mui/system';
-import { Typography } from '@mui/material';
+import { List, Typography } from '@mui/material';
+
+import { getPeople } from '@/services/firebase/firebaseapi';
+import { useUserContext } from '@/context/userContext';
+import { sortLastName } from '@/helpers/helpers';
+import Fabutton from '../Fabutton';
+import { SearchField } from '../Forms/Fields/SearchField';
+import { PeopleDetail } from './PeopleDetail';
 
 function People() {
   const [isLoading, setIsLoading] = useState(true);
@@ -60,43 +60,20 @@ function People() {
         maxWidth: 900,
         minHeight: '100vh',
         m: '0 auto',
-        mt: 6,
         p: [2, 4],
+        mt: 5,
       }}
     >
       <SearchField handleChange={handleChange} />
-      <Typography
-        component="h2"
-        variant="h4"
-        sx={{ fontFamily: 'Raleway', mt: 2 }}
-      >
-        All
+      <Typography component="h2" variant="h4" sx={{ mt: 2 }}>
+        All Contacts
       </Typography>
       {filteredList && (
-        <ul className="homepage-people-list">
+        <List sx={{ maxWidth: 500, width: '100%', mt: 0 }}>
           {filteredList.map(person => (
-            <li key={person.id}>
-              <Link
-                passHref
-                href="/person/[personId]"
-                as={`/person/${person.id}`}
-              >
-                <a className="person-link">
-                  <PeopleAvatar
-                    firstName={person.firstName}
-                    lastName={person.lastName}
-                  />
-                  <div className="person-details">
-                    <p>{`${person.firstName} ${person.lastName}`}</p>
-                    <span>
-                      {capitalizeFirstLetter(person.relationshiptype)}
-                    </span>
-                  </div>
-                </a>
-              </Link>
-            </li>
+            <PeopleDetail key={person.id} person={person} />
           ))}
-        </ul>
+        </List>
       )}
       {isLoading && <p>Loading...</p>}
       {!isLoading && peopleList.length < 1 && (

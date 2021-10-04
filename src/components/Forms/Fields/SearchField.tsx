@@ -1,31 +1,25 @@
 import React from 'react';
-import { makeStyles } from '@mui/styles';
+import { Box } from '@mui/system';
 
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
-
-const useStyles = makeStyles(() => ({
-  searchField: {
-    width: 300,
-    backgroundColor: '#ffffff',
-  },
-}));
 
 type Props = {
   handleChange: (arg: any) => void;
 };
 
 export const SearchField = ({ handleChange }: Props) => {
-  const classes = useStyles();
-
   return (
-    <div className="homepage-search">
+    <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
       <TextField
         type="text"
         variant="outlined"
         placeholder="Search Peeps..."
-        className={classes.searchField}
+        sx={{
+          width: 300,
+          bgcolor: 'white',
+        }}
         onChange={e => handleChange(e)}
         InputProps={{
           startAdornment: (
@@ -35,6 +29,6 @@ export const SearchField = ({ handleChange }: Props) => {
           ),
         }}
       />
-    </div>
+    </Box>
   );
 };

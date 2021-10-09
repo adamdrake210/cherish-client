@@ -32,7 +32,7 @@ export default function Person({ person, id }: Props) {
 
   return (
     <div>
-      <Typography variant="h3" component="h1">
+      <Typography variant="h3" component="h1" color="secondary">
         Details
       </Typography>
       <Link passHref href="/edit-person/[personId]" as={`/edit-person/${id}`}>
@@ -40,7 +40,7 @@ export default function Person({ person, id }: Props) {
       </Link>
       <PersonDetails person={person} />
 
-      <Typography variant="h4" component="h2">
+      <Typography variant="h4" component="h2" color="secondary">
         Relationships
       </Typography>
       {isLoading && <Loader />}

@@ -25,8 +25,8 @@ const getDesignTokens = (mode: PaletteMode) => ({
           },
           divider: yellow[200],
           text: {
-            primary: blue[600],
-            secondary: blue[800],
+            primary: grey[600],
+            secondary: grey[800],
           },
           background: {
             paper: grey[100],

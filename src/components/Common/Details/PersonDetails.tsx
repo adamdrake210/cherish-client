@@ -1,13 +1,16 @@
 import React from 'react';
 import { List, ListItem, Typography } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
+import { Box } from '@mui/system';
 
 import BirthdayDetails from './BirthdayDetails';
 import { capitalizeFirstLetter } from '@/helpers/helpers';
-import { Box } from '@mui/system';
 
 const useStyles = makeStyles(() => ({
   listItem: {
+    paddingLeft: 0,
+  },
+  listItemText: {
     fontWeight: 700,
     marginRight: '6px',
   },
@@ -34,15 +37,13 @@ export default function PersonDetails({ person }: Props) {
 
   return (
     <Box sx={{ my: 2 }}>
-      <Typography variant="h4" component="h2">
+      <Typography variant="h4" component="h2" color="secondary">
         {firstName} {lastName}
       </Typography>
-      <List sx={{ color: 'primary.main' }}>
-        <ListItem>
-          <Typography variant="body1" className={classes.listItem}>
-            Birthday:
-          </Typography>
-          <Typography variant="body1">
+      <List>
+        <ListItem className={classes.listItem}>
+          <Typography className={classes.listItemText}>Birthday:</Typography>
+          <Typography>
             <BirthdayDetails
               birthday={birthday}
               birthmonth={birthmonth}
@@ -50,29 +51,23 @@ export default function PersonDetails({ person }: Props) {
             />
           </Typography>
         </ListItem>
-        <ListItem>
-          <Typography variant="body1" className={classes.listItem}>
-            Notes:
-          </Typography>
-          <Typography variant="body1">
-            {notes || 'No comments at this time.'}
-          </Typography>
+        <ListItem className={classes.listItem}>
+          <Typography className={classes.listItemText}>Notes:</Typography>
+          <Typography>{notes || 'No comments at this time.'}</Typography>
         </ListItem>
-        <ListItem>
-          <Typography variant="body1" className={classes.listItem}>
+        <ListItem className={classes.listItem}>
+          <Typography className={classes.listItemText}>
             Relationship:
           </Typography>
-          <Typography variant="body1">
+          <Typography>
             {capitalizeFirstLetter(relationshiptype) ||
               'Relationship needs updating'}
           </Typography>
         </ListItem>
-        <ListItem>
-          <Typography variant="body1" className={classes.listItem}>
-            Email:
-          </Typography>
+        <ListItem className={classes.listItem}>
+          <Typography className={classes.listItemText}>Email:</Typography>
           {email ? (
-            <Typography variant="body1">
+            <Typography>
               <a
                 href={`mailto:${email}`}
                 target="_blank"
@@ -82,29 +77,25 @@ export default function PersonDetails({ person }: Props) {
               </a>
             </Typography>
           ) : (
-            <Typography variant="body1">No email set at this time.</Typography>
+            <Typography>No email set at this time.</Typography>
           )}
         </ListItem>
-        <ListItem>
-          <Typography variant="body1" className={classes.listItem}>
-            Address:
-          </Typography>
-          <Typography variant="body1">
-            {address || 'No address at this time'}
-          </Typography>
+        <ListItem className={classes.listItem}>
+          <Typography className={classes.listItemText}>Address:</Typography>
+          <Typography>{address || 'No address at this time'}</Typography>
         </ListItem>
-        <ListItem>
+        <ListItem className={classes.listItem}>
           {links.length > 0 && links[0] !== '' ? (
             <>
               <span>
-                <Typography variant="body1" className={classes.listItem}>
+                <Typography className={classes.listItemText}>
                   Useful Links:
                 </Typography>
               </span>
               <List>
                 {links.map(link => (
                   <ListItem key={link}>
-                    <Typography variant="body1">
+                    <Typography>
                       <a href={link} target="_blank" rel="noopener noreferrer">
                         {link}
                       </a>
@@ -114,7 +105,7 @@ export default function PersonDetails({ person }: Props) {
               </List>
             </>
           ) : (
-            <Typography variant="body1">No links at this time.</Typography>
+            <Typography>No links at this time.</Typography>
           )}
         </ListItem>
       </List>

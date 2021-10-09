@@ -1,6 +1,6 @@
 import React from 'react';
 import BirthdayDetails from './BirthdayDetails';
-import { capitalizeFirstLetter } from '../../helpers/helpers';
+import { capitalizeFirstLetter } from '@/helpers/helpers';
 
 type Props = {
   person: any;

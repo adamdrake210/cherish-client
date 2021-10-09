@@ -1,5 +1,5 @@
 import React from 'react';
-import { firebase } from '../../services/firebase/firebase';
+import { firebase } from '@/services/firebase/firebase';
 
 export default function Logout() {
   const handleLogout = () => {

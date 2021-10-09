@@ -1,6 +1,6 @@
 import React from 'react';
-import { capitalizeFirstLetter } from '../../helpers/helpers';
-import { RelationshipType } from '../../types/types';
+import { capitalizeFirstLetter } from '@/helpers/helpers';
+import { RelationshipType } from '@/types/types';
 import BirthdayDetails from './BirthdayDetails';
 
 type Props = {

@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import {
-  getPeople,
-  getRelationships,
-} from '../../services/firebase/firebaseapi';
-import { useUserContext } from '../../context/userContext';
-import { formatDate, sortBirthdays } from '../../helpers/dateHelpers';
-import { monthsArray } from '../../constants';
-import AgeDetails from '../Details/AgeDetails';
-import Fabutton from '../Fabutton';
+import { getPeople, getRelationships } from '@/services/firebase/firebaseapi';
+import { useUserContext } from '@/context/userContext';
+import { formatDate, sortBirthdays } from '@/helpers/dateHelpers';
+import { monthsArray } from '@/constants';
+import AgeDetails from '@/components/Common/Details/AgeDetails';
+import Fabutton from '@/components/Common/Buttons/Fabutton';
 
 export default function CalendarList() {
   const [peopleList, setPeopleList] = useState([]);

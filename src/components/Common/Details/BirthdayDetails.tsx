@@ -1,5 +1,5 @@
 import React from 'react';
-import { getAge } from '../../helpers/dateHelpers';
+import { getAge } from '@/helpers/dateHelpers';
 
 type Props = {
   birthday: string;

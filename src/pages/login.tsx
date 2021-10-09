@@ -1,6 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
-import Login from '@/components/Auth/Login';
+import Login from '@/components/Login/Login';
 import AppLayout from '@/containers/AppLayout';
 
 function LoginPage() {

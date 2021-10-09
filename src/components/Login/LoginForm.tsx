@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { Formik, Form } from 'formik';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { firebase } from '../../services/firebase/firebase';
-import Email from './Fields/Email';
-import Password from './Fields/Password';
-import GoogleLoginButton from '../GoogleLoginButton';
+import { firebase } from '@/services/firebase/firebase';
+import Email from '../Forms/Fields/Email';
+import Password from '../Forms/Fields/Password';
+import GoogleLoginButton from '@/components/Login/GoogleLoginButton';
 
 export default function LoginForm() {
   const [firebaseError, setFirebaseError] = useState(null);
@@ -38,7 +38,7 @@ export default function LoginForm() {
               setSubmitting(false);
               const errorCode = error.code;
               const errorMessage = error.message;
-              console.log('errorCode', errorCode);
+              console.error('errorCode', errorCode);
               setFirebaseError(errorMessage);
             });
         }}

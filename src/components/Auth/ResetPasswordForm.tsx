@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { Formik, Form } from 'formik';
-import { firebase } from '../../services/firebase/firebase';
-import Email from './Fields/Email';
+import { firebase } from '@/services/firebase/firebase';
+import Email from '../Forms/Fields/Email';
 
 export default function ResetPasswordForm() {
   const [firebaseError, setFirebaseError] = useState(null);
   const [isPasswordReset, setIsPasswordReset] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  function resetPassword(email) {
+  function resetPassword(email: string) {
     setLoading(true);
     return firebase.auth().sendPasswordResetEmail(email);
   }
@@ -25,7 +25,7 @@ export default function ResetPasswordForm() {
               setIsPasswordReset(true);
               setSubmitting(false);
               setFirebaseError(null);
-              console.log(response);
+              console.error(response);
             })
             .catch(error => {
               setLoading(false);
@@ -33,8 +33,8 @@ export default function ResetPasswordForm() {
               // Handle Errors here.
               const errorCode = error.code;
               const errorMessage = error.message;
-              console.log('errorCode', errorCode);
-              console.log('errorMessage', errorMessage);
+              console.error('errorCode', errorCode);
+              console.error('errorMessage', errorMessage);
               setFirebaseError(errorMessage);
             });
         }}

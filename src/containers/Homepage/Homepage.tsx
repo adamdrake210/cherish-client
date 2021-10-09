@@ -1,9 +1,9 @@
 import React from 'react';
 
-import People from '../../components/PeopleList/People';
-import HomepageNotLoggedIn from '../../components/HomepageNotLoggedIn';
-import Loader from '../../components/Loader';
-import { useUserContext } from '../../context/userContext';
+import People from '@/components/PeopleList/People';
+import NotLoggedIn from '@/components/Login/NotLoggedIn';
+import Loader from '@/components/Common/Loaders/Loader';
+import { useUserContext } from '@/context/userContext';
 
 export default function Homepage() {
   const { user, isLoading } = useUserContext();
@@ -12,7 +12,7 @@ export default function Homepage() {
     <>
       {isLoading && <Loader />}
       {!isLoading && user && <People />}
-      {!isLoading && !user && <HomepageNotLoggedIn />}
+      {!isLoading && !user && <NotLoggedIn />}
     </>
   );
 }

@@ -5,7 +5,7 @@ import { List, Typography } from '@mui/material';
 import { getPeople } from '@/services/firebase/firebaseapi';
 import { useUserContext } from '@/context/userContext';
 import { sortLastName } from '@/helpers/helpers';
-import Fabutton from '../Fabutton';
+import Fabutton from '../Common/Buttons/Fabutton';
 import { SearchField } from '../Forms/Fields/SearchField';
 import { PeopleDetail } from './PeopleDetail';
 

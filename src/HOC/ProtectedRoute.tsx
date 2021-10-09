@@ -1,5 +1,5 @@
 import React from 'react';
-import Loader from '../components/Loader';
+import Loader from '../components/Common/Loaders/Loader';
 import { useUserContext } from '../context/userContext';
 
 type Props = {

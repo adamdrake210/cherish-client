@@ -16,7 +16,7 @@ const Snackbars = () => {
   const { open, variant, message } = useSnackbarState();
   const snackbarsDispatch = useSnackbarDispatch();
 
-  const handleClose = (event, reason) => {
+  const handleClose = reason => {
     if (reason === 'clickaway') {
       return;
     }
@@ -34,7 +34,6 @@ const Snackbars = () => {
       autoHideDuration={6000}
       onClose={handleClose}
       message={message}
-      variant={variant}
       action={
         <IconButton
           size="small"

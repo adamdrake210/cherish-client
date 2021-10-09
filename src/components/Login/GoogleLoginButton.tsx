@@ -1,6 +1,6 @@
 import React from 'react';
 import { useRouter } from 'next/router';
-import { firebase } from '../services/firebase/firebase';
+import { firebase } from '@/services/firebase/firebase';
 
 type Props = {
   setFirebaseError: (arg: string) => void;

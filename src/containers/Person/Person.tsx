@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import PersonDetails from '../../components/Details/PersonDetails';
-import RelationshipDetails from '../../components/Details/RelationshipDetails';
-import { getRelationships } from '../../services/firebase/firebaseapi';
-import Fabutton from '../../components/Fabutton';
-import { PersonType } from '../../types/types';
+import PersonDetails from '@/components/Common/Details/PersonDetails';
+import RelationshipDetails from '@/components/Common/Details/RelationshipDetails';
+import { getRelationships } from '@/services/firebase/firebaseapi';
+import Fabutton from '@/components/Common/Buttons/Fabutton';
+import { PersonType } from '@/types/types';
 
 type Props = {
   person: PersonType;

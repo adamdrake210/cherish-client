@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 
-export default function HomepageNotLoggedIn() {
+export default function NotLoggedIn() {
   return (
     <div className="container homepagen-nli-container">
       <p className="cherish-logo cherish-logo-lg">Cherish</p>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Formik, Form } from 'formik';
-import { addRelationship } from '../../services/firebase/firebaseapi';
+import { addRelationship } from '@/services/firebase/firebaseapi';
 import FirstName from './Fields/FirstName';
 import LastName from './Fields/LastName';
 import Address from './Fields/Address';
@@ -9,8 +9,8 @@ import Email from './Fields/Email';
 import Birthday from './Fields/Birthday';
 import Notes from './Fields/Notes';
 import Links from './Fields/Links';
-import { useUserContext } from '../../context/userContext';
-import { useSnackbarDispatch } from '../../context/snackbarContext';
+import { useUserContext } from '@/context/userContext';
+import { useSnackbarDispatch } from '@/context/snackbarContext';
 
 export default function AddRelationshipForm({
   personId,

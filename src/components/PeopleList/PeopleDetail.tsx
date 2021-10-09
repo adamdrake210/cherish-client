@@ -1,10 +1,10 @@
 import React from 'react';
-import PeopleAvatar from './PeopleAvatar';
 import Link from 'next/link';
 import makeStyles from '@mui/styles/makeStyles';
 import { Box } from '@mui/system';
 import { ListItem, Typography } from '@mui/material';
 
+import PeopleAvatar from './PeopleAvatar';
 import { capitalizeFirstLetter } from '@/helpers/helpers';
 
 const useStyles = makeStyles(() => ({

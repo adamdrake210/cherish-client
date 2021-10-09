@@ -1,5 +1,5 @@
 import { PaletteMode } from '@mui/material';
-import { blue, grey, yellow } from '@mui/material/colors';
+import { blue, grey, purple, yellow } from '@mui/material/colors';
 
 const font = "'Raleway', sans-serif";
 
@@ -8,7 +8,7 @@ const getDesignTokens = (mode: PaletteMode) => ({
     MuiTypography: {
       defaultProps: {
         fontFamily: font,
-        color: blue[600],
+        color: blue[700],
       },
     },
   },
@@ -21,12 +21,12 @@ const getDesignTokens = (mode: PaletteMode) => ({
             main: yellow[200],
           },
           secondary: {
-            main: yellow[400],
+            main: purple[400],
           },
           divider: yellow[200],
           text: {
-            primary: blue[600],
-            secondary: blue[800],
+            primary: grey[600],
+            secondary: grey[800],
           },
           background: {
             paper: grey[100],

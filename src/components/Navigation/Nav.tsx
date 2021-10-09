@@ -12,12 +12,12 @@ import Brightness7Icon from '@mui/icons-material/Brightness7';
 import { Box } from '@mui/system';
 import { AccountCircle } from '@mui/icons-material';
 
-import { useUserContext } from '../../context/userContext';
-import Logout from '../Auth/Logout';
+import { useUserContext } from '@/context/userContext';
+import Logout from '@/components/Auth/Logout';
 import { NavDrawer } from './NavDrawer';
 import { LoggedInLinks } from './LoggedInLinks';
 import { LoggedOutLinks } from './LoggedOutLinks';
-import { ColorModeContext } from '../../pages/_app';
+import { ColorModeContext } from '@/pages/_app';
 
 const useStyles = makeStyles<Theme>(theme => ({
   menuButton: {
@@ -65,7 +65,7 @@ const Nav = () => {
           p: 1,
         }}
       >
-        <AppBar position="fixed" sx={{ bgcolor: 'primary.main' }}>
+        <AppBar position="fixed" sx={{ bgcolor: theme.palette.primary.light }}>
           <Toolbar
             sx={{
               display: 'flex',

@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { Typography } from '@mui/material';
+
 import PersonDetails from '@/components/Common/Details/PersonDetails';
 import RelationshipDetails from '@/components/Common/Details/RelationshipDetails';
 import { getRelationships } from '@/services/firebase/firebaseapi';
 import Fabutton from '@/components/Common/Buttons/Fabutton';
 import { PersonType } from '@/types/types';
+import Loader from '@/components/Common/Loaders/Loader';
 
 type Props = {
   person: PersonType;
@@ -28,18 +31,24 @@ export default function Person({ person, id }: Props) {
   }, []);
 
   return (
-    <div className="container details-container">
-      <h1>Details</h1>
+    <div>
+      <Typography variant="h3" component="h1">
+        Details
+      </Typography>
       <Link passHref href="/edit-person/[personId]" as={`/edit-person/${id}`}>
         <a>Edit Person</a>
       </Link>
       <PersonDetails person={person} />
 
-      <h2>Relationships</h2>
-      {isLoading && <p>Loading...</p>}
+      <Typography variant="h4" component="h2">
+        Relationships
+      </Typography>
+      {isLoading && <Loader />}
 
       {!isLoading && relationships.length === 0 && (
-        <p>Currently there are no relationships for this person.</p>
+        <Typography component="p">
+          Currently there are no relationships for this person.
+        </Typography>
       )}
 
       {!isLoading &&

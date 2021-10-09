@@ -8,7 +8,7 @@ const getDesignTokens = (mode: PaletteMode) => ({
     MuiTypography: {
       defaultProps: {
         fontFamily: font,
-        color: blue[600],
+        color: blue[700],
       },
     },
   },

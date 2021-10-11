@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Formik, Form } from 'formik';
 import router from 'next/router';
+import { useSnackbar } from 'notistack';
+
 import {
   updatePerson,
   deleteDocument,
@@ -13,7 +15,6 @@ import Email from './Fields/Email';
 import Birthday from './Fields/Birthday';
 import Notes from './Fields/Notes';
 import Links from './Fields/Links';
-import { useSnackbarDispatch } from '../../context/snackbarContext';
 import { PersonType } from '../../types/types';
 
 type Props = {
@@ -23,17 +24,13 @@ type Props = {
 
 export default function EditPersonForm({ id, person }: Props) {
   const [isEditable, setIsEditable] = useState(false);
-  const snackbarDispatch = useSnackbarDispatch();
+  const { enqueueSnackbar } = useSnackbar();
 
   const handleDeletePerson = () => {
     deleteDocument(id, 'people')
       .then(() => {
-        snackbarDispatch({
-          type: 'show_snackbar',
-          payload: {
-            message: `Successfully deleted ${person.firstName}`,
-            variant: 'success',
-          },
+        enqueueSnackbar(`Successfully deleted ${person.firstName}`, {
+          variant: 'success',
         });
         router.push('/');
       })
@@ -41,12 +38,8 @@ export default function EditPersonForm({ id, person }: Props) {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.error('errorCode: ', errorCode);
-        snackbarDispatch({
-          type: 'show_snackbar',
-          payload: {
-            message: errorMessage,
-            variant: 'error',
-          },
+        enqueueSnackbar(errorMessage, {
+          variant: 'error',
         });
       });
   };
@@ -85,12 +78,8 @@ export default function EditPersonForm({ id, person }: Props) {
               .then(() => {
                 setSubmitting(false);
                 setIsEditable(false);
-                snackbarDispatch({
-                  type: 'show_snackbar',
-                  payload: {
-                    message: `Successfully edited ${values.firstName}`,
-                    variant: 'success',
-                  },
+                enqueueSnackbar(`Successfully edited ${values.firstName}`, {
+                  variant: 'success',
                 });
               })
               .catch(error => {
@@ -98,12 +87,8 @@ export default function EditPersonForm({ id, person }: Props) {
                 const errorMessage = error.message;
                 console.error(errorCode);
                 setSubmitting(false);
-                snackbarDispatch({
-                  type: 'show_snackbar',
-                  payload: {
-                    message: errorMessage,
-                    variant: 'error',
-                  },
+                enqueueSnackbar(errorMessage, {
+                  variant: 'error',
                 });
               });
           }}

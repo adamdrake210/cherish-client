@@ -6,6 +6,7 @@ import { ListItem, Typography } from '@mui/material';
 
 import PeopleAvatar from './PeopleAvatar';
 import { capitalizeFirstLetter } from '@/helpers/helpers';
+import { ROUTE } from '@/routes/routeConstants';
 
 const useStyles = makeStyles(() => ({
   link: {
@@ -35,7 +36,11 @@ export const PeopleDetail = ({ person }: Props) => {
         borderBottom: '1px solid red',
       }}
     >
-      <Link passHref href="/person/[personId]" as={`/person/${person.id}`}>
+      <Link
+        passHref
+        href={ROUTE.VIEW_PERSON_DETAIL}
+        as={`/person/${person.id}`}
+      >
         <a className={classes.link}>
           <PeopleAvatar
             firstName={person.firstName}

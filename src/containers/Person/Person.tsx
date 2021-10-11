@@ -8,6 +8,7 @@ import { getRelationships } from '@/services/firebase/firebaseapi';
 import Fabutton from '@/components/Common/Buttons/Fabutton';
 import { PersonType } from '@/types/types';
 import Loader from '@/components/Common/Loaders/Loader';
+import { ROUTE } from '@/routes/routeConstants';
 
 type Props = {
   person: PersonType;
@@ -35,7 +36,7 @@ export default function Person({ person, id }: Props) {
       <Typography variant="h3" component="h1" color="secondary">
         Details
       </Typography>
-      <Link passHref href="/edit-person/[personId]" as={`/edit-person/${id}`}>
+      <Link passHref href={ROUTE.EDIT_PERSON_DETAIL} as={`/edit-person/${id}`}>
         <a>Edit Person</a>
       </Link>
       <PersonDetails person={person} />

@@ -8,6 +8,7 @@ import LastName from '../Forms/Fields/LastName';
 import Email from '../Forms/Fields/Email';
 import Password from '../Forms/Fields/Password';
 import GoogleLoginButton from '../Login/GoogleLoginButton';
+import { ROUTE } from '@/routes/routeConstants';
 
 export default function RegisterForm() {
   const [firebaseError, setFirebaseError] = useState(null);
@@ -72,7 +73,7 @@ export default function RegisterForm() {
       </Formik>
       {firebaseError && <p>{firebaseError}</p>}
       <div className="login-link-container">
-        <Link href="/login">
+        <Link href={ROUTE.LOGIN}>
           <a>Already have an account?</a>
         </Link>
       </div>

@@ -6,6 +6,7 @@ import { formatDate, sortBirthdays } from '@/helpers/dateHelpers';
 import { monthsArray } from '@/constants';
 import AgeDetails from '@/components/Common/Details/AgeDetails';
 import Fabutton from '@/components/Common/Buttons/Fabutton';
+import { ROUTE } from '@/routes/routeConstants';
 
 export default function CalendarList() {
   const [peopleList, setPeopleList] = useState([]);
@@ -54,7 +55,7 @@ export default function CalendarList() {
                     {`${person.birthday} ${person.birthmonth} - `}
                     <Link
                       passHref
-                      href="/person/[personId]"
+                      href={ROUTE.VIEW_PERSON_DETAIL}
                       as={`/person/${
                         person.peopleId ? person.peopleId : person.id
                       }`}

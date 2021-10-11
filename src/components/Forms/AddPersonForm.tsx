@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { Formik, Form } from 'formik';
 import Link from 'next/link';
-import { addPerson } from '../../services/firebase/firebaseapi';
+import { useSnackbar } from 'notistack';
+
+import { addPerson } from '@/services/firebase/firebaseapi';
 import FirstName from './Fields/FirstName';
 import LastName from './Fields/LastName';
 import Address from './Fields/Address';
@@ -10,8 +12,8 @@ import Email from './Fields/Email';
 import Birthday from './Fields/Birthday';
 import Notes from './Fields/Notes';
 import Links from './Fields/Links';
-import { useUserContext } from '../../context/userContext';
-import { useSnackbarDispatch } from '../../context/snackbarContext';
+import { useUserContext } from '@/context/userContext';
+import { ROUTE } from '@/routes/routeConstants';
 
 type Props = {
   success: boolean;
@@ -26,7 +28,7 @@ export default function AddPersonForm({
 }: Props) {
   const [newPersonId, setNewPersonId] = useState(null);
   const [isEditable, setIsEditable] = useState(true);
-  const snackbarDispatch = useSnackbarDispatch();
+  const { enqueueSnackbar } = useSnackbar();
 
   const { user } = useUserContext();
   return (
@@ -53,12 +55,8 @@ export default function AddPersonForm({
                 setPersonId(docRef.id);
                 setNewPersonId(docRef.id);
                 setIsEditable(false);
-                snackbarDispatch({
-                  type: 'show_snackbar',
-                  payload: {
-                    message: `Successfully added ${values.firstName}`,
-                    variant: 'success',
-                  },
+                enqueueSnackbar(`Successfully added ${values.firstName}`, {
+                  variant: 'success',
                 });
                 setSuccess(true);
               })
@@ -68,12 +66,8 @@ export default function AddPersonForm({
                 console.error('errorCode', errorCode);
                 console.error('errorMessage', errorMessage);
                 setSubmitting(false);
-                snackbarDispatch({
-                  type: 'show_snackbar',
-                  payload: {
-                    message: errorMessage,
-                    variant: 'error',
-                  },
+                enqueueSnackbar(errorMessage, {
+                  variant: 'error',
                 });
               });
           }}
@@ -105,7 +99,7 @@ export default function AddPersonForm({
         {newPersonId && (
           <Link
             passHref
-            href="/edit-person/[personId]"
+            href={ROUTE.EDIT_PERSON_DETAIL}
             as={`/edit-person/${newPersonId}`}
           >
             <a>Edit Person</a>

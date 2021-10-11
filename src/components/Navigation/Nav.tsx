@@ -18,6 +18,7 @@ import { NavDrawer } from './NavDrawer';
 import { LoggedInLinks } from './LoggedInLinks';
 import { LoggedOutLinks } from './LoggedOutLinks';
 import { ColorModeContext } from '@/pages/_app';
+import { ROUTE } from '@/routes/routeConstants';
 
 const useStyles = makeStyles<Theme>(theme => ({
   menuButton: {
@@ -77,7 +78,7 @@ const Nav = () => {
               mx: 'auto',
             }}
           >
-            <Link href="/" sx={{ flexGrow: 1 }}>
+            <Link href={ROUTE.HOME} sx={{ flexGrow: 1 }}>
               <a className="cherish-logo cherish-logo-nav">Cherish</a>
             </Link>
             <List className={classes.list} dense>

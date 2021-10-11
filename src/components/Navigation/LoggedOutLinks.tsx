@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { ListItem, Theme } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
+import { ROUTE } from '@/routes/routeConstants';
 
 const useStyles = makeStyles<Theme>(theme => ({
   link: {
@@ -18,12 +19,12 @@ export const LoggedOutLinks = () => {
   return (
     <>
       <ListItem sx={{ minWidth: 150 }}>
-        <Link href="/register">
+        <Link href={ROUTE.REGISTER}>
           <a className={classes.link}>Register</a>
         </Link>
       </ListItem>
       <ListItem>
-        <Link href="/login">
+        <Link href={ROUTE.LOGIN}>
           <a className={classes.link}>Login</a>
         </Link>
       </ListItem>

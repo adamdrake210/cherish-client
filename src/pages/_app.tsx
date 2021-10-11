@@ -6,8 +6,7 @@ import { ThemeProvider } from '@mui/styles';
 import { createTheme, CssBaseline, PaletteMode } from '@mui/material';
 
 import { UserProvider } from '../context/userContext';
-import { SnackbarProvider } from '../context/snackbarContext';
-import SnackbarContainer from '../containers/SnackbarContainer';
+import { SnackbarProvider } from 'notistack';
 
 import getDesignTokens from '../styles/theme';
 import createEmotionCache from '../helpers/createEmotionCache';
@@ -46,7 +45,6 @@ export default function MyApp(props) {
           <UserProvider>
             <SnackbarProvider>
               <Component {...pageProps} />
-              <SnackbarContainer />
             </SnackbarProvider>
           </UserProvider>
         </ThemeProvider>

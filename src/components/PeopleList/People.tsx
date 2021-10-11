@@ -8,6 +8,7 @@ import { sortLastName } from '@/helpers/helpers';
 import Fabutton from '../Common/Buttons/Fabutton';
 import { SearchField } from '../Forms/Fields/SearchField';
 import { PeopleDetail } from './PeopleDetail';
+import { ROUTE } from '@/routes/routeConstants';
 
 function People() {
   const [isLoading, setIsLoading] = useState(true);
@@ -68,7 +69,7 @@ function People() {
       {!isLoading && peopleList.length < 1 && (
         <div className="flex-column-container">
           <p>No People have been added yet</p>
-          <Link passHref href="/add-person">
+          <Link passHref href={ROUTE.ADD_PERSON}>
             <a>Add Your First Person!</a>
           </Link>
         </div>

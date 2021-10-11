@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { Formik, Form } from 'formik';
+import { useSnackbar } from 'notistack';
+
 import {
   updateRelationship,
   deleteDocument,
-} from '../../services/firebase/firebaseapi';
+} from '@/services/firebase/firebaseapi';
 import FirstName from './Fields/FirstName';
 import LastName from './Fields/LastName';
 import Address from './Fields/Address';
@@ -12,8 +14,7 @@ import Email from './Fields/Email';
 import Birthday from './Fields/Birthday';
 import Notes from './Fields/Notes';
 import Links from './Fields/Links';
-import { useSnackbarDispatch } from '../../context/snackbarContext';
-import { RelationshipType } from '../../types/types';
+import { RelationshipType } from '@/types/types';
 
 type Props = {
   id: string;
@@ -22,29 +23,21 @@ type Props = {
 
 export default function EditRelationshipForm({ id, relationship }: Props) {
   const [isEditable, setIsEditable] = useState(false);
-  const snackbarDispatch = useSnackbarDispatch();
+  const { enqueueSnackbar } = useSnackbar();
 
   const handleDeletePerson = () => {
     deleteDocument(id, 'relationship')
       .then(() => {
-        snackbarDispatch({
-          type: 'show_snackbar',
-          payload: {
-            message: `Successfully deleted ${relationship.firstName}`,
-            variant: 'success',
-          },
+        enqueueSnackbar(`Successfully deleted ${relationship.firstName}`, {
+          variant: 'success',
         });
       })
       .catch(error => {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.error('errorCode', errorCode);
-        snackbarDispatch({
-          type: 'show_snackbar',
-          payload: {
-            message: errorMessage,
-            variant: 'error',
-          },
+        enqueueSnackbar(errorMessage, {
+          variant: 'error',
         });
       });
   };
@@ -88,12 +81,8 @@ export default function EditRelationshipForm({ id, relationship }: Props) {
               .then(() => {
                 setSubmitting(false);
                 setIsEditable(false);
-                snackbarDispatch({
-                  type: 'show_snackbar',
-                  payload: {
-                    message: `Successfully edited ${values.firstName}`,
-                    variant: 'success',
-                  },
+                enqueueSnackbar(`Successfully edited ${values.firstName}`, {
+                  variant: 'success',
                 });
               })
               .catch(error => {
@@ -101,12 +90,8 @@ export default function EditRelationshipForm({ id, relationship }: Props) {
                 const errorMessage = error.message;
                 console.error(errorCode);
                 setSubmitting(false);
-                snackbarDispatch({
-                  type: 'show_snackbar',
-                  payload: {
-                    message: errorMessage,
-                    variant: 'error',
-                  },
+                enqueueSnackbar(errorMessage, {
+                  variant: 'error',
                 });
               });
           }}

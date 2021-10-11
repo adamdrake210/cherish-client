@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import { ROUTE } from '@/routes/routeConstants';
 
 export default function NotLoggedIn() {
   return (
@@ -8,11 +9,11 @@ export default function NotLoggedIn() {
       <h1>Your own private online address book</h1>
       <h2>Cherish those close to you</h2>
       <div className="sign-up-links">
-        <Link href="/register">
+        <Link href={ROUTE.REGISTER}>
           <a>Sign Up</a>
         </Link>
         /
-        <Link href="/login">
+        <Link href={ROUTE.LOGIN}>
           <a>Login</a>
         </Link>
       </div>

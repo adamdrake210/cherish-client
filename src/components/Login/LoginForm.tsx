@@ -6,6 +6,7 @@ import { firebase } from '@/services/firebase/firebase';
 import Email from '../Forms/Fields/Email';
 import Password from '../Forms/Fields/Password';
 import GoogleLoginButton from '@/components/Login/GoogleLoginButton';
+import { ROUTE } from '@/routes/routeConstants';
 
 export default function LoginForm() {
   const [firebaseError, setFirebaseError] = useState(null);
@@ -60,10 +61,10 @@ export default function LoginForm() {
 
       {firebaseError && <p className="error-message">{firebaseError}</p>}
       <div className="login-link-container">
-        <Link href="/reset-password">
+        <Link href={ROUTE.RESET_PASSWORD}>
           <a>Forgot Password?</a>
         </Link>
-        <Link href="/register">
+        <Link href={ROUTE.REGISTER}>
           <a>Create an account?</a>
         </Link>
       </div>

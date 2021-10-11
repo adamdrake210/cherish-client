@@ -12,6 +12,7 @@ import Notes from './Fields/Notes';
 import Links from './Fields/Links';
 import { useUserContext } from '../../context/userContext';
 import { useSnackbarDispatch } from '../../context/snackbarContext';
+import { ROUTE } from '@/routes/routeConstants';
 
 type Props = {
   success: boolean;
@@ -105,7 +106,7 @@ export default function AddPersonForm({
         {newPersonId && (
           <Link
             passHref
-            href="/edit-person/[personId]"
+            href={ROUTE.EDIT_PERSON_DETAIL}
             as={`/edit-person/${newPersonId}`}
           >
             <a>Edit Person</a>

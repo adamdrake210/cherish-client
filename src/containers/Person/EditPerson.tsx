@@ -6,6 +6,7 @@ import EditRelationshipForm from '../../components/Forms/EditRelationshipForm';
 import { getRelationships } from '../../services/firebase/firebaseapi';
 import { PersonType } from '../../types/types';
 import { Button } from '@mui/material';
+import { ROUTE } from '@/routes/routeConstants';
 
 type Props = {
   id: string;
@@ -33,7 +34,7 @@ export default function EditPerson({ id, person }: Props) {
     <div className="container">
       <div>
         <h1>Edit Person - {person.firstName}</h1>
-        <Link passHref href="/person/[personId]" as={`/person/${id}`}>
+        <Link passHref href={ROUTE.VIEW_PERSON_DETAIL} as={`/person/${id}`}>
           <a>View Person Details</a>
         </Link>
         <EditPersonForm id={id} person={person} />

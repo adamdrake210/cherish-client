@@ -2,7 +2,7 @@
 import React from 'react';
 import { CacheProvider } from '@emotion/react';
 import 'react-datepicker/dist/react-datepicker.css';
-import { ThemeProvider } from '@mui/styles';
+import { ThemeProvider, StyledEngineProvider } from '@mui/material/styles';
 import { createTheme, CssBaseline, PaletteMode } from '@mui/material';
 
 import { UserProvider } from '../context/userContext';
@@ -40,14 +40,16 @@ export default function MyApp(props) {
   return (
     <CacheProvider value={emotionCache}>
       <ColorModeContext.Provider value={colorMode}>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <UserProvider>
-            <SnackbarProvider>
-              <Component {...pageProps} />
-            </SnackbarProvider>
-          </UserProvider>
-        </ThemeProvider>
+        <StyledEngineProvider injectFirst>
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <UserProvider>
+              <SnackbarProvider>
+                <Component {...pageProps} />
+              </SnackbarProvider>
+            </UserProvider>
+          </ThemeProvider>
+        </StyledEngineProvider>
       </ColorModeContext.Provider>
     </CacheProvider>
   );

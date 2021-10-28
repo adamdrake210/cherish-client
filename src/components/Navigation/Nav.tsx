@@ -81,7 +81,7 @@ const Nav = () => {
             <Link href={ROUTE.HOME} sx={{ flexGrow: 1 }}>
               <a className="cherish-logo cherish-logo-nav">Cherish</a>
             </Link>
-            <List className={classes.list} dense>
+            <List sx={{ display: ['none', 'flex'] }} dense>
               {user ? <LoggedInLinks /> : <LoggedOutLinks />}
             </List>
             {user && (

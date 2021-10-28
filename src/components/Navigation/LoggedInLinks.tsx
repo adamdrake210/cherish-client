@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { ListItem, Theme } from '@mui/material';
+import { ListItem, Theme, Typography } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import { ROUTE } from '@/routes/routeConstants';
 
@@ -8,8 +8,11 @@ const useStyles = makeStyles<Theme>(theme => ({
   link: {
     textDecoration: 'none',
     color: theme.palette.secondary.main,
-    fontWeight: 500,
-    fontSize: '1.2rem',
+    fontWeight: 600,
+    fontSize: '1.5rem',
+    '&:hover': {
+      cursor: 'pointer',
+    },
   },
 }));
 
@@ -18,16 +21,21 @@ export const LoggedInLinks = () => {
 
   return (
     <>
-      <ListItem sx={{ minWidth: 150 }}>
+      <li>
         <Link href={ROUTE.ADD_PERSON}>
-          <a className={classes.link}>Add Person</a>
+          <ListItem component="a">
+            <Typography className={classes.link}>Add Person</Typography>
+          </ListItem>
         </Link>
-      </ListItem>
-      <ListItem>
+      </li>
+
+      <li>
         <Link href={ROUTE.CALENDAR}>
-          <a className={classes.link}>Calendar</a>
+          <ListItem component="a">
+            <Typography className={classes.link}>Calendar</Typography>
+          </ListItem>
         </Link>
-      </ListItem>
+      </li>
     </>
   );
 };

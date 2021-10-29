@@ -1,3 +1,4 @@
+// TODO Turn into enum
 export const relationshipTypeArray = [
   'Friend',
   'son',

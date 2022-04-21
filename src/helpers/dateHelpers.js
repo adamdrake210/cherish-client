@@ -10,6 +10,7 @@ export const getIntlDateTimeString = dateObj => {
   try {
     return new Intl.DateTimeFormat(locale, options).format(dateObj);
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.log(
       `The following error occurred while formatting a date object to string --> ${error}`,
     );

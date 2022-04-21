@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Formik, Form } from 'formik';
-import { firebase } from '@/services/firebase/firebase';
+import { auth } from '@/services/firebase/firebase';
+import { sendPasswordResetEmail } from 'firebase/auth';
 import Email from '../Forms/Fields/Email';
 
 export default function ResetPasswordForm() {
@@ -10,7 +11,7 @@ export default function ResetPasswordForm() {
 
   function resetPassword(email: string) {
     setLoading(true);
-    return firebase.auth().sendPasswordResetEmail(email);
+    return sendPasswordResetEmail(auth, email);
   }
   return (
     <div className="login-container-form">

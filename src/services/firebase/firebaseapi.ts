@@ -34,11 +34,6 @@ export async function getPeople(id, callback) {
     where('userId', '==', id),
   );
   return await onSnapshot(q, callback);
-
-  // return firestore
-  //   .collection('people')
-  //   .where('userId', '==', id)
-  //   .onSnapshot(callback);
 }
 
 export async function getRelationships(id, idType, callback) {
@@ -48,31 +43,16 @@ export async function getRelationships(id, idType, callback) {
   );
 
   return await onSnapshot(q, callback);
-
-  // return firestore
-  //   .collection('relationship')
-  //   .where(idType, '==', id)
-  //   .onSnapshot(callback);
 }
 
 export async function updatePerson(id, values) {
   const peopleRef = doc(db, DbNames.PEOPLE, id);
   return await updateDoc(peopleRef, { ...values }, { merge: true });
-
-  // return firestore
-  //   .collection('people')
-  //   .doc(id)
-  //   .set({ ...values }, { merge: true });
 }
 
 export async function updateRelationship(id, values) {
   const relationshipRef = doc(db, DbNames.RELATIONSHIP, id);
   return await updateDoc(relationshipRef, { ...values }, { merge: true });
-
-  // return firestore
-  //   .collection('relationship')
-  //   .doc(id)
-  //   .set({ ...values }, { merge: true });
 }
 
 export async function deleteDocument(id, collection) {

@@ -2,25 +2,22 @@ import React, { useState } from 'react';
 import { Formik, Form } from 'formik';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { firebase } from '@/services/firebase/firebase';
+import { auth } from '@/services/firebase/firebase';
 import FirstName from '../Forms/Fields/FirstName';
 import LastName from '../Forms/Fields/LastName';
 import Email from '../Forms/Fields/Email';
 import Password from '../Forms/Fields/Password';
 import GoogleLoginButton from '../Login/GoogleLoginButton';
 import { ROUTE } from '@/routes/routeConstants';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 
 export default function RegisterForm() {
   const [firebaseError, setFirebaseError] = useState(null);
   const router = useRouter();
 
-  async function register(firstName, email, password) {
-    const newUser = await firebase
-      .auth()
-      .createUserWithEmailAndPassword(email, password);
-    return newUser.user.updateProfile({
-      displayName: firstName,
-    });
+  async function register(email: string, password: string) {
+    const newUser = await createUserWithEmailAndPassword(auth, email, password);
+    return newUser.user;
   }
 
   return (
@@ -39,7 +36,7 @@ export default function RegisterForm() {
           password: '',
         }}
         onSubmit={(values, { setSubmitting }) => {
-          register(values.firstName, values.email, values.password)
+          register(values.email, values.password)
             .then(() => {
               setFirebaseError(null);
               setSubmitting(false);

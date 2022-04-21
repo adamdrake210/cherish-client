@@ -1,6 +1,7 @@
 import React from 'react';
 import { useRouter } from 'next/router';
-import { firebase } from '@/services/firebase/firebase';
+import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+import { auth } from '@/services/firebase/firebase';
 
 type Props = {
   setFirebaseError: (arg: string) => void;
@@ -11,11 +12,9 @@ export default function GoogleLoginButton({ setFirebaseError, title }: Props) {
   const router = useRouter();
 
   function handleGoogleAuth() {
-    const provider = new firebase.auth.GoogleAuthProvider();
+    const provider = new GoogleAuthProvider();
 
-    firebase
-      .auth()
-      .signInWithPopup(provider)
+    signInWithPopup(auth, provider)
       .then(() => {
         setFirebaseError(null);
         router.push('/');

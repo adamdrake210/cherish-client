@@ -1,9 +1,9 @@
 import React from 'react';
-import { firebase } from '@/services/firebase/firebase';
+import { auth } from '@/services/firebase/firebase';
 
 export default function Logout() {
   const handleLogout = () => {
-    return firebase.auth().signOut();
+    return auth.signOut();
   };
 
   return (

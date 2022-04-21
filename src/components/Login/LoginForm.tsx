@@ -2,18 +2,19 @@ import React, { useState } from 'react';
 import { Formik, Form } from 'formik';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { firebase } from '@/services/firebase/firebase';
 import Email from '../Forms/Fields/Email';
 import Password from '../Forms/Fields/Password';
 import GoogleLoginButton from '@/components/Login/GoogleLoginButton';
 import { ROUTE } from '@/routes/routeConstants';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '@/services/firebase/firebase';
 
 export default function LoginForm() {
   const [firebaseError, setFirebaseError] = useState(null);
   const router = useRouter();
 
   function login(email, password) {
-    return firebase.auth().signInWithEmailAndPassword(email, password);
+    return signInWithEmailAndPassword(auth, email, password);
   }
 
   return (

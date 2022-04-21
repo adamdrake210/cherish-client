@@ -1,14 +1,19 @@
-import firebase from 'firebase/app';
-import 'firebase/firestore';
-import 'firebase/analytics';
-import 'firebase/auth';
+import { initializeApp, getApp } from 'firebase/app';
+import type { FirebaseApp } from 'firebase/app';
+import { getAuth } from 'firebase/auth';
 import firebaseConfig from '../../../config/firebaseConfig';
+import { getFirestore } from 'firebase/firestore';
 
-// Initialize Firebase
-if (!firebase.apps.length) {
-  firebase.initializeApp(firebaseConfig);
+let firebaseApp: FirebaseApp;
+
+try {
+  firebaseApp = getApp();
+} catch {
+  firebaseApp = initializeApp(firebaseConfig);
 }
-const firestore = firebase.firestore();
-// firebase.analytics();
 
-export { firebase, firestore };
+const db = getFirestore();
+
+const auth = getAuth();
+
+export { firebaseApp, db, auth };

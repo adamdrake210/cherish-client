@@ -1,9 +1,12 @@
 import React from 'react';
 import { auth } from '@/services/firebase/firebase';
+import { useRouter } from 'next/router';
 
 export default function Logout() {
+  const router = useRouter();
   const handleLogout = () => {
-    return auth.signOut();
+    auth.signOut();
+    router.push('/');
   };
 
   return (

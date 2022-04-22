@@ -1,7 +1,7 @@
 import { initializeApp, getApp } from 'firebase/app';
 import type { FirebaseApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
-import firebaseConfig from '../../../config/firebaseConfig';
+import firebaseConfig from './config/firebaseConfig';
 import { getFirestore } from 'firebase/firestore';
 
 let firebaseApp: FirebaseApp;

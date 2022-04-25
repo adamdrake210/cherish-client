@@ -1,111 +1,154 @@
 import React, { useState } from 'react';
-import { Formik, Form } from 'formik';
-import Link from 'next/link';
+import { Formik } from 'formik';
 import { useSnackbar } from 'notistack';
 
 import { addPerson } from '@/services/firebase/firebaseapi';
-import FirstName from './Fields/FirstName';
-import LastName from './Fields/LastName';
-import Address from './Fields/Address';
 import RelationshipTypeField from './Fields/RelationshipTypeField';
-import Email from './Fields/Email';
 import Birthday from './Fields/Birthday';
-import Notes from './Fields/Notes';
 import Links from './Fields/Links';
 import { useUserContext } from '@/context/userContext';
 import { ROUTE } from '@/routes/routeConstants';
+import { useRouter } from 'next/router';
+import { Box, Button, TextField } from '@mui/material';
 
-type Props = {
-  success: boolean;
-  setSuccess: (arg: boolean) => void;
-  setPersonId: (arg: string) => void;
-};
-
-export default function AddPersonForm({
-  success,
-  setSuccess,
-  setPersonId,
-}: Props) {
-  const [newPersonId, setNewPersonId] = useState(null);
+export default function AddPersonForm() {
   const [isEditable, setIsEditable] = useState(true);
   const { enqueueSnackbar } = useSnackbar();
+  const router = useRouter();
 
   const { user } = useUserContext();
+
   return (
-    <div>
-      <div>
-        <Formik
-          initialValues={{
-            firstName: '',
-            lastName: '',
-            relationshiptype: '',
-            birthday: '',
-            birthmonth: '',
-            birthyear: '',
-            email: '',
-            address: '',
-            links: [],
-            notes: '',
-            userId: user.uid,
-          }}
-          onSubmit={(values, { setSubmitting }) => {
-            addPerson(values)
-              .then(docRef => {
-                setSubmitting(false);
-                setPersonId(docRef.id);
-                setNewPersonId(docRef.id);
-                setIsEditable(false);
-                enqueueSnackbar(`Successfully added ${values.firstName}`, {
-                  variant: 'success',
-                });
-                setSuccess(true);
-              })
-              .catch(error => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.error('errorCode', errorCode);
-                console.error('errorMessage', errorMessage);
-                setSubmitting(false);
-                enqueueSnackbar(errorMessage, {
-                  variant: 'error',
-                });
-              });
-          }}
-        >
-          {({ isSubmitting, values }) => (
-            <Form className="formContainer">
-              <FirstName isEditable={isEditable} />
-              <LastName isEditable={isEditable} />
-              <RelationshipTypeField isEditable={isEditable} />
-              <Birthday isEditable={isEditable} />
-              <Email isEditable={isEditable} />
-              <Address isEditable={isEditable} />
-              <Notes isEditable={isEditable} />
-
-              <Links values={values} isEditable={isEditable} />
-
-              {!success && (
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="button button-lg button-green"
-                >
-                  Submit
-                </button>
-              )}
-            </Form>
-          )}
-        </Formik>
-        {newPersonId && (
-          <Link
-            passHref
-            href={ROUTE.EDIT_PERSON_DETAIL}
-            as={`/edit-person/${newPersonId}`}
+    <Formik
+      initialValues={{
+        firstName: '',
+        lastName: '',
+        relationshiptype: 'Friend',
+        birthday: '',
+        birthmonth: '',
+        birthyear: '',
+        email: '',
+        address: '',
+        links: [],
+        notes: '',
+        userId: user.uid,
+      }}
+      // validationSchema={SignupSchema}
+      onSubmit={values => {
+        // eslint-disable-next-line no-console
+        console.log('values', values);
+        addPerson(values)
+          .then(docRef => {
+            setIsEditable(false);
+            enqueueSnackbar(`Successfully added ${values.firstName}`, {
+              variant: 'success',
+            });
+            router.push(`${ROUTE.VIEW_PERSON}${docRef.id}`);
+          })
+          .catch(error => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.error('errorCode', errorCode);
+            console.error('errorMessage', errorMessage);
+            enqueueSnackbar(errorMessage, {
+              variant: 'error',
+            });
+          });
+      }}
+    >
+      {({
+        errors,
+        touched,
+        values,
+        handleChange,
+        isSubmitting,
+        handleSubmit,
+      }) => (
+        <form onSubmit={handleSubmit}>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              maxWidth: 400,
+              width: '100%',
+            }}
           >
-            <a>Edit Person</a>
-          </Link>
-        )}
-      </div>
-    </div>
+            <TextField
+              id="firstName"
+              name="firstName"
+              label="First Name"
+              sx={{ mb: 2 }}
+              value={values.firstName}
+              onChange={handleChange}
+              error={touched.firstName && Boolean(errors.firstName)}
+              helperText={touched.firstName && errors.firstName}
+            />
+            <TextField
+              id="lastName"
+              name="lastName"
+              label="First Name"
+              sx={{ mb: 2 }}
+              value={values.lastName}
+              onChange={handleChange}
+              error={touched.lastName && Boolean(errors.lastName)}
+              helperText={touched.lastName && errors.lastName}
+            />
+
+            <RelationshipTypeField
+              isEditable={isEditable}
+              errors={errors}
+              handleChange={handleChange}
+              values={values}
+            />
+            <Birthday isEditable={isEditable} />
+            <TextField
+              id="email"
+              name="email"
+              label="Email"
+              type="email"
+              sx={{ mb: 2 }}
+              value={values.email}
+              onChange={handleChange}
+              error={touched.email && Boolean(errors.email)}
+              helperText={touched.email && errors.email}
+            />
+
+            <TextField
+              id="address"
+              name="address"
+              label="Address"
+              sx={{ mb: 2 }}
+              value={values.address}
+              onChange={handleChange}
+              error={touched.address && Boolean(errors.address)}
+              helperText={touched.address && errors.address}
+            />
+
+            <TextField
+              id="notes"
+              name="notes"
+              label="Notes"
+              sx={{ mb: 2 }}
+              value={values.notes}
+              onChange={handleChange}
+              error={touched.notes && Boolean(errors.notes)}
+              helperText={touched.notes && errors.notes}
+            />
+
+            <Links values={values} isEditable={isEditable} />
+
+            <Button
+              type="submit"
+              variant="contained"
+              color="success"
+              sx={{ maxWidth: 200 }}
+              disabled={isSubmitting}
+            >
+              Create
+            </Button>
+          </Box>
+        </form>
+      )}
+    </Formik>
   );
 }

@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { monthsArray } from '../constants';
+import { monthsArray } from '../constants/constants';
 
 export const getIntlDateTimeString = dateObj => {
   const locale = 'en-US';

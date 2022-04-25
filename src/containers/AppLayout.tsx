@@ -12,11 +12,11 @@ const AppLayout = ({ children }: Props) => {
     <Box>
       <Nav />
 
-      <Box sx={{ backgroundColor: 'background.paper', fontFamily: 'Raleway' }}>
+      <Box sx={{ fontFamily: 'Raleway' }}>
         <Box
           sx={{
             width: '100%',
-            backgroundColor: 'primary.main',
+            backgroundColor: 'primary.dark',
             maxWidth: 900,
             minHeight: '100vh',
             m: '0 auto',

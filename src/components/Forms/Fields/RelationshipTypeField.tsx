@@ -1,36 +1,43 @@
-import React from 'react';
-import { Field, ErrorMessage } from 'formik';
-import { relationshipTypeArray } from '../../../constants';
-import { capitalizeFirstLetter } from '../../../helpers/helpers';
+import React, { ReactNode } from 'react';
+import { InputLabel, MenuItem, Select, SelectChangeEvent } from '@mui/material';
+import { relationshipTypeArray } from '@/constants/constants';
+import { capitalizeFirstLetter } from '@/helpers/helpers';
 
 type Props = {
   isEditable: boolean;
+  errors: any;
+  values: any;
+  handleChange: (event: SelectChangeEvent<string>, child: ReactNode) => void;
 };
 
-export default function RelationshipTypeField({ isEditable }: Props) {
+export default function RelationshipTypeField({
+  isEditable,
+  errors,
+  handleChange,
+  values,
+}: Props) {
   return (
-    <div className="field-container">
-      <div className="field">
-        <label htmlFor="relationshiptype">Relationship*</label>
-        <Field
-          as="select"
-          name="relationshiptype"
-          required
-          disabled={!isEditable}
-        >
-          <option value="" disabled hidden>
-            Choose here
-          </option>
-          {relationshipTypeArray.map(relationship => (
-            <option key={relationship} value={relationship}>
-              {capitalizeFirstLetter(relationship)}
-            </option>
-          ))}
-        </Field>
-      </div>
-      <div className="error-message">
-        <ErrorMessage name="relationshiptype" component="div" />
-      </div>
-    </div>
+    <>
+      <InputLabel id="action-type-select-label">
+        Choose Relationship Type*
+      </InputLabel>
+      <Select
+        disabled={!isEditable}
+        name="relationshiptype"
+        labelId="action-type-select-label"
+        id="action-type-select"
+        label="Choose Relationship Type*"
+        value={values.relationshiptype}
+        error={errors.relationshiptype}
+        onChange={handleChange}
+        sx={{ mb: 2 }}
+      >
+        {relationshipTypeArray.map(relationship => (
+          <MenuItem key={relationship} value={relationship}>
+            {capitalizeFirstLetter(relationship)}
+          </MenuItem>
+        ))}
+      </Select>
+    </>
   );
 }

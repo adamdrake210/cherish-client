@@ -1,6 +1,6 @@
 import React from 'react';
 import { Field, ErrorMessage } from 'formik';
-import { daysArray, monthsArray } from '../../../constants';
+import { daysArray, monthsArray } from '../../../constants/constants';
 import { createYearsArray } from '../../../helpers/dateHelpers';
 
 type Props = {

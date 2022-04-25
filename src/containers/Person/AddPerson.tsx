@@ -1,4 +1,5 @@
-import { Button } from '@mui/material';
+import PersonForm from '@/components/Forms/PersonForm';
+import { Button, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import AddPersonForm from '../../components/Forms/AddPersonForm';
 import AddRelationshipForm from '../../components/Forms/AddRelationshipForm';
@@ -11,14 +12,13 @@ export default function AddPerson() {
   return (
     <div className="container">
       <div>
-        <h1>Add Person</h1>
-        <AddPersonForm
-          success={success}
-          setSuccess={setSuccess}
-          setPersonId={setPersonId}
-        />
+        <Typography component="h1" variant="h4" color="primary" gutterBottom>
+          Add Person
+        </Typography>
+        <AddPersonForm />
+        {/* <PersonForm /> */}
       </div>
-      {success && (
+      {/* {success && (
         <div>
           {isAddRelationship && (
             <>
@@ -49,7 +49,7 @@ export default function AddPerson() {
             </Button>
           )}
         </div>
-      )}
+      )} */}
     </div>
   );
 }

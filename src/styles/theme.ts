@@ -8,7 +8,7 @@ const getDesignTokens = (mode: PaletteMode) => ({
     MuiTypography: {
       defaultProps: {
         fontFamily: font,
-        color: blue[700],
+        // color: blue[700],
       },
     },
   },
@@ -17,27 +17,33 @@ const getDesignTokens = (mode: PaletteMode) => ({
   },
   palette: {
     mode,
-    ...(mode === 'dark'
+    ...(mode === 'light'
       ? {
           // palette values for light mode
           primary: {
-            main: yellow[200],
+            light: yellow[100],
+            main: yellow[400],
+            dark: yellow[700],
           },
           secondary: {
             main: red[400],
           },
-          divider: yellow[200],
+          // divider: yellow[200],
           text: {
             primary: grey[600],
             secondary: grey[800],
           },
           background: {
-            paper: grey[200],
+            paper: grey[400],
           },
         }
       : {
           // palette values for dark mode
-          primary: blue,
+          primary: {
+            light: blue[100],
+            main: blue[400],
+            dark: blue[700],
+          },
           divider: blue[200],
           background: {
             default: blue[700],

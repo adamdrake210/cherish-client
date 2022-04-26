@@ -1,24 +1,15 @@
 import React from 'react';
 import { Field, ErrorMessage } from 'formik';
-import { daysArray, monthsArray } from '../../../constants';
-import { createYearsArray } from '../../../helpers/dateHelpers';
+import { daysArray, monthsArray } from '@/constants/constants';
+import { createYearsArray } from '@/helpers/dateHelpers';
 
-type Props = {
-  isEditable: boolean;
-};
-
-export default function Birthday({ isEditable }: Props) {
+export default function Birthday() {
   return (
     <div className="field-container">
       <div className="field field-birthday">
         <div className="input-fields">
           <label htmlFor="birthday">Birthday</label>
-          <Field
-            as="select"
-            name="birthday"
-            className="month-input"
-            disabled={!isEditable}
-          >
+          <Field as="select" name="birthday" className="month-input">
             <option value="" disabled hidden>
               Day
             </option>
@@ -28,12 +19,7 @@ export default function Birthday({ isEditable }: Props) {
               </option>
             ))}
           </Field>
-          <Field
-            as="select"
-            name="birthmonth"
-            className="month-input"
-            disabled={!isEditable}
-          >
+          <Field as="select" name="birthmonth" className="month-input">
             <option value="" disabled hidden>
               Month
             </option>
@@ -48,12 +34,7 @@ export default function Birthday({ isEditable }: Props) {
         <div className="input-fields">
           <label htmlFor="birthyear">Year of Birth</label>
 
-          <Field
-            as="select"
-            name="birthyear"
-            className="month-input"
-            disabled={!isEditable}
-          >
+          <Field as="select" name="birthyear" className="month-input">
             <option value="" disabled hidden>
               Year
             </option>

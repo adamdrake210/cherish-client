@@ -12,17 +12,6 @@
   }
 }
 
-p {
-  color: $darkblue;
-}
-
-a {
-  color: $fontcolor2;
-  &:hover {
-    color: lighten($fontcolor2, 10%);
-  }
-}
-
 .flex-center {
   display: flex;
   justify-content: center;

@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import EditPersonForm from '../../components/Forms/EditPersonForm';
-import AddRelationshipForm from '../../components/Forms/AddRelationshipForm';
-import EditRelationshipForm from '../../components/Forms/EditRelationshipForm';
-import { getRelationships } from '../../services/firebase/firebaseapi';
-import { PersonType } from '../../types/types';
+import { getRelationships } from '@/services/firebase/firebaseapi';
+import { PersonType } from '@/types/types';
 import { Button } from '@mui/material';
 import { ROUTE } from '@/routes/routeConstants';
+import PersonForm from '@/components/Forms/PersonForm';
+import RelationshipForm from '@/components/Forms/RelationshipForm';
 
 type Props = {
   id: string;
@@ -37,7 +36,7 @@ export default function EditPerson({ id, person }: Props) {
         <Link passHref href={ROUTE.VIEW_PERSON_DETAIL} as={`/person/${id}`}>
           <a>View Person Details</a>
         </Link>
-        <EditPersonForm id={id} person={person} />
+        <PersonForm id={id} person={person} />
       </div>
 
       <h2>Current Relationships</h2>
@@ -49,8 +48,8 @@ export default function EditPerson({ id, person }: Props) {
       {!isLoading &&
         relationships.length > 0 &&
         relationships.map(relationship => (
-          <EditRelationshipForm
-            relationship={relationship}
+          <RelationshipForm
+            relation={relationship}
             id={relationship.id}
             key={relationship.id}
           />
@@ -69,10 +68,7 @@ export default function EditPerson({ id, person }: Props) {
                 Cancel
               </button>
             )}
-            <AddRelationshipForm
-              personId={id}
-              setIsAddRelationship={setIsAddRelationship}
-            />
+            <RelationshipForm id={id} />
           </>
         )}
 

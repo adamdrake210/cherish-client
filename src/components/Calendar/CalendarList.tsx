@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { getPeople, getRelationships } from '@/services/firebase/firebaseapi';
 import { useUserContext } from '@/context/userContext';
 import { formatDate, sortBirthdays } from '@/helpers/dateHelpers';
-import { monthsArray } from '@/constants';
+import { monthsArray } from '@/constants/constants';
 import AgeDetails from '@/components/Common/Details/AgeDetails';
 import Fabutton from '@/components/Common/Buttons/Fabutton';
 import { ROUTE } from '@/routes/routeConstants';

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Formik, Form } from 'formik';
-import { auth } from '@/services/firebase/firebase';
+import { TextField } from '@mui/material';
 import { sendPasswordResetEmail } from 'firebase/auth';
-import Email from '../Forms/Fields/Email';
+
+import { auth } from '@/services/firebase/firebase';
 
 export default function ResetPasswordForm() {
   const [firebaseError, setFirebaseError] = useState(null);
@@ -40,9 +41,19 @@ export default function ResetPasswordForm() {
             });
         }}
       >
-        {({ isSubmitting }) => (
+        {({ errors, touched, values, handleChange, isSubmitting }) => (
           <Form className="formContainer">
-            <Email isEditable noLabel />
+            <TextField
+              id="email"
+              name="email"
+              label="Email"
+              type="email"
+              sx={{ mb: 2 }}
+              value={values.email}
+              onChange={handleChange}
+              error={touched.email && Boolean(errors.email)}
+              helperText={touched.email && errors.email}
+            />
 
             <button
               type="submit"

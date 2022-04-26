@@ -17,7 +17,7 @@ const AppLayout = ({ children }: Props) => {
           component="main"
           sx={{
             width: '100%',
-            backgroundColor: 'primary.dark',
+            backgroundColor: 'primary.light',
             maxWidth: 900,
             minHeight: '100vh',
             m: '0 auto',

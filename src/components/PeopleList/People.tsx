@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { List, Typography } from '@mui/material';
+import { Box, List, Typography } from '@mui/material';
 
 import { getPeople } from '@/services/firebase/firebaseapi';
 import { useUserContext } from '@/context/userContext';
@@ -67,12 +67,12 @@ function People() {
       )}
       {isLoading && <p>Loading...</p>}
       {!isLoading && peopleList.length < 1 && (
-        <div className="flex-column-container">
+        <Box sx={{ display: 'flex', flexDirection: 'column' }}>
           <p>No People have been added yet</p>
           <Link passHref href={ROUTE.ADD_PERSON}>
             <a>Add Your First Person!</a>
           </Link>
-        </div>
+        </Box>
       )}
       <Fabutton />
     </>

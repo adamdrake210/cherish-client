@@ -4,14 +4,13 @@ import { ListItem, Theme, Typography } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import { ROUTE } from '@/routes/routeConstants';
 
-const useStyles = makeStyles<Theme>(theme => ({
+const useStyles = makeStyles<Theme>(() => ({
   link: {
     textDecoration: 'none',
-    color: theme.palette.secondary.main,
-    fontWeight: 600,
     fontSize: '1.5rem',
     '&:hover': {
       cursor: 'pointer',
+      textDecoration: 'underline',
     },
   },
 }));

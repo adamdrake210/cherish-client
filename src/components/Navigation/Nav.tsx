@@ -6,11 +6,12 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
-import { List, Theme, useTheme, Link } from '@mui/material';
+import { List, Theme, useTheme, Typography } from '@mui/material';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 import { Box } from '@mui/system';
 import { AccountCircle } from '@mui/icons-material';
+import Link from 'next/link';
 
 import { useUserContext } from '@/context/userContext';
 import Logout from '@/components/Auth/Logout';
@@ -78,9 +79,24 @@ const Nav = () => {
               mx: 'auto',
             }}
           >
-            <Link href={ROUTE.HOME} sx={{ flexGrow: 1 }}>
-              <a className="cherish-logo cherish-logo-nav">Cherish</a>
-            </Link>
+            <Box sx={{ flexGrow: 1 }}>
+              <Link href={ROUTE.HOME}>
+                <Typography
+                  sx={{
+                    fontSize: '36px',
+                    textDecoration: 'none',
+                    lineHeight: '1.2',
+                    width: 130,
+                    '&:hover': {
+                      textDecoration: 'underline',
+                      cursor: 'pointer',
+                    },
+                  }}
+                >
+                  Cherish
+                </Typography>
+              </Link>
+            </Box>
             <List sx={{ display: ['none', 'flex'] }} dense>
               {user ? <LoggedInLinks /> : <LoggedOutLinks />}
             </List>

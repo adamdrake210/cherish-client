@@ -24,6 +24,7 @@ type Props = {
   setIsOpenDrawer: (arg: boolean) => void;
 };
 
+// @ts-ignore
 const DrawerHeader = styled('div')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',

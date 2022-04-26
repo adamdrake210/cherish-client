@@ -8,7 +8,6 @@ const useStyles = makeStyles<Theme>(theme => ({
   link: {
     textDecoration: 'none',
     color: theme.palette.secondary.main,
-    fontWeight: 600,
     fontSize: '1.5rem',
     '&:hover': {
       cursor: 'pointer',

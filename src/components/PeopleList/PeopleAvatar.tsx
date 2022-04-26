@@ -18,7 +18,8 @@ export default function PeopleAvatar({ firstName, lastName }: Props) {
         height: 55,
         fontSize: 24,
         borderRadius: '50%',
-        backgroundColor: 'primary.light',
+        backgroundColor: 'primary.dark',
+        color: 'white',
         mr: 2,
       }}
     >

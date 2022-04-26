@@ -83,7 +83,6 @@ const Nav = () => {
               <Link href={ROUTE.HOME}>
                 <Typography
                   sx={{
-                    color: '#fc1b1b',
                     fontSize: '36px',
                     textDecoration: 'none',
                     lineHeight: '1.2',

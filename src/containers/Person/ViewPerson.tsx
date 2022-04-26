@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Typography } from '@mui/material';
+import { Typography, Button } from '@mui/material';
 
 import PersonDetails from '@/components/Common/Details/PersonDetails';
 import RelationshipDetails from '@/components/Common/Details/RelationshipDetails';
@@ -33,15 +33,17 @@ export default function ViewPerson({ person, id }: Props) {
 
   return (
     <div>
-      <Typography variant="h3" component="h1" color="secondary">
+      <Typography variant="h3" component="h1">
         Details
       </Typography>
       <Link passHref href={ROUTE.EDIT_PERSON_DETAIL} as={`/edit-person/${id}`}>
-        <a>Edit Person</a>
+        <Button sx={{ my: 2 }} color="secondary" variant="contained">
+          Edit Person
+        </Button>
       </Link>
       <PersonDetails person={person} />
 
-      <Typography variant="h4" component="h2" color="secondary">
+      <Typography variant="h4" component="h2">
         Relationships
       </Typography>
       {isLoading && <Loader />}

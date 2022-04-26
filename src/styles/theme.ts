@@ -1,5 +1,5 @@
 import { PaletteMode } from '@mui/material';
-import { blue, grey, red, yellow } from '@mui/material/colors';
+import { grey, indigo, pink, red, yellow } from '@mui/material/colors';
 
 const font = "'Raleway', sans-serif";
 
@@ -40,18 +40,18 @@ const getDesignTokens = (mode: PaletteMode) => ({
       : {
           // palette values for dark mode
           primary: {
-            light: blue[100],
-            main: blue[400],
-            dark: blue[700],
+            main: indigo[600],
           },
-          divider: blue[200],
+          secondary: {
+            main: pink[700],
+          },
           background: {
-            default: blue[700],
-            paper: blue[700],
+            default: 'rgb(0, 20, 20)',
+            paper: indigo[900],
           },
           text: {
-            primary: yellow[900],
-            secondary: yellow[200],
+            primary: '#fff',
+            secondary: grey[500],
           },
         }),
   },

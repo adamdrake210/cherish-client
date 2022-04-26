@@ -1,0 +1,4 @@
+- Delete Person & relationship functionality
+- Main styling
+- Form Validation
+- Disable buttons and inputs when submitting forms

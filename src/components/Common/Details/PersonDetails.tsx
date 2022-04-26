@@ -37,7 +37,7 @@ export default function PersonDetails({ person }: Props) {
 
   return (
     <Box sx={{ my: 2 }}>
-      <Typography variant="h4" component="h2" color="secondary">
+      <Typography variant="h4" component="h2">
         {firstName} {lastName}
       </Typography>
       <List>

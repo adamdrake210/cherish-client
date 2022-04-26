@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { Formik, Form } from 'formik';
+import { TextField } from '@mui/material';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+
 import { auth } from '@/services/firebase/firebase';
-import FirstName from '../Forms/Fields/FirstName';
-import LastName from '../Forms/Fields/LastName';
-import Email from '../Forms/Fields/Email';
-import Password from '../Forms/Fields/Password';
-import GoogleLoginButton from '../Login/GoogleLoginButton';
+import Password from '@/components/Forms/Fields/Password';
+import GoogleLoginButton from '@/components/Login/GoogleLoginButton';
 import { ROUTE } from '@/routes/routeConstants';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 
@@ -52,11 +51,39 @@ export default function RegisterForm() {
             });
         }}
       >
-        {({ isSubmitting }) => (
-          <Form className="formContainer">
-            <FirstName isEditable noLabel />
-            <LastName isEditable noLabel />
-            <Email isEditable noLabel />
+        {({ errors, touched, values, handleChange, isSubmitting }) => (
+          <Form>
+            <TextField
+              id="firstName"
+              name="firstName"
+              label="First Name"
+              sx={{ mb: 2 }}
+              value={values.firstName}
+              onChange={handleChange}
+              error={touched.firstName && Boolean(errors.firstName)}
+              helperText={touched.firstName && errors.firstName}
+            />
+            <TextField
+              id="lastName"
+              name="lastName"
+              label="First Name"
+              sx={{ mb: 2 }}
+              value={values.lastName}
+              onChange={handleChange}
+              error={touched.lastName && Boolean(errors.lastName)}
+              helperText={touched.lastName && errors.lastName}
+            />
+            <TextField
+              id="email"
+              name="email"
+              label="Email"
+              type="email"
+              sx={{ mb: 2 }}
+              value={values.email}
+              onChange={handleChange}
+              error={touched.email && Boolean(errors.email)}
+              helperText={touched.email && errors.email}
+            />
             <Password title="Choose a secure password" noLabel />
             <button
               type="submit"

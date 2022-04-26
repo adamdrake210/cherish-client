@@ -4,10 +4,9 @@ import { Button } from '@mui/material';
 
 type Props = {
   values: any; // TODO type
-  isEditable: boolean;
 };
 
-export default function Links({ values, isEditable }: Props) {
+export default function Links({ values }: Props) {
   const validateUrl = value => {
     let errorMessage;
     const pattern = new RegExp(
@@ -36,14 +35,9 @@ export default function Links({ values, isEditable }: Props) {
               values.links.map((link, index) => (
                 <div className="link-input-container" key={link}>
                   <div key={index} className="link-input">
-                    <Field
-                      name={`links.${index}`}
-                      disabled={!isEditable}
-                      validate={validateUrl}
-                    />
+                    <Field name={`links.${index}`} validate={validateUrl} />
                     <button
                       type="button"
-                      disabled={!isEditable}
                       className="button button-sm button-blue"
                       onClick={() => arrayHelpers.insert(index, '')} // insert an empty string at a position
                     >
@@ -51,7 +45,6 @@ export default function Links({ values, isEditable }: Props) {
                     </button>
                     <button
                       type="button"
-                      disabled={!isEditable}
                       className="button button-sm button-red"
                       onClick={() => arrayHelpers.remove(index)} // remove a link from the list
                     >
@@ -66,7 +59,6 @@ export default function Links({ values, isEditable }: Props) {
             ) : (
               <Button
                 type="button"
-                disabled={!isEditable}
                 onClick={() => arrayHelpers.push('')}
                 variant="contained"
                 color="primary"

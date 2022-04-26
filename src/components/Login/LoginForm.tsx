@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { Formik, Form } from 'formik';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import Email from '../Forms/Fields/Email';
-import Password from '../Forms/Fields/Password';
+import Password from '@/components/Forms/Fields/Password';
 import GoogleLoginButton from '@/components/Login/GoogleLoginButton';
 import { ROUTE } from '@/routes/routeConstants';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '@/services/firebase/firebase';
+import { TextField } from '@mui/material';
 
 export default function LoginForm() {
   const [firebaseError, setFirebaseError] = useState(null);
@@ -45,9 +45,19 @@ export default function LoginForm() {
             });
         }}
       >
-        {({ isSubmitting }) => (
+        {({ errors, touched, values, handleChange, isSubmitting }) => (
           <Form>
-            <Email isEditable noLabel />
+            <TextField
+              id="email"
+              name="email"
+              label="Email"
+              type="email"
+              sx={{ mb: 2 }}
+              value={values.email}
+              onChange={handleChange}
+              error={touched.email && Boolean(errors.email)}
+              helperText={touched.email && errors.email}
+            />
             <Password title="Password" noLabel />
             <button
               type="submit"

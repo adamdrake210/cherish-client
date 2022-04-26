@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Formik } from 'formik';
 import { useSnackbar } from 'notistack';
 
-import { addPerson } from '@/services/firebase/firebaseapi';
+import {
+  addRelationship,
+  updateRelationship,
+} from '@/services/firebase/firebaseapi';
 import RelationshipTypeField from './Fields/RelationshipTypeField';
 import Birthday from './Fields/Birthday';
 import Links from './Fields/Links';
@@ -10,50 +13,83 @@ import { useUserContext } from '@/context/userContext';
 import { ROUTE } from '@/routes/routeConstants';
 import { useRouter } from 'next/router';
 import { Box, Button, TextField } from '@mui/material';
+import { Relation } from '@/types/types';
 
-export default function AddPersonForm() {
-  const [isEditable, setIsEditable] = useState(true);
+type Props = {
+  id?: string;
+  relation?: Relation;
+};
+
+export default function RelationshipForm({ id, relation }: Props) {
   const { enqueueSnackbar } = useSnackbar();
   const router = useRouter();
 
   const { user } = useUserContext();
 
+  // const handleDeletePerson = () => {
+  //   deleteDocument(id, 'relationship')
+  //     .then(() => {
+  //       enqueueSnackbar(`Successfully deleted ${relationship.firstName}`, {
+  //         variant: 'success',
+  //       });
+  //     })
+  //     .catch(error => {
+  //       const errorCode = error.code;
+  //       const errorMessage = error.message;
+  //       console.error('errorCode', errorCode);
+  //       enqueueSnackbar(errorMessage, {
+  //         variant: 'error',
+  //       });
+  //     });
+  // };
+
   return (
     <Formik
       initialValues={{
-        firstName: '',
-        lastName: '',
-        relationshiptype: 'Friend',
-        birthday: '',
-        birthmonth: '',
-        birthyear: '',
-        email: '',
-        address: '',
-        links: [],
-        notes: '',
+        firstName: relation?.firstName || '',
+        lastName: relation?.lastName || '',
+        relationshiptype: relation?.relationshiptype || 'Friend',
+        birthday: relation?.birthday || '',
+        birthmonth: relation?.birthmonth || '',
+        birthyear: relation?.birthyear || '',
+        email: relation?.email || '',
+        address: relation?.address || '',
+        links: relation?.links || [],
+        notes: relation?.notes || '',
+        peopleId: relation?.peopleId || id,
         userId: user.uid,
       }}
       // validationSchema={SignupSchema}
       onSubmit={values => {
-        // eslint-disable-next-line no-console
-        console.log('values', values);
-        addPerson(values)
-          .then(docRef => {
-            setIsEditable(false);
-            enqueueSnackbar(`Successfully added ${values.firstName}`, {
-              variant: 'success',
+        if (relation) {
+          updateRelationship(id, values)
+            .then(() => {
+              enqueueSnackbar(`Successfully edited ${values.firstName}`, {
+                variant: 'success',
+              });
+              router.push(`${ROUTE.VIEW_PERSON}${values.peopleId}`);
+            })
+            .catch(error => {
+              console.error('Update Relationship Error: ', error.message);
+              enqueueSnackbar(error.message, {
+                variant: 'error',
+              });
             });
-            router.push(`${ROUTE.VIEW_PERSON}${docRef.id}`);
-          })
-          .catch(error => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            console.error('errorCode', errorCode);
-            console.error('errorMessage', errorMessage);
-            enqueueSnackbar(errorMessage, {
-              variant: 'error',
+        } else {
+          addRelationship(values)
+            .then(() => {
+              enqueueSnackbar(`Successfully added ${values.firstName}`, {
+                variant: 'success',
+              });
+              router.push(`${ROUTE.VIEW_PERSON}${id}`);
+            })
+            .catch(error => {
+              console.error('Add Relationship Error: ', error.message);
+              enqueueSnackbar(error.message, {
+                variant: 'error',
+              });
             });
-          });
+        }
       }}
     >
       {({
@@ -73,6 +109,11 @@ export default function AddPersonForm() {
               width: '100%',
             }}
           >
+            <RelationshipTypeField
+              errors={errors}
+              handleChange={handleChange}
+              values={values}
+            />
             <TextField
               id="firstName"
               name="firstName"
@@ -94,13 +135,7 @@ export default function AddPersonForm() {
               helperText={touched.lastName && errors.lastName}
             />
 
-            <RelationshipTypeField
-              isEditable={isEditable}
-              errors={errors}
-              handleChange={handleChange}
-              values={values}
-            />
-            <Birthday isEditable={isEditable} />
+            <Birthday />
             <TextField
               id="email"
               name="email"
@@ -135,7 +170,7 @@ export default function AddPersonForm() {
               helperText={touched.notes && errors.notes}
             />
 
-            <Links values={values} isEditable={isEditable} />
+            <Links values={values} />
 
             <Button
               type="submit"
@@ -144,7 +179,7 @@ export default function AddPersonForm() {
               sx={{ maxWidth: 200 }}
               disabled={isSubmitting}
             >
-              Create
+              {id ? 'Update' : 'Create'}
             </Button>
           </Box>
         </form>

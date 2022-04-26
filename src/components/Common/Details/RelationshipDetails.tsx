@@ -2,12 +2,12 @@ import React from 'react';
 import { Box } from '@mui/system';
 
 import { capitalizeFirstLetter } from '@/helpers/helpers';
-import { RelationshipType } from '@/types/types';
+import { Relation } from '@/types/types';
 import BirthdayDetails from './BirthdayDetails';
 import { Typography } from '@mui/material';
 
 type Props = {
-  relationship: RelationshipType;
+  relationship: Relation;
 };
 
 export default function RelationshipDetails({ relationship }: Props) {

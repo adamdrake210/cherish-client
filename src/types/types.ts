@@ -12,7 +12,7 @@ export type PersonType = {
   userId: string;
 };
 
-export type RelationshipType = {
+export type Relation = {
   address: string;
   birthday: string;
   birthmonth: string;

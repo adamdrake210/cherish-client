@@ -4,14 +4,12 @@ import { relationshipTypeArray } from '@/constants/constants';
 import { capitalizeFirstLetter } from '@/helpers/helpers';
 
 type Props = {
-  isEditable: boolean;
   errors: any;
   values: any;
   handleChange: (event: SelectChangeEvent<string>, child: ReactNode) => void;
 };
 
 export default function RelationshipTypeField({
-  isEditable,
   errors,
   handleChange,
   values,
@@ -22,7 +20,6 @@ export default function RelationshipTypeField({
         Choose Relationship Type*
       </InputLabel>
       <Select
-        disabled={!isEditable}
         name="relationshiptype"
         labelId="action-type-select-label"
         id="action-type-select"

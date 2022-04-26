@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
-import AddPersonForm from '@/components/Forms/AddPersonForm';
+import PersonForm from '@/components/Forms/PersonForm';
 
 export default function AddPerson() {
   return (
@@ -8,7 +8,7 @@ export default function AddPerson() {
       <Typography component="h1" variant="h4" color="primary" gutterBottom>
         Add Person
       </Typography>
-      <AddPersonForm />
+      <PersonForm />
     </Box>
   );
 }

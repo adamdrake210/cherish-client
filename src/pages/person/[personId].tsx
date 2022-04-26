@@ -1,6 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
-import Person from '@/containers/Person/Person';
+import ViewPerson from '@/containers/Person/ViewPerson';
 import { getPerson } from '@/services/firebase/firebaseapi';
 import ProtectedRoute from '@/HOC/ProtectedRoute';
 import { PersonType } from '@/types/types';
@@ -18,7 +18,7 @@ function PersonPage({ id, person }: Props) {
         <title>Cherish | Person Details</title>
       </Head>
       <AppLayout>
-        <Person person={person} id={id} />
+        <ViewPerson person={person} id={id} />
       </AppLayout>
     </ProtectedRoute>
   );

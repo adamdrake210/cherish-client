@@ -15,7 +15,7 @@ type Props = {
   id: string;
 };
 
-export default function Person({ person, id }: Props) {
+export default function ViewPerson({ person, id }: Props) {
   const [relationships, setRelationships] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 

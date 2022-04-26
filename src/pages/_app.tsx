@@ -2,15 +2,20 @@
 import React from 'react';
 import { CacheProvider } from '@emotion/react';
 import 'react-datepicker/dist/react-datepicker.css';
-import { ThemeProvider, StyledEngineProvider } from '@mui/material/styles';
-import { createTheme, CssBaseline, PaletteMode } from '@mui/material';
-
+import {
+  ThemeProvider,
+  createTheme,
+  CssBaseline,
+  PaletteMode,
+} from '@mui/material';
+import { EmotionCache } from '@emotion/cache';
 import { UserProvider } from '../context/userContext';
 import { SnackbarProvider } from 'notistack';
 
 import getDesignTokens from '../styles/theme';
 import createEmotionCache from '../helpers/createEmotionCache';
-import '../styles/styles.scss';
+import { AppProps } from 'next/app';
+// import '../styles/styles.scss';
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
@@ -19,8 +24,11 @@ export const ColorModeContext = React.createContext({
   toggleColorMode: () => {},
 });
 
-export default function MyApp(props) {
-  const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
+const MyApp = ({
+  Component,
+  emotionCache = clientSideEmotionCache,
+  pageProps,
+}: AppProps & { emotionCache: EmotionCache }) => {
   const [mode, setMode] = React.useState<PaletteMode>('dark');
   const colorMode = React.useMemo(
     () => ({
@@ -40,17 +48,17 @@ export default function MyApp(props) {
   return (
     <CacheProvider value={emotionCache}>
       <ColorModeContext.Provider value={colorMode}>
-        <StyledEngineProvider injectFirst>
-          <ThemeProvider theme={theme}>
-            <CssBaseline />
-            <UserProvider>
-              <SnackbarProvider>
-                <Component {...pageProps} />
-              </SnackbarProvider>
-            </UserProvider>
-          </ThemeProvider>
-        </StyledEngineProvider>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <UserProvider>
+            <SnackbarProvider>
+              <Component {...pageProps} />
+            </SnackbarProvider>
+          </UserProvider>
+        </ThemeProvider>
       </ColorModeContext.Provider>
     </CacheProvider>
   );
-}
+};
+
+export default MyApp;

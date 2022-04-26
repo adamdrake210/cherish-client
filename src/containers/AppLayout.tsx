@@ -14,9 +14,10 @@ const AppLayout = ({ children }: Props) => {
 
       <Box sx={{ fontFamily: 'Raleway' }}>
         <Box
+          component="main"
           sx={{
             width: '100%',
-            backgroundColor: 'primary.dark',
+            // backgroundColor: 'primary.dark',
             maxWidth: 900,
             minHeight: '100vh',
             m: '0 auto',

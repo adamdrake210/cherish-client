@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { getRelationships } from '@/services/firebase/firebaseapi';
 import { PersonType } from '@/types/types';
-import { Button } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 import { ROUTE } from '@/routes/routeConstants';
-import PersonForm from '@/components/Forms/PersonForm';
+
 import RelationshipForm from '@/components/Forms/RelationshipForm';
+import PersonForm from '@/components/Forms/PersonForm';
 
 type Props = {
   id: string;
@@ -30,20 +31,30 @@ export default function EditPerson({ id, person }: Props) {
   }, []);
 
   return (
-    <div className="container">
-      <div>
-        <h1>Edit Person - {person.firstName}</h1>
+    <Box>
+      <Box>
+        <Typography component="h1" variant="h3">
+          Edit Person - {person.firstName}
+        </Typography>
         <Link passHref href={ROUTE.VIEW_PERSON_DETAIL} as={`/person/${id}`}>
-          <a>View Person Details</a>
+          <Button sx={{ my: 2 }} color="secondary" variant="contained">
+            View Person Details
+          </Button>
         </Link>
-        <PersonForm id={id} person={person} />
-      </div>
+        <Box sx={{ my: 2 }}>
+          <PersonForm id={id} person={person} />
+        </Box>
+      </Box>
 
-      <h2>Current Relationships</h2>
+      <Typography component="h2" variant="h4">
+        Current Relationships
+      </Typography>
       {isLoading && <p>Loading...</p>}
 
       {!isLoading && relationships.length < 1 && (
-        <p>Currently there are no relationships for this person.</p>
+        <Typography component="p" variant="body2">
+          Currently there are no relationships for this person.
+        </Typography>
       )}
       {!isLoading &&
         relationships.length > 0 &&
@@ -55,18 +66,21 @@ export default function EditPerson({ id, person }: Props) {
           />
         ))}
 
-      <div>
+      <Box>
         {isAddRelationship && (
           <>
-            <h2>Add Relationship</h2>
+            <Typography component="h2" variant="h4">
+              Add Relationships
+            </Typography>
             {isAddRelationship && (
-              <button
-                type="button"
-                className="button button-sm button-white"
+              <Button
+                variant="outlined"
+                color="info"
+                sx={{ my: 2 }}
                 onClick={() => setIsAddRelationship(!isAddRelationship)}
               >
                 Cancel
-              </button>
+              </Button>
             )}
             <RelationshipForm id={id} />
           </>
@@ -75,14 +89,15 @@ export default function EditPerson({ id, person }: Props) {
         {!isAddRelationship && (
           <Button
             type="button"
-            color="primary"
+            color="secondary"
             variant="contained"
+            sx={{ my: 2 }}
             onClick={() => setIsAddRelationship(!isAddRelationship)}
           >
             Add Relationship
           </Button>
         )}
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 }

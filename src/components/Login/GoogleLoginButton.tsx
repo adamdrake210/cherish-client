@@ -2,6 +2,7 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import { auth } from '@/services/firebase/firebase';
+import { Button } from '@mui/material';
 
 type Props = {
   setFirebaseError: (arg: string) => void;
@@ -28,10 +29,14 @@ export default function GoogleLoginButton({ setFirebaseError, title }: Props) {
   }
 
   return (
-    <button
-      type="button"
-      className="button button-lg google-button m-b-20"
+    <Button
       onClick={handleGoogleAuth}
+      sx={{
+        backgroundColor: '#ffffff',
+        color: '#555',
+        minWidth: 200,
+        ':hover': { backgroundColor: '#b7b7b7' },
+      }}
     >
       <svg
         width="24"
@@ -62,6 +67,6 @@ export default function GoogleLoginButton({ setFirebaseError, title }: Props) {
         </g>
       </svg>
       {title}
-    </button>
+    </Button>
   );
 }

@@ -1,13 +1,23 @@
+import { Box, Typography } from '@mui/material';
 import React from 'react';
 import ResetPasswordForm from './ResetPasswordForm';
 
 export default function Login() {
   return (
-    <div className="container">
-      <div className="login-container">
-        <h2>Reset Password</h2>
-        <ResetPasswordForm />
-      </div>
-    </div>
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '80vh',
+        py: 4,
+      }}
+    >
+      <Typography component="h1" variant="h3" gutterBottom>
+        Reset Password
+      </Typography>
+      <ResetPasswordForm />
+    </Box>
   );
 }

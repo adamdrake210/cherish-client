@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { Formik, Form } from 'formik';
-import { TextField } from '@mui/material';
+import { Box, Button, TextField, Typography } from '@mui/material';
 import { sendPasswordResetEmail } from 'firebase/auth';
+import * as Yup from 'yup';
 
 import { auth } from '@/services/firebase/firebase';
+import Loader from '../Common/Loaders/Loader';
 
 export default function ResetPasswordForm() {
   const [firebaseError, setFirebaseError] = useState(null);
@@ -14,20 +16,27 @@ export default function ResetPasswordForm() {
     setLoading(true);
     return sendPasswordResetEmail(auth, email);
   }
+
+  const validationSchema = Yup.object().shape({
+    email: Yup.string()
+      .email('Invalid email address')
+      .required('Email is required'),
+  });
+
   return (
-    <div className="login-container-form">
+    <>
       <Formik
         initialValues={{
           email: '',
         }}
+        validationSchema={validationSchema}
         onSubmit={(values, { setSubmitting }) => {
           resetPassword(values.email)
-            .then(response => {
+            .then(() => {
               setLoading(false);
               setIsPasswordReset(true);
               setSubmitting(false);
               setFirebaseError(null);
-              console.error(response);
             })
             .catch(error => {
               setLoading(false);
@@ -42,32 +51,50 @@ export default function ResetPasswordForm() {
         }}
       >
         {({ errors, touched, values, handleChange, isSubmitting }) => (
-          <Form className="formContainer">
-            <TextField
-              id="email"
-              name="email"
-              label="Email"
-              type="email"
-              sx={{ mb: 2 }}
-              value={values.email}
-              onChange={handleChange}
-              error={touched.email && Boolean(errors.email)}
-              helperText={touched.email && errors.email}
-            />
-
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="button button-lg button-blue m-t-5 m-b-20"
+          <Form autoComplete="off">
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+              }}
             >
-              Reset Password
-            </button>
+              <TextField
+                id="email"
+                name="email"
+                label="Email"
+                type="email"
+                sx={{ mb: 1, minWidth: 250 }}
+                value={values.email}
+                onChange={handleChange}
+                error={touched.email && Boolean(errors.email)}
+                helperText={touched.email && errors.email}
+              />
+
+              <Button
+                type="submit"
+                color="secondary"
+                variant="contained"
+                sx={{ my: 1 }}
+                disabled={isSubmitting}
+              >
+                Reset Password
+              </Button>
+            </Box>
           </Form>
         )}
       </Formik>
-      {loading && <p>Loading...</p>}
-      {isPasswordReset && <p>Check Email to reset password.</p>}
-      {firebaseError && <p>{firebaseError}</p>}
-    </div>
+      {loading && <Loader />}
+      {isPasswordReset && (
+        <Typography variant="h5" gutterBottom>
+          Check Email to reset password.
+        </Typography>
+      )}
+      {firebaseError && (
+        <Typography color="error" gutterBottom>
+          {firebaseError}
+        </Typography>
+      )}
+    </>
   );
 }

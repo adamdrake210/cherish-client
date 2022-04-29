@@ -1,11 +1,17 @@
 import React, { useState } from 'react';
 import { Formik, Form } from 'formik';
-import { TextField } from '@mui/material';
+import {
+  Box,
+  Button,
+  TextField,
+  Typography,
+  Link as MuiLink,
+} from '@mui/material';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import * as Yup from 'yup';
 
 import { auth } from '@/services/firebase/firebase';
-import Password from '@/components/Forms/Fields/Password';
 import GoogleLoginButton from '@/components/Login/GoogleLoginButton';
 import { ROUTE } from '@/routes/routeConstants';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
@@ -19,14 +25,27 @@ export default function RegisterForm() {
     return newUser.user;
   }
 
+  const validationSchema = Yup.object().shape({
+    firstName: Yup.string().required('First name is required'),
+    lastName: Yup.string().required('Last name is required'),
+    email: Yup.string()
+      .email('Invalid email address')
+      .required('Email is required'),
+    password: Yup.string().required('Password is required'),
+  });
+
   return (
-    <div className="login-container-form">
+    <>
       <GoogleLoginButton
         setFirebaseError={setFirebaseError}
         title="Register with Google"
       />
-      <p>or</p>
-      <h3>Sign up with Email</h3>
+      <Typography variant="h6" sx={{ my: 2 }}>
+        or
+      </Typography>
+      <Typography variant="h5" component="h3" gutterBottom>
+        Sign up with Email
+      </Typography>
       <Formik
         initialValues={{
           firstName: '',
@@ -34,6 +53,7 @@ export default function RegisterForm() {
           email: '',
           password: '',
         }}
+        validationSchema={validationSchema}
         onSubmit={(values, { setSubmitting }) => {
           register(values.email, values.password)
             .then(() => {
@@ -52,55 +72,83 @@ export default function RegisterForm() {
         }}
       >
         {({ errors, touched, values, handleChange, isSubmitting }) => (
-          <Form>
-            <TextField
-              id="firstName"
-              name="firstName"
-              label="First Name"
-              sx={{ mb: 2 }}
-              value={values.firstName}
-              onChange={handleChange}
-              error={touched.firstName && Boolean(errors.firstName)}
-              helperText={touched.firstName && errors.firstName}
-            />
-            <TextField
-              id="lastName"
-              name="lastName"
-              label="First Name"
-              sx={{ mb: 2 }}
-              value={values.lastName}
-              onChange={handleChange}
-              error={touched.lastName && Boolean(errors.lastName)}
-              helperText={touched.lastName && errors.lastName}
-            />
-            <TextField
-              id="email"
-              name="email"
-              label="Email"
-              type="email"
-              sx={{ mb: 2 }}
-              value={values.email}
-              onChange={handleChange}
-              error={touched.email && Boolean(errors.email)}
-              helperText={touched.email && errors.email}
-            />
-            <Password title="Choose a secure password" noLabel />
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="button button-lg button-blue m-t-5 m-b-20"
+          <Form autoComplete="off">
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+              }}
             >
-              Sign Up
-            </button>
+              <TextField
+                id="firstName"
+                name="firstName"
+                label="First Name*"
+                sx={{ mb: 2, minWidth: 250 }}
+                value={values.firstName}
+                onChange={handleChange}
+                error={touched.firstName && Boolean(errors.firstName)}
+                helperText={touched.firstName && errors.firstName}
+              />
+              <TextField
+                id="lastName"
+                name="lastName"
+                label="Last Name*"
+                sx={{ mb: 2, minWidth: 250 }}
+                value={values.lastName}
+                onChange={handleChange}
+                error={touched.lastName && Boolean(errors.lastName)}
+                helperText={touched.lastName && errors.lastName}
+              />
+              <TextField
+                id="email"
+                name="email"
+                label="Email*"
+                sx={{ mb: 2, minWidth: 250 }}
+                value={values.email}
+                onChange={handleChange}
+                error={touched.email && Boolean(errors.email)}
+                helperText={touched.email && errors.email}
+              />
+              <TextField
+                id="password"
+                name="password"
+                label="Choose a Secure Password*"
+                type="password"
+                sx={{ mb: 2, minWidth: 250 }}
+                value={values.password}
+                onChange={handleChange}
+                error={touched.password && Boolean(errors.password)}
+                helperText={touched.password && errors.password}
+              />
+              <Button
+                type="submit"
+                variant="contained"
+                color="secondary"
+                disabled={isSubmitting}
+                sx={{ minWidth: 150, my: 2 }}
+              >
+                Sign Up
+              </Button>
+            </Box>
           </Form>
         )}
       </Formik>
-      {firebaseError && <p>{firebaseError}</p>}
-      <div className="login-link-container">
+
+      {firebaseError && (
+        <Typography color="error" gutterBottom>
+          {firebaseError}
+        </Typography>
+      )}
+      <Box>
         <Link href={ROUTE.LOGIN}>
-          <a>Already have an account?</a>
+          <MuiLink
+            sx={{ color: 'primary.dark', ':hover': { cursor: 'pointer' } }}
+          >
+            Already have an account?
+          </MuiLink>
         </Link>
-      </div>
-    </div>
+      </Box>
+    </>
   );
 }

@@ -10,6 +10,7 @@ import {
 } from '@mui/material';
 import { useRouter } from 'next/router';
 import { signInWithEmailAndPassword } from 'firebase/auth';
+import * as Yup from 'yup';
 
 import { auth } from '@/services/firebase/firebase';
 import { ROUTE } from '@/routes/routeConstants';
@@ -19,9 +20,16 @@ export default function LoginForm() {
   const [firebaseError, setFirebaseError] = useState(null);
   const router = useRouter();
 
-  function login(email, password) {
+  function login(email: string, password: string) {
     return signInWithEmailAndPassword(auth, email, password);
   }
+
+  const validationSchema = Yup.object().shape({
+    email: Yup.string()
+      .email('Invalid email address')
+      .required('Email is required'),
+    password: Yup.string().required('Password is required'),
+  });
 
   return (
     <>
@@ -37,6 +45,7 @@ export default function LoginForm() {
           email: '',
           password: '',
         }}
+        validationSchema={validationSchema}
         onSubmit={(values, { setSubmitting }) => {
           login(values.email, values.password)
             .then(() => {
@@ -83,7 +92,7 @@ export default function LoginForm() {
                 error={touched.password && Boolean(errors.password)}
                 helperText={touched.password && errors.password}
               />
-              {/* <Password title="Password" noLabel /> */}
+
               <Button
                 variant="contained"
                 color="secondary"
@@ -105,12 +114,22 @@ export default function LoginForm() {
       )}
       <Box>
         <Link href={ROUTE.RESET_PASSWORD}>
-          <MuiLink sx={{ mr: 2, color: 'primary.dark' }}>
+          <MuiLink
+            sx={{
+              mr: 2,
+              color: 'primary.dark',
+              ':hover': { cursor: 'pointer' },
+            }}
+          >
             Forgot Password?
           </MuiLink>
         </Link>
         <Link href={ROUTE.REGISTER}>
-          <MuiLink sx={{ color: 'primary.dark' }}>Create an account?</MuiLink>
+          <MuiLink
+            sx={{ color: 'primary.dark', ':hover': { cursor: 'pointer' } }}
+          >
+            Create an account?
+          </MuiLink>
         </Link>
       </Box>
     </>

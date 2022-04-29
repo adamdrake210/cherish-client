@@ -1,6 +1,7 @@
 import React from 'react';
-import { Formik } from 'formik';
+import { Form, Formik } from 'formik';
 import { useSnackbar } from 'notistack';
+import * as Yup from 'yup';
 
 import { addPerson, updatePerson } from '@/services/firebase/firebaseapi';
 import RelationshipTypeField from './Fields/RelationshipTypeField';
@@ -17,11 +18,26 @@ type Props = {
   person?: PersonType;
 };
 
+export type PersonFormValues = PersonType;
+
 export default function PersonForm({ id, person }: Props) {
   const { enqueueSnackbar } = useSnackbar();
   const router = useRouter();
 
   const { user } = useUserContext();
+
+  const validationSchema = Yup.object().shape({
+    firstName: Yup.string().required('First name is required'),
+    lastName: Yup.string().required('Last name is required'),
+    relationshiptype: Yup.string(),
+    email: Yup.string().email('Invalid email address'),
+    links: Yup.array(Yup.string().url('Invalid url')),
+    address: Yup.string(),
+    notes: Yup.string(),
+    birthday: Yup.string(),
+    birthmonth: Yup.string(),
+    birthyear: Yup.string(),
+  });
 
   return (
     <Formik
@@ -38,10 +54,8 @@ export default function PersonForm({ id, person }: Props) {
         notes: person?.notes || '',
         userId: user.uid,
       }}
-      // validationSchema={SignupSchema}
+      validationSchema={validationSchema}
       onSubmit={values => {
-        // eslint-disable-next-line no-console
-        console.log('values', values);
         if (id) {
           updatePerson(id, values)
             .then(() => {
@@ -78,10 +92,10 @@ export default function PersonForm({ id, person }: Props) {
         touched,
         values,
         handleChange,
+        handleBlur,
         isSubmitting,
-        handleSubmit,
       }) => (
-        <form onSubmit={handleSubmit}>
+        <Form autoComplete="off">
           <Box
             sx={{
               display: 'flex',
@@ -93,7 +107,7 @@ export default function PersonForm({ id, person }: Props) {
             <TextField
               id="firstName"
               name="firstName"
-              label="First Name"
+              label="First Name*"
               sx={{ mb: 2 }}
               value={values.firstName}
               onChange={handleChange}
@@ -103,7 +117,7 @@ export default function PersonForm({ id, person }: Props) {
             <TextField
               id="lastName"
               name="lastName"
-              label="First Name"
+              label="Last Name*"
               sx={{ mb: 2 }}
               value={values.lastName}
               onChange={handleChange}
@@ -121,7 +135,6 @@ export default function PersonForm({ id, person }: Props) {
               id="email"
               name="email"
               label="Email"
-              type="email"
               sx={{ mb: 2 }}
               value={values.email}
               onChange={handleChange}
@@ -151,7 +164,13 @@ export default function PersonForm({ id, person }: Props) {
               helperText={touched.notes && errors.notes}
             />
 
-            <Links values={values} />
+            <Links
+              values={values}
+              touched={touched}
+              errors={errors}
+              handleChange={handleChange}
+              handleBlur={handleBlur}
+            />
 
             <Button
               type="submit"
@@ -163,7 +182,7 @@ export default function PersonForm({ id, person }: Props) {
               {id ? 'Update' : 'Create'}
             </Button>
           </Box>
-        </form>
+        </Form>
       )}
     </Formik>
   );

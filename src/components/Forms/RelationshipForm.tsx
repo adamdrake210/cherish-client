@@ -1,5 +1,5 @@
 import React from 'react';
-import { Formik } from 'formik';
+import { Form, Formik } from 'formik';
 import { useSnackbar } from 'notistack';
 
 import {
@@ -97,10 +97,10 @@ export default function RelationshipForm({ id, relation }: Props) {
         touched,
         values,
         handleChange,
+        handleBlur,
         isSubmitting,
-        handleSubmit,
       }) => (
-        <form onSubmit={handleSubmit}>
+        <Form autoComplete="off">
           <Box
             sx={{
               display: 'flex',
@@ -170,7 +170,13 @@ export default function RelationshipForm({ id, relation }: Props) {
               helperText={touched.notes && errors.notes}
             />
 
-            <Links values={values} />
+            <Links
+              values={values}
+              touched={touched}
+              errors={errors}
+              handleChange={handleChange}
+              handleBlur={handleBlur}
+            />
 
             <Button
               type="submit"
@@ -182,7 +188,7 @@ export default function RelationshipForm({ id, relation }: Props) {
               {id ? 'Update' : 'Create'}
             </Button>
           </Box>
-        </form>
+        </Form>
       )}
     </Formik>
   );

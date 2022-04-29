@@ -30,8 +30,8 @@
     "react": "^17.0.2",
     "react-datepicker": "^2.15.0",
     "react-dom": "^17.0.2",
-    "react-hook-form": "^7.30.0",
-    "sass": "^1.50.1"
+    "sass": "^1.50.1",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.20.0",

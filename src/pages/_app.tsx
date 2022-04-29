@@ -52,7 +52,7 @@ const MyApp = ({
           <CssBaseline />
           <UserProvider>
             <SnackbarProvider>
-              <NextNProgress />
+              <NextNProgress color="#c2185b" />
               <Component {...pageProps} />
             </SnackbarProvider>
           </UserProvider>

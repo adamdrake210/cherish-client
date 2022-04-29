@@ -1,13 +1,19 @@
 import React, { useState } from 'react';
 import { Formik, Form } from 'formik';
 import Link from 'next/link';
+import {
+  Box,
+  Button,
+  TextField,
+  Typography,
+  Link as MuiLink,
+} from '@mui/material';
 import { useRouter } from 'next/router';
-import Password from '@/components/Forms/Fields/Password';
-import GoogleLoginButton from '@/components/Login/GoogleLoginButton';
-import { ROUTE } from '@/routes/routeConstants';
 import { signInWithEmailAndPassword } from 'firebase/auth';
+
 import { auth } from '@/services/firebase/firebase';
-import { TextField } from '@mui/material';
+import { ROUTE } from '@/routes/routeConstants';
+import GoogleLoginButton from '@/components/Login/GoogleLoginButton';
 
 export default function LoginForm() {
   const [firebaseError, setFirebaseError] = useState(null);
@@ -18,12 +24,14 @@ export default function LoginForm() {
   }
 
   return (
-    <div className="login-container-form">
+    <>
       <GoogleLoginButton
         setFirebaseError={setFirebaseError}
         title="Google Login"
       />
-      <p>or</p>
+      <Typography variant="h6" sx={{ my: 2 }}>
+        or
+      </Typography>
       <Formik
         initialValues={{
           email: '',
@@ -38,47 +46,73 @@ export default function LoginForm() {
             })
             .catch(error => {
               setSubmitting(false);
-              const errorCode = error.code;
               const errorMessage = error.message;
-              console.error('errorCode', errorCode);
+              console.error('LoginError: ', errorMessage);
               setFirebaseError(errorMessage);
             });
         }}
       >
         {({ errors, touched, values, handleChange, isSubmitting }) => (
-          <Form>
-            <TextField
-              id="email"
-              name="email"
-              label="Email"
-              type="email"
-              sx={{ mb: 2 }}
-              value={values.email}
-              onChange={handleChange}
-              error={touched.email && Boolean(errors.email)}
-              helperText={touched.email && errors.email}
-            />
-            <Password title="Password" noLabel />
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="button button-lg button-blue m-t-5 m-b-20"
+          <Form autoComplete="off">
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+              }}
             >
-              Login
-            </button>
+              <TextField
+                id="email"
+                name="email"
+                label="Email"
+                type="email"
+                sx={{ mb: 2, minWidth: 250 }}
+                value={values.email}
+                onChange={handleChange}
+                error={touched.email && Boolean(errors.email)}
+                helperText={touched.email && errors.email}
+              />
+              <TextField
+                id="password"
+                name="password"
+                label="Password"
+                type="password"
+                sx={{ mb: 2, minWidth: 250 }}
+                value={values.password}
+                onChange={handleChange}
+                error={touched.password && Boolean(errors.password)}
+                helperText={touched.password && errors.password}
+              />
+              {/* <Password title="Password" noLabel /> */}
+              <Button
+                variant="contained"
+                color="secondary"
+                type="submit"
+                sx={{ my: 2, minWidth: 150 }}
+                disabled={isSubmitting}
+              >
+                Login
+              </Button>
+            </Box>
           </Form>
         )}
       </Formik>
 
-      {firebaseError && <p className="error-message">{firebaseError}</p>}
-      <div className="login-link-container">
+      {firebaseError && (
+        <Typography color="error" gutterBottom>
+          {firebaseError}
+        </Typography>
+      )}
+      <Box>
         <Link href={ROUTE.RESET_PASSWORD}>
-          <a>Forgot Password?</a>
+          <MuiLink sx={{ mr: 2, color: 'primary.dark' }}>
+            Forgot Password?
+          </MuiLink>
         </Link>
         <Link href={ROUTE.REGISTER}>
-          <a>Create an account?</a>
+          <MuiLink sx={{ color: 'primary.dark' }}>Create an account?</MuiLink>
         </Link>
-      </div>
-    </div>
+      </Box>
+    </>
   );
 }

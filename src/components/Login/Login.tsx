@@ -1,13 +1,23 @@
+import { Box, Typography } from '@mui/material';
 import React from 'react';
 import LoginForm from './LoginForm';
 
 export default function Login() {
   return (
-    <div className="container flex-center">
-      <div className="login-container">
-        <h2>Login</h2>
-        <LoginForm />
-      </div>
-    </div>
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '80vh',
+        py: 4,
+      }}
+    >
+      <Typography component="h1" variant="h3" gutterBottom>
+        Login
+      </Typography>
+      <LoginForm />
+    </Box>
   );
 }

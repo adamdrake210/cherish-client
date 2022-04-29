@@ -1,22 +1,52 @@
 import React from 'react';
 import Link from 'next/link';
+import { Box, Typography, Link as MuiLink } from '@mui/material';
+
 import { ROUTE } from '@/routes/routeConstants';
 
 export default function NotLoggedIn() {
   return (
-    <div className="container homepagen-nli-container">
-      <p className="cherish-logo cherish-logo-lg">Cherish</p>
-      <h1>Your own private online address book</h1>
-      <h2>Cherish those close to you</h2>
-      <div className="sign-up-links">
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '80vh',
+        py: 4,
+      }}
+    >
+      <Typography component="p" variant="h5" gutterBottom>
+        Cherish those close to you
+      </Typography>
+      <Typography
+        component="h1"
+        variant="h3"
+        sx={{ textAlign: 'center' }}
+        gutterBottom
+      >
+        Your own private <br />
+        online address book
+      </Typography>
+      <Box sx={{ display: 'flex' }}>
         <Link href={ROUTE.REGISTER}>
-          <a>Sign Up</a>
-        </Link>
-        /
+          <MuiLink
+            sx={{
+              fontSize: '2rem',
+              color: 'secondary.dark',
+              ':hover': { cursor: 'pointer' },
+            }}
+          >
+            Sign Up
+          </MuiLink>
+        </Link>{' '}
+        <Typography sx={{ fontSize: '2rem', mx: 2 }}> / </Typography>
         <Link href={ROUTE.LOGIN}>
-          <a>Login</a>
+          <MuiLink sx={{ fontSize: '2rem', ':hover': { cursor: 'pointer' } }}>
+            Login
+          </MuiLink>
         </Link>
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 }

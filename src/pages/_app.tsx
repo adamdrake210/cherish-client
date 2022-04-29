@@ -9,13 +9,13 @@ import {
   PaletteMode,
 } from '@mui/material';
 import { EmotionCache } from '@emotion/cache';
-import { UserProvider } from '../context/userContext';
 import { SnackbarProvider } from 'notistack';
+import NextNProgress from 'nextjs-progressbar';
 
-import getDesignTokens from '../styles/theme';
-import createEmotionCache from '../helpers/createEmotionCache';
+import { UserProvider } from '@/context/userContext';
+import getDesignTokens from '@/styles/theme';
+import createEmotionCache from '@/helpers/createEmotionCache';
 import { AppProps } from 'next/app';
-// import '../styles/styles.scss';
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
@@ -52,6 +52,7 @@ const MyApp = ({
           <CssBaseline />
           <UserProvider>
             <SnackbarProvider>
+              <NextNProgress />
               <Component {...pageProps} />
             </SnackbarProvider>
           </UserProvider>

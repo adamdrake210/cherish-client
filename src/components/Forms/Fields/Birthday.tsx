@@ -2,6 +2,7 @@ import React from 'react';
 import { Field, ErrorMessage } from 'formik';
 import { daysArray, monthsArray } from '@/constants/constants';
 import { createYearsArray } from '@/helpers/dateHelpers';
+import { Typography } from '@mui/material';
 
 export default function Birthday() {
   return (
@@ -48,7 +49,9 @@ export default function Birthday() {
           </Field>
         </div>
         <div className="helper-label">
-          <p>If you don&apos;t know the brithday you can leave it blank</p>
+          <Typography component="p" variant="body2" gutterBottom>
+            If you don&apos;t know the brithday you can leave it blank
+          </Typography>
         </div>
       </div>
       <div className="error-message">

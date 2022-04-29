@@ -1,67 +1,115 @@
 import React from 'react';
-import { Field, FieldArray, ErrorMessage } from 'formik';
-import { Button } from '@mui/material';
+import { FieldArray, getIn, FormikErrors } from 'formik';
+import {
+  Box,
+  Button,
+  TextField,
+  Typography,
+  IconButton,
+  Tooltip,
+} from '@mui/material';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
+import { PersonFormValues } from '../PersonForm';
 
 type Props = {
-  values: any; // TODO type
+  values: PersonFormValues;
+  touched: any;
+  errors: FormikErrors<PersonFormValues>;
+  handleChange: (event: React.ChangeEvent<any>) => void;
+  handleBlur: (event: React.FocusEvent<any>) => void;
 };
 
-export default function Links({ values }: Props) {
-  const validateUrl = value => {
-    let errorMessage;
-    const pattern = new RegExp(
-      '^(https?:\\/\\/)?' + // protocol
-        '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
-        '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
-        '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
-        '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
-        '(\\#[-a-z\\d_]*)?$',
-      'i',
-    ); // fragment locator
-    if (!pattern.test(value)) {
-      errorMessage = 'Invalid url';
-    }
-    return errorMessage;
-  };
-
+export default function Links({
+  values,
+  touched,
+  errors,
+  handleChange,
+  handleBlur,
+}: Props) {
   return (
-    <div className="link-container">
-      <h3>Useful Links:</h3>
-      <FieldArray
-        name="links"
-        render={arrayHelpers => (
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        width: '100%',
+        mb: 2,
+      }}
+    >
+      <Typography component="h3" variant="h5" gutterBottom>
+        Useful Links
+      </Typography>
+      <FieldArray name="links">
+        {({ push, remove }) => (
           <div>
             {values.links && values.links.length > 0 ? (
-              values.links.map((link, index) => (
-                <div className="link-input-container" key={link}>
-                  <div key={index} className="link-input">
-                    <Field name={`links.${index}`} validate={validateUrl} />
-                    <button
-                      type="button"
-                      className="button button-sm button-blue"
-                      onClick={() => arrayHelpers.insert(index, '')} // insert an empty string at a position
+              <>
+                <>
+                  {values.links.map((link, index) => {
+                    const linkName = `links.${index}`;
+                    const touchedLinkName = getIn(touched, linkName);
+                    const errorLinkName = getIn(errors, linkName);
+
+                    return (
+                      <div key={index}>
+                        <Box
+                          sx={{
+                            display: 'flex',
+                            alignItems: 'center',
+                          }}
+                        >
+                          <TextField
+                            sx={{ width: '100%' }}
+                            margin="normal"
+                            variant="outlined"
+                            label={`Link #${index + 1}*`}
+                            name={`links.${index}`}
+                            value={link}
+                            helperText={
+                              touchedLinkName && errorLinkName
+                                ? errorLinkName
+                                : ''
+                            }
+                            error={Boolean(touchedLinkName && errorLinkName)}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                          />
+                          <Tooltip title="Remove Link">
+                            <IconButton
+                              aria-label="Remove this link"
+                              onClick={() => remove(index)} // remove a link from the list
+                            >
+                              <RemoveCircleOutlineIcon color="secondary" />
+                            </IconButton>
+                          </Tooltip>
+                        </Box>
+                      </div>
+                    );
+                  })}
+                </>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    width: '100%',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <Tooltip title="Add new link">
+                    <IconButton
+                      aria-label="Add new link"
+                      onClick={() => push('')} // insert an empty string at a position
                     >
-                      +
-                    </button>
-                    <button
-                      type="button"
-                      className="button button-sm button-red"
-                      onClick={() => arrayHelpers.remove(index)} // remove a link from the list
-                    >
-                      -
-                    </button>
-                  </div>
-                  <div className="error-message">
-                    <ErrorMessage name={`links.${index}`} component="div" />
-                  </div>
-                </div>
-              ))
+                      <AddCircleOutlineIcon color="primary" />
+                    </IconButton>
+                  </Tooltip>
+                </Box>
+              </>
             ) : (
               <Button
                 type="button"
-                onClick={() => arrayHelpers.push('')}
+                onClick={() => push('')}
                 variant="contained"
-                color="primary"
+                color="secondary"
               >
                 {/* show this when user has removed all links from the list */}
                 Add a link
@@ -69,7 +117,7 @@ export default function Links({ values }: Props) {
             )}
           </div>
         )}
-      />
-    </div>
+      </FieldArray>
+    </Box>
   );
 }

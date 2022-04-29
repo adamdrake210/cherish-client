@@ -2,17 +2,18 @@ import React from 'react';
 import Link from 'next/link';
 import makeStyles from '@mui/styles/makeStyles';
 import { Box } from '@mui/system';
-import { ListItem, Typography } from '@mui/material';
+import { ListItem, Theme, Typography } from '@mui/material';
 
 import PeopleAvatar from './PeopleAvatar';
 import { capitalizeFirstLetter } from '@/helpers/helpers';
 import { ROUTE } from '@/routes/routeConstants';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles<Theme>(theme => ({
   link: {
     display: 'flex',
     textDecoration: 'none',
     width: '100%',
+    color: theme.palette.primary.contrastText,
   },
 }));
 
@@ -54,7 +55,7 @@ export const PeopleDetail = ({ person }: Props) => {
             <Typography
               variant="body2"
               component="span"
-              sx={{ fontSize: '14px', color: 'red' }}
+              sx={{ fontSize: '14px' }}
             >
               {capitalizeFirstLetter(person.relationshiptype)}
             </Typography>

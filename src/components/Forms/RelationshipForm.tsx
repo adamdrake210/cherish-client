@@ -1,6 +1,9 @@
 import React from 'react';
 import { Form, Formik } from 'formik';
 import { useSnackbar } from 'notistack';
+import * as Yup from 'yup';
+import { useRouter } from 'next/router';
+import { Box, Button, TextField } from '@mui/material';
 
 import {
   addRelationship,
@@ -11,8 +14,6 @@ import Birthday from './Fields/Birthday';
 import Links from './Fields/Links';
 import { useUserContext } from '@/context/userContext';
 import { ROUTE } from '@/routes/routeConstants';
-import { useRouter } from 'next/router';
-import { Box, Button, TextField } from '@mui/material';
 import { Relation } from '@/types/types';
 
 type Props = {
@@ -25,6 +26,19 @@ export default function RelationshipForm({ id, relation }: Props) {
   const router = useRouter();
 
   const { user } = useUserContext();
+
+  const validationSchema = Yup.object().shape({
+    firstName: Yup.string().required('First name is required'),
+    lastName: Yup.string().required('Last name is required'),
+    relationshiptype: Yup.string(),
+    email: Yup.string().email('Invalid email address'),
+    links: Yup.array(Yup.string().url('Invalid url')),
+    address: Yup.string(),
+    notes: Yup.string(),
+    birthday: Yup.string(),
+    birthmonth: Yup.string(),
+    birthyear: Yup.string(),
+  });
 
   // const handleDeletePerson = () => {
   //   deleteDocument(id, 'relationship')
@@ -59,7 +73,7 @@ export default function RelationshipForm({ id, relation }: Props) {
         peopleId: relation?.peopleId || id,
         userId: user.uid,
       }}
-      // validationSchema={SignupSchema}
+      validationSchema={validationSchema}
       onSubmit={values => {
         if (relation) {
           updateRelationship(id, values)
@@ -117,7 +131,7 @@ export default function RelationshipForm({ id, relation }: Props) {
             <TextField
               id="firstName"
               name="firstName"
-              label="First Name"
+              label="First Name*"
               sx={{ mb: 2 }}
               value={values.firstName}
               onChange={handleChange}
@@ -127,7 +141,7 @@ export default function RelationshipForm({ id, relation }: Props) {
             <TextField
               id="lastName"
               name="lastName"
-              label="First Name"
+              label="Last Name*"
               sx={{ mb: 2 }}
               value={values.lastName}
               onChange={handleChange}
@@ -140,7 +154,6 @@ export default function RelationshipForm({ id, relation }: Props) {
               id="email"
               name="email"
               label="Email"
-              type="email"
               sx={{ mb: 2 }}
               value={values.email}
               onChange={handleChange}

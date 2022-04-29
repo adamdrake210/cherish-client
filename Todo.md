@@ -1,5 +1,4 @@
 - Delete Person & relationship functionality
 - Disable buttons and inputs when submitting forms
-- Login screen styling
 - Birthday fields styling
 - Email notifications for bdays

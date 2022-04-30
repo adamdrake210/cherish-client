@@ -25,18 +25,19 @@ function PersonPage({ id, person }: Props) {
 }
 
 export async function getServerSideProps({ query }) {
-  let pageProps;
+  const res = await getPerson(query.personId);
+  const person = res.data();
 
-  await getPerson(query.personId)
-    .then(person => {
-      pageProps = {
-        id: person.id,
-        person: person.data(),
-      };
-    })
-    .catch(error => {
-      console.error('Person Page: ', error);
-    });
+  if (!person) {
+    return {
+      notFound: true,
+    };
+  }
+
+  const pageProps = {
+    id: res.id,
+    person,
+  };
 
   return { props: pageProps };
 }

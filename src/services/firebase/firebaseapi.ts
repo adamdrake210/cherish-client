@@ -9,6 +9,7 @@ import {
   onSnapshot,
   query,
   where,
+  getDocs,
 } from 'firebase/firestore';
 
 const enum DbNames {
@@ -36,13 +37,13 @@ export async function getPeople(id, callback) {
   return await onSnapshot(q, callback);
 }
 
-export async function getRelationships(id, idType, callback) {
+export async function getRelationships(id, idType) {
   const q = await query(
     collection(db, DbNames.RELATIONSHIP),
     where(idType, '==', id),
   );
 
-  return await onSnapshot(q, callback);
+  return await getDocs(q);
 }
 
 export async function updatePerson(id, values) {

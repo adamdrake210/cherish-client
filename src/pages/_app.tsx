@@ -11,6 +11,8 @@ import {
 import { EmotionCache } from '@emotion/cache';
 import { SnackbarProvider } from 'notistack';
 import NextNProgress from 'nextjs-progressbar';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
 
 import { UserProvider } from '@/context/userContext';
 import getDesignTokens from '@/styles/theme';
@@ -23,6 +25,9 @@ const clientSideEmotionCache = createEmotionCache();
 export const ColorModeContext = React.createContext({
   toggleColorMode: () => {},
 });
+
+// Create a client
+const queryClient = new QueryClient();
 
 const MyApp = ({
   Component,
@@ -46,19 +51,22 @@ const MyApp = ({
   const theme = React.useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
 
   return (
-    <CacheProvider value={emotionCache}>
-      <ColorModeContext.Provider value={colorMode}>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <UserProvider>
-            <SnackbarProvider>
-              <NextNProgress color="#c2185b" />
-              <Component {...pageProps} />
-            </SnackbarProvider>
-          </UserProvider>
-        </ThemeProvider>
-      </ColorModeContext.Provider>
-    </CacheProvider>
+    <QueryClientProvider client={queryClient}>
+      <CacheProvider value={emotionCache}>
+        <ColorModeContext.Provider value={colorMode}>
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <UserProvider>
+              <SnackbarProvider>
+                <NextNProgress color="#c2185b" />
+                <Component {...pageProps} />
+              </SnackbarProvider>
+            </UserProvider>
+          </ThemeProvider>
+        </ColorModeContext.Provider>
+      </CacheProvider>
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
   );
 };
 

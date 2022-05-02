@@ -20,22 +20,4 @@ function PersonPage() {
   );
 }
 
-// export async function getServerSideProps({ query }) {
-//   const res = await getPerson(query.personId);
-//   const person = res.data();
-
-//   if (!person) {
-//     return {
-//       notFound: true,
-//     };
-//   }
-
-//   const pageProps = {
-//     id: res.id,
-//     person,
-//   };
-
-//   return { props: pageProps };
-// }
-
 export default PersonPage;

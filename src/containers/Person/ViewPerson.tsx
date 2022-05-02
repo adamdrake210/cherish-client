@@ -13,7 +13,7 @@ import ViewRelationship from './ViewRelationship';
 
 export default function ViewPerson() {
   const router = useRouter();
-  const personId = router.query.personId;
+  const personId = router.query.personId as string;
 
   const {
     data: person,
@@ -38,9 +38,7 @@ export default function ViewPerson() {
       </Link>
       {person && <PersonDetails person={person.data() as PersonType} />}
 
-      <ViewRelationship
-        personId={typeof personId === 'string' ? personId : ''}
-      />
+      <ViewRelationship personId={personId} />
     </Loading>
   );
 }

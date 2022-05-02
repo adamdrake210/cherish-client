@@ -2,7 +2,6 @@ import React from 'react';
 import Head from 'next/head';
 import ViewPerson from '@/containers/Person/ViewPerson';
 import ProtectedRoute from '@/HOC/ProtectedRoute';
-// import { PersonType } from '@/types/types';
 import AppLayout from '@/containers/AppLayout';
 import Fabutton from '@/components/Common/Buttons/Fabutton';
 

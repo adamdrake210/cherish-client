@@ -3,3 +3,4 @@
 - Birthday fields styling
 - Email notifications for bdays
 - github action for tsc in PRs and tests
+- update calendar list to react-query

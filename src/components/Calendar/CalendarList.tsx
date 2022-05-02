@@ -10,7 +10,7 @@ import { ROUTE } from '@/routes/routeConstants';
 
 export default function CalendarList() {
   const [peopleList, setPeopleList] = useState([]);
-  const [relationshipsList, setRelationshipsList] = useState([]);
+  const [relationshipsList] = useState([]);
   const [, setCurrentMonth] = useState(0);
   const { user } = useUserContext();
 
@@ -21,12 +21,12 @@ export default function CalendarList() {
     setPeopleList(peopleArray);
   }
 
-  function handleRelationshipsSnapshot(snapshot) {
-    const relationshipArray = snapshot.docs.map(doc => {
-      return { id: doc.id, ...doc.data() };
-    });
-    setRelationshipsList(relationshipArray);
-  }
+  // function handleRelationshipsSnapshot(snapshot) {
+  //   const relationshipArray = snapshot.docs.map(doc => {
+  //     return { id: doc.id, ...doc.data() };
+  //   });
+  //   setRelationshipsList(relationshipArray);
+  // }
 
   function convertBirthdaysToSortedList(array, month) {
     const birthdayArray = [];
@@ -80,7 +80,7 @@ export default function CalendarList() {
 
   useEffect(() => {
     getPeople(user.uid, handlePeopleSnapshot);
-    getRelationships(user.uid, 'userId', handleRelationshipsSnapshot);
+    getRelationships(user.uid, 'userId');
     setCurrentMonth(new Date().getMonth());
   }, []);
 

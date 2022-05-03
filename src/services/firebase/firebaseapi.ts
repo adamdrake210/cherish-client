@@ -6,7 +6,6 @@ import {
   getDoc,
   updateDoc,
   deleteDoc,
-  onSnapshot,
   query,
   where,
   getDocs,
@@ -29,12 +28,12 @@ export async function getPerson(id) {
   return await getDoc(doc(db, DbNames.PEOPLE, id));
 }
 
-export async function getPeople(id, callback) {
+export async function getPeople(id) {
   const q = await query(
     collection(db, DbNames.PEOPLE),
     where('userId', '==', id),
   );
-  return await onSnapshot(q, callback);
+  return await getDocs(q);
 }
 
 export async function getRelationships(id, idType) {

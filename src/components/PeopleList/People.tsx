@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { Box, List, Typography } from '@mui/material';
+import { Box, List, Typography, Link as MuiLink } from '@mui/material';
 
 import { getPeople } from '@/services/firebase/firebaseapi';
 import { useUserContext } from '@/context/userContext';
@@ -9,25 +9,20 @@ import Fabutton from '../Common/Buttons/Fabutton';
 import { SearchField } from '../Forms/Fields/SearchField';
 import { PeopleDetail } from './PeopleDetail';
 import { ROUTE } from '@/routes/routeConstants';
+import { useQuery } from 'react-query';
+import Loading from '../Common/Loaders/Loading';
 
 function People() {
-  const [isLoading, setIsLoading] = useState(true);
   const [peopleList, setPeopleList] = useState([]);
   const [filteredList, setFilteredList] = useState([]);
   const { user } = useUserContext();
 
-  function handleSnapshot(snapshot) {
-    const peopleArray = snapshot.docs.map(doc => {
-      return { id: doc.id, ...doc.data() };
-    });
-    setPeopleList(sortLastName(peopleArray));
-    setFilteredList(sortLastName(peopleArray));
-    setIsLoading(false);
-  }
-
-  useEffect(() => {
-    getPeople(user.uid, handleSnapshot);
-  }, []);
+  const {
+    data: people,
+    isLoading,
+    error,
+    isError,
+  } = useQuery(['people', user.uid], () => getPeople(user.uid));
 
   function handleChange(e) {
     let currentList = [];
@@ -36,8 +31,8 @@ function People() {
     if (e.target.value !== '') {
       currentList = peopleList;
       newList = currentList.filter(item => {
-        const firstNameLowerCase = item.firstName.toLowerCase();
-        const lastNameLowerCase = item.lastName.toLowerCase();
+        const firstNameLowerCase = item.data().firstName.toLowerCase();
+        const lastNameLowerCase = item.data().lastName.toLowerCase();
         const filterLowerCase = e.target.value.toLowerCase();
         return (
           firstNameLowerCase.includes(filterLowerCase) ||
@@ -52,30 +47,40 @@ function People() {
     setFilteredList(sortedNewList);
   }
 
+  useEffect(() => {
+    setPeopleList(people?.docs.map(person => person));
+    setFilteredList(people?.docs.map(person => person));
+  }, [people]);
+
   return (
-    <>
+    <Loading error={error as Error} isError={isError} isLoading={isLoading}>
       <SearchField handleChange={handleChange} />
       <Typography component="h2" variant="h4" sx={{ mt: 2 }}>
         All Contacts
       </Typography>
-      {filteredList && (
+      {filteredList?.length > 0 ? (
         <List sx={{ maxWidth: 500, width: '100%', mt: 0 }}>
           {filteredList.map(person => (
             <PeopleDetail key={person.id} person={person} />
           ))}
         </List>
-      )}
-      {isLoading && <p>Loading...</p>}
-      {!isLoading && peopleList.length < 1 && (
+      ) : (
         <Box sx={{ display: 'flex', flexDirection: 'column' }}>
           <p>No People have been added yet</p>
           <Link passHref href={ROUTE.ADD_PERSON}>
-            <a>Add Your First Person!</a>
+            <MuiLink
+              sx={{
+                color: 'text.primary',
+                ':hover': { color: 'text.secondary' },
+              }}
+            >
+              Add Your First Person!
+            </MuiLink>
           </Link>
         </Box>
       )}
       <Fabutton />
-    </>
+    </Loading>
   );
 }
 

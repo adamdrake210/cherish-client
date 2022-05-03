@@ -18,16 +18,13 @@ const useStyles = makeStyles<Theme>(theme => ({
 }));
 
 type Props = {
-  person: {
-    id: string;
-    firstName: string;
-    lastName: string;
-    relationshiptype: string;
-  };
+  person: any;
 };
 
 export const PeopleDetail = ({ person }: Props) => {
   const classes = useStyles();
+  const { firstName, lastName, relationshiptype } = person.data();
+
   return (
     <ListItem
       sx={{
@@ -43,21 +40,18 @@ export const PeopleDetail = ({ person }: Props) => {
         as={`/person/${person.id}`}
       >
         <a className={classes.link}>
-          <PeopleAvatar
-            firstName={person.firstName}
-            lastName={person.lastName}
-          />
+          <PeopleAvatar firstName={firstName} lastName={lastName} />
           <Box>
             <Typography
               variant="h5"
               component="p"
-            >{`${person.firstName} ${person.lastName}`}</Typography>
+            >{`${firstName} ${lastName}`}</Typography>
             <Typography
               variant="body2"
               component="span"
               sx={{ fontSize: '14px' }}
             >
-              {capitalizeFirstLetter(person.relationshiptype)}
+              {capitalizeFirstLetter(relationshiptype)}
             </Typography>
           </Box>
         </a>

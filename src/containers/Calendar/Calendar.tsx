@@ -1,10 +1,13 @@
+import { Typography } from '@mui/material';
 import React from 'react';
-import CalendarList from '../../components/Calendar/CalendarList';
+import CalendarList from '@/components/Calendar/CalendarList';
 
 export default function Calendar() {
   return (
     <>
-      <h1>Calendar</h1>
+      <Typography variant="h3" component="h1">
+        Calendar
+      </Typography>
       <CalendarList />
     </>
   );

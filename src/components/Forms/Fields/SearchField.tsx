@@ -19,7 +19,6 @@ export const SearchField = ({ handleChange }: Props) => {
         placeholder="Search Peeps..."
         sx={{
           width: 300,
-          bgcolor: 'white',
           border: `1px solid ${grey[300]}`,
           borderRadius: '5px',
         }}

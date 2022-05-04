@@ -7,6 +7,7 @@ import { Box, Button, TextField } from '@mui/material';
 
 import {
   addRelationship,
+  deleteDocument,
   updateRelationship,
 } from '@/services/firebase/firebaseapi';
 import RelationshipTypeField from './Fields/RelationshipTypeField';
@@ -15,6 +16,8 @@ import Links from './Fields/Links';
 import { useUserContext } from '@/context/userContext';
 import { ROUTE } from '@/routes/routeConstants';
 import { Relation } from '@/types/types';
+import { useQueryClient } from 'react-query';
+import { RQ_KEY_RELATIONSHIP } from '@/constants/constants';
 
 type Props = {
   id?: string;
@@ -24,6 +27,7 @@ type Props = {
 export default function RelationshipForm({ id, relation }: Props) {
   const { enqueueSnackbar } = useSnackbar();
   const router = useRouter();
+  const queryClient = useQueryClient();
 
   const { user } = useUserContext();
 
@@ -40,22 +44,22 @@ export default function RelationshipForm({ id, relation }: Props) {
     birthyear: Yup.string(),
   });
 
-  // const handleDeletePerson = () => {
-  //   deleteDocument(id, 'relationship')
-  //     .then(() => {
-  //       enqueueSnackbar(`Successfully deleted ${relationship.firstName}`, {
-  //         variant: 'success',
-  //       });
-  //     })
-  //     .catch(error => {
-  //       const errorCode = error.code;
-  //       const errorMessage = error.message;
-  //       console.error('errorCode', errorCode);
-  //       enqueueSnackbar(errorMessage, {
-  //         variant: 'error',
-  //       });
-  //     });
-  // };
+  const handleDeletePerson = () => {
+    deleteDocument(id, 'relationship')
+      .then(() => {
+        queryClient.refetchQueries([RQ_KEY_RELATIONSHIP]);
+        enqueueSnackbar(`Successfully deleted ${relation.firstName}`, {
+          variant: 'success',
+        });
+      })
+      .catch(error => {
+        const errorMessage = error.message;
+        console.error('errorCode', errorMessage);
+        enqueueSnackbar(errorMessage, {
+          variant: 'error',
+        });
+      });
+  };
 
   return (
     <Formik
@@ -172,17 +176,6 @@ export default function RelationshipForm({ id, relation }: Props) {
               helperText={touched.address && errors.address}
             />
 
-            <TextField
-              id="notes"
-              name="notes"
-              label="Notes"
-              sx={{ mb: 2 }}
-              value={values.notes}
-              onChange={handleChange}
-              error={touched.notes && Boolean(errors.notes)}
-              helperText={touched.notes && errors.notes}
-            />
-
             <Links
               values={values}
               touched={touched}
@@ -190,16 +183,38 @@ export default function RelationshipForm({ id, relation }: Props) {
               handleChange={handleChange}
               handleBlur={handleBlur}
             />
+            <TextField
+              id="notes"
+              name="notes"
+              label="Notes"
+              multiline
+              minRows={3}
+              sx={{ mb: 2 }}
+              value={values.notes}
+              onChange={handleChange}
+              error={touched.notes && Boolean(errors.notes)}
+              helperText={touched.notes && errors.notes}
+            />
 
-            <Button
-              type="submit"
-              variant="contained"
-              color="success"
-              sx={{ maxWidth: 200 }}
-              disabled={isSubmitting}
-            >
-              {id ? 'Update' : 'Create'}
-            </Button>
+            <Box sx={{ display: 'flex' }}>
+              <Button
+                type="submit"
+                variant="contained"
+                color="success"
+                sx={{ maxWidth: 200 }}
+                disabled={isSubmitting}
+              >
+                {id ? 'Update' : 'Create'}
+              </Button>
+              <Button
+                variant="contained"
+                color="warning"
+                sx={{ maxWidth: 200, ml: 2 }}
+                onClick={handleDeletePerson}
+              >
+                Delete Relation
+              </Button>
+            </Box>
           </Box>
         </Form>
       )}

@@ -7,6 +7,7 @@ import { getRelationships } from '@/services/firebase/firebaseapi';
 import Loading from '@/components/Common/Loaders/Loading';
 import { Relation } from '@/types/types';
 import RelationshipForm from '@/components/Forms/RelationshipForm';
+import { RQ_KEY_RELATIONSHIP } from '@/constants/constants';
 
 type ViewRelationshipProps = {
   personId: string;
@@ -24,7 +25,7 @@ export default function ViewRelationship({
     isLoading,
     error,
     isError,
-  } = useQuery(['relationship', personId], () =>
+  } = useQuery([RQ_KEY_RELATIONSHIP, personId], () =>
     getRelationships(personId, 'peopleId'),
   );
 

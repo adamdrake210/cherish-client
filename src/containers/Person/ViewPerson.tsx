@@ -10,6 +10,7 @@ import { useRouter } from 'next/router';
 import Loading from '@/components/Common/Loaders/Loading';
 import { PersonType } from '@/types/types';
 import ViewRelationship from './ViewRelationship';
+import { RQ_KEY_PERSON } from '@/constants/constants';
 
 export default function ViewPerson() {
   const router = useRouter();
@@ -20,7 +21,7 @@ export default function ViewPerson() {
     isLoading,
     error,
     isError,
-  } = useQuery(['person', personId], () => getPerson(personId));
+  } = useQuery([RQ_KEY_PERSON, personId], () => getPerson(personId));
 
   return (
     <Loading error={error as Error} isError={isError} isLoading={isLoading}>

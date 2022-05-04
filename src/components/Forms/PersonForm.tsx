@@ -158,6 +158,8 @@ export default function PersonForm({ id, person }: Props) {
               name="notes"
               label="Notes"
               sx={{ mb: 2 }}
+              multiline
+              minRows={3}
               value={values.notes}
               onChange={handleChange}
               error={touched.notes && Boolean(errors.notes)}

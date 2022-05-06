@@ -14,9 +14,15 @@ type Props = {
   errors: any;
   values: any;
   handleChange: (event: SelectChangeEvent<string>, child: ReactNode) => void;
+  disabled: boolean;
 };
 
-export default function Birthday({ errors, handleChange, values }: Props) {
+export default function Birthday({
+  errors,
+  handleChange,
+  values,
+  disabled,
+}: Props) {
   return (
     <div>
       <div>
@@ -39,6 +45,7 @@ export default function Birthday({ errors, handleChange, values }: Props) {
               error={errors.birthday}
               onChange={handleChange}
               sx={{ mt: 1, mb: 2, minWidth: 60 }}
+              disabled={disabled}
             >
               {daysArray.slice(1).map(day => (
                 <MenuItem key={day} value={day}>
@@ -56,6 +63,7 @@ export default function Birthday({ errors, handleChange, values }: Props) {
               error={errors.birthmonth}
               onChange={handleChange}
               sx={{ mt: 1, mb: 2, ml: 2, minWidth: 200 }}
+              disabled={disabled}
             >
               {monthsArray.map(month => (
                 <MenuItem key={month} value={month}>
@@ -80,6 +88,7 @@ export default function Birthday({ errors, handleChange, values }: Props) {
             error={errors.birthyear}
             onChange={handleChange}
             sx={{ mt: 1, mb: 2, minWidth: 200 }}
+            disabled={disabled}
           >
             {createYearsArray('June 26, 1915 11:13:00')
               .reverse()

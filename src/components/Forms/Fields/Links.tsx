@@ -11,6 +11,7 @@ type Props = {
   errors: FormikErrors<PersonFormValues>;
   handleChange: (event: React.ChangeEvent<any>) => void;
   handleBlur: (event: React.FocusEvent<any>) => void;
+  disabled: boolean;
 };
 
 export default function Links({
@@ -19,6 +20,7 @@ export default function Links({
   errors,
   handleChange,
   handleBlur,
+  disabled,
 }: Props) {
   return (
     <Box
@@ -67,10 +69,12 @@ export default function Links({
                             error={Boolean(touchedLinkName && errorLinkName)}
                             onChange={handleChange}
                             onBlur={handleBlur}
+                            disabled={disabled}
                           />
                           <Tooltip title="Remove Link">
                             <IconButton
                               aria-label="Remove this link"
+                              disabled={disabled}
                               onClick={() => remove(index)} // remove a link from the list
                             >
                               <RemoveCircleOutlineIcon color="secondary" />
@@ -91,6 +95,7 @@ export default function Links({
                   <Tooltip title="Add new link">
                     <IconButton
                       aria-label="Add new link"
+                      disabled={disabled}
                       onClick={() => push('')} // insert an empty string at a position
                     >
                       <AddCircleOutlineIcon color="primary" />
@@ -102,6 +107,7 @@ export default function Links({
               <Tooltip title="Add new link">
                 <IconButton
                   aria-label="Add new link"
+                  disabled={disabled}
                   onClick={() => push('')} // insert an empty string at a position
                 >
                   <AddCircleOutlineIcon color="primary" />

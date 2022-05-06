@@ -25,7 +25,7 @@ export default function EditPerson() {
 
   return (
     <Loading error={error as Error} isError={isError} isLoading={isLoading}>
-      {person && (
+      {person?.data() ? (
         <Box>
           <Typography component="h1" variant="h3">
             Edit Person - {person.data().firstName}
@@ -42,10 +42,17 @@ export default function EditPerson() {
           <Box sx={{ my: 2 }}>
             <PersonForm id={personId} person={person.data() as PersonType} />
           </Box>
+
+          <ViewRelationship personId={personId} isEditing />
+        </Box>
+      ) : (
+        <Box sx={{ mx: 8, textAlign: 'center' }}>
+          <Typography variant="h6" color="error.light">
+            There was a problem finding this person. Please try again or check
+            that this person exists.
+          </Typography>
         </Box>
       )}
-
-      <ViewRelationship personId={personId} isEditing />
     </Loading>
   );
 }

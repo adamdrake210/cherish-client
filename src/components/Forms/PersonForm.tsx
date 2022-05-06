@@ -3,7 +3,11 @@ import { Form, Formik } from 'formik';
 import { useSnackbar } from 'notistack';
 import * as Yup from 'yup';
 
-import { addPerson, updatePerson } from '@/services/firebase/firebaseapi';
+import {
+  addPerson,
+  deleteDocument,
+  updatePerson,
+} from '@/services/firebase/firebaseapi';
 import RelationshipTypeField from './Fields/RelationshipTypeField';
 import Birthday from './Fields/Birthday';
 import Links from './Fields/Links';
@@ -12,6 +16,8 @@ import { ROUTE } from '@/routes/routeConstants';
 import { useRouter } from 'next/router';
 import { Box, Button, TextField } from '@mui/material';
 import { PersonType } from '@/types/types';
+import { useQueryClient } from 'react-query';
+import { RQ_KEY_PEOPLE } from '@/constants/constants';
 
 type Props = {
   id?: string;
@@ -23,8 +29,27 @@ export type PersonFormValues = PersonType;
 export default function PersonForm({ id, person }: Props) {
   const { enqueueSnackbar } = useSnackbar();
   const router = useRouter();
+  const queryClient = useQueryClient();
 
   const { user } = useUserContext();
+
+  const handleDeletePerson = () => {
+    deleteDocument(id, 'people')
+      .then(() => {
+        queryClient.refetchQueries([RQ_KEY_PEOPLE]);
+        enqueueSnackbar(`Successfully deleted ${person.firstName}`, {
+          variant: 'success',
+        });
+        router.push(ROUTE.HOME);
+      })
+      .catch(error => {
+        const errorMessage = error.message;
+        console.error('errorCode', errorMessage);
+        enqueueSnackbar(errorMessage, {
+          variant: 'error',
+        });
+      });
+  };
 
   const validationSchema = Yup.object().shape({
     firstName: Yup.string().required('First name is required'),
@@ -102,6 +127,7 @@ export default function PersonForm({ id, person }: Props) {
               flexDirection: 'column',
               maxWidth: 400,
               width: '100%',
+              my: 2,
             }}
           >
             <TextField
@@ -174,15 +200,27 @@ export default function PersonForm({ id, person }: Props) {
               handleBlur={handleBlur}
             />
 
-            <Button
-              type="submit"
-              variant="contained"
-              color="success"
-              sx={{ maxWidth: 200 }}
-              disabled={isSubmitting}
-            >
-              {id ? 'Update' : 'Create'}
-            </Button>
+            <Box sx={{ display: 'flex' }}>
+              <Button
+                type="submit"
+                variant="contained"
+                color="success"
+                sx={{ maxWidth: 200 }}
+                disabled={isSubmitting}
+              >
+                {id ? 'Update' : 'Create'}
+              </Button>
+              {id && (
+                <Button
+                  variant="contained"
+                  color="warning"
+                  sx={{ maxWidth: 200, ml: 2 }}
+                  onClick={handleDeletePerson}
+                >
+                  Delete Person
+                </Button>
+              )}
+            </Box>
           </Box>
         </Form>
       )}

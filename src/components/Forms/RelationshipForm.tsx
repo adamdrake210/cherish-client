@@ -31,19 +31,6 @@ export default function RelationshipForm({ id, relation }: Props) {
 
   const { user } = useUserContext();
 
-  const validationSchema = Yup.object().shape({
-    firstName: Yup.string().required('First name is required'),
-    lastName: Yup.string().required('Last name is required'),
-    relationshiptype: Yup.string(),
-    email: Yup.string().email('Invalid email address'),
-    links: Yup.array(Yup.string().url('Invalid url')),
-    address: Yup.string(),
-    notes: Yup.string(),
-    birthday: Yup.string(),
-    birthmonth: Yup.string(),
-    birthyear: Yup.string(),
-  });
-
   const handleDeletePerson = () => {
     deleteDocument(id, 'relationship')
       .then(() => {
@@ -60,6 +47,19 @@ export default function RelationshipForm({ id, relation }: Props) {
         });
       });
   };
+
+  const validationSchema = Yup.object().shape({
+    firstName: Yup.string().required('First name is required'),
+    lastName: Yup.string().required('Last name is required'),
+    relationshiptype: Yup.string(),
+    email: Yup.string().email('Invalid email address'),
+    links: Yup.array(Yup.string().url('Invalid url')),
+    address: Yup.string(),
+    notes: Yup.string(),
+    birthday: Yup.string(),
+    birthmonth: Yup.string(),
+    birthyear: Yup.string(),
+  });
 
   return (
     <Formik
@@ -125,6 +125,7 @@ export default function RelationshipForm({ id, relation }: Props) {
               flexDirection: 'column',
               maxWidth: 400,
               width: '100%',
+              my: 2,
             }}
           >
             <RelationshipTypeField

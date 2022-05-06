@@ -154,7 +154,11 @@ export default function RelationshipForm({ id, relation }: Props) {
               helperText={touched.lastName && errors.lastName}
             />
 
-            <Birthday />
+            <Birthday
+              errors={errors}
+              handleChange={handleChange}
+              values={values}
+            />
             <TextField
               id="email"
               name="email"
@@ -212,6 +216,7 @@ export default function RelationshipForm({ id, relation }: Props) {
                 color="warning"
                 sx={{ maxWidth: 200, ml: 2 }}
                 onClick={handleDeletePerson}
+                disabled={isSubmitting}
               >
                 Delete Relation
               </Button>

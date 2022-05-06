@@ -156,7 +156,11 @@ export default function PersonForm({ id, person }: Props) {
               handleChange={handleChange}
               values={values}
             />
-            <Birthday />
+            <Birthday
+              errors={errors}
+              handleChange={handleChange}
+              values={values}
+            />
             <TextField
               id="email"
               name="email"
@@ -216,6 +220,7 @@ export default function PersonForm({ id, person }: Props) {
                   color="warning"
                   sx={{ maxWidth: 200, ml: 2 }}
                   onClick={handleDeletePerson}
+                  disabled={isSubmitting}
                 >
                   Delete Person
                 </Button>

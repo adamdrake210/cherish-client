@@ -6,7 +6,11 @@ import { Box, Typography, Link as MuiLink } from '@mui/material';
 import { getPeople, getRelationships } from '@/services/firebase/firebaseapi';
 import { useUserContext } from '@/context/userContext';
 import { formatDate, sortBirthdays } from '@/helpers/dateHelpers';
-import { monthsArray } from '@/constants/constants';
+import {
+  monthsArray,
+  RQ_KEY_PEOPLE,
+  RQ_KEY_RELATIONSHIPS,
+} from '@/constants/constants';
 import AgeDetails from '@/components/Common/Details/AgeDetails';
 import Fabutton from '@/components/Common/Buttons/Fabutton';
 import { ROUTE } from '@/routes/routeConstants';
@@ -33,7 +37,7 @@ export default function CalendarList() {
     isLoading,
     error,
     isError,
-  } = useQuery(['relationships', user.uid], () =>
+  } = useQuery([RQ_KEY_RELATIONSHIPS, user.uid], () =>
     getRelationships(user.uid, 'userId'),
   );
 
@@ -42,7 +46,7 @@ export default function CalendarList() {
     isLoading: isLoadingPeople,
     error: errorPeople,
     isError: isErrorPeople,
-  } = useQuery(['people', user.uid], () => getPeople(user.uid));
+  } = useQuery([RQ_KEY_PEOPLE, user.uid], () => getPeople(user.uid));
 
   function makeBirthdayList(month) {
     return (

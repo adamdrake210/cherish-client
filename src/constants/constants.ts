@@ -39,3 +39,9 @@ export const monthsArray = [
   'November',
   'December',
 ];
+
+// react-query keys
+export const RQ_KEY_RELATIONSHIP = 'relationship';
+export const RQ_KEY_RELATIONSHIPS = 'relationships';
+export const RQ_KEY_PERSON = 'person';
+export const RQ_KEY_PEOPLE = 'people';

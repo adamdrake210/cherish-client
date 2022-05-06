@@ -2,4 +2,4 @@
 - Disable buttons and inputs when submitting forms
 - Birthday fields styling
 - Email notifications for bdays
-- github action for tsc in PRs and tests
+- github action for tsc

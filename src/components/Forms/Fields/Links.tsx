@@ -1,13 +1,6 @@
 import React from 'react';
 import { FieldArray, getIn, FormikErrors } from 'formik';
-import {
-  Box,
-  Button,
-  TextField,
-  Typography,
-  IconButton,
-  Tooltip,
-} from '@mui/material';
+import { Box, TextField, Typography, IconButton, Tooltip } from '@mui/material';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import { PersonFormValues } from '../PersonForm';
@@ -31,12 +24,13 @@ export default function Links({
     <Box
       sx={{
         display: 'flex',
-        flexDirection: 'column',
+        // flexDirection: 'column',
+        justifyContent: 'space-between',
         width: '100%',
         mb: 2,
       }}
     >
-      <Typography component="h3" variant="h5" gutterBottom>
+      <Typography component="h3" variant="h6" gutterBottom>
         Useful Links
       </Typography>
       <FieldArray name="links">
@@ -105,15 +99,14 @@ export default function Links({
                 </Box>
               </>
             ) : (
-              <Button
-                type="button"
-                onClick={() => push('')}
-                variant="contained"
-                color="secondary"
-              >
-                {/* show this when user has removed all links from the list */}
-                Add a link
-              </Button>
+              <Tooltip title="Add new link">
+                <IconButton
+                  aria-label="Add new link"
+                  onClick={() => push('')} // insert an empty string at a position
+                >
+                  <AddCircleOutlineIcon color="primary" />
+                </IconButton>
+              </Tooltip>
             )}
           </div>
         )}

@@ -11,6 +11,7 @@ import { PeopleDetail } from './PeopleDetail';
 import { ROUTE } from '@/routes/routeConstants';
 import { useQuery } from 'react-query';
 import Loading from '../Common/Loaders/Loading';
+import { RQ_KEY_PEOPLE } from '@/constants/constants';
 
 function People() {
   const [peopleList, setPeopleList] = useState([]);
@@ -22,7 +23,7 @@ function People() {
     isLoading,
     error,
     isError,
-  } = useQuery(['people', user.uid], () => getPeople(user.uid));
+  } = useQuery([RQ_KEY_PEOPLE, user.uid], () => getPeople(user.uid));
 
   function handleChange(e) {
     let currentList = [];

@@ -7,12 +7,14 @@ type Props = {
   errors: any;
   values: any;
   handleChange: (event: SelectChangeEvent<string>, child: ReactNode) => void;
+  disabled: boolean;
 };
 
 export default function RelationshipTypeField({
   errors,
   handleChange,
   values,
+  disabled,
 }: Props) {
   return (
     <>
@@ -28,6 +30,7 @@ export default function RelationshipTypeField({
         error={errors.relationshiptype}
         onChange={handleChange}
         sx={{ mb: 2 }}
+        disabled={disabled}
       >
         {relationshipTypeArray.map(relationship => (
           <MenuItem key={relationship} value={relationship}>

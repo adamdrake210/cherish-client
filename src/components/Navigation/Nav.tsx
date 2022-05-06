@@ -14,7 +14,7 @@ import { AccountCircle } from '@mui/icons-material';
 import Link from 'next/link';
 
 import { useUserContext } from '@/context/userContext';
-import Logout from '@/components/Auth/Logout';
+import LogoutButton from '@/components/Auth/LogoutButton';
 import { NavDrawer } from './NavDrawer';
 import { LoggedInLinks } from './LoggedInLinks';
 import { LoggedOutLinks } from './LoggedOutLinks';
@@ -127,20 +127,14 @@ const Nav = () => {
                   <Menu
                     id="menu-appbar"
                     anchorEl={anchorEl}
-                    anchorOrigin={{
-                      vertical: 'top',
-                      horizontal: 'right',
-                    }}
-                    keepMounted
-                    transformOrigin={{
-                      vertical: 'top',
-                      horizontal: 'right',
-                    }}
                     open={open}
                     onClose={handleClose}
+                    keepMounted
+                    transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+                    anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
                   >
                     <MenuItem onClick={handleClose}>
-                      {user && <Logout />}
+                      <LogoutButton />
                     </MenuItem>
                   </Menu>
                 </div>

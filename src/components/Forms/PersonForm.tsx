@@ -139,6 +139,7 @@ export default function PersonForm({ id, person }: Props) {
               onChange={handleChange}
               error={touched.firstName && Boolean(errors.firstName)}
               helperText={touched.firstName && errors.firstName}
+              disabled={isSubmitting}
             />
             <TextField
               id="lastName"
@@ -149,14 +150,21 @@ export default function PersonForm({ id, person }: Props) {
               onChange={handleChange}
               error={touched.lastName && Boolean(errors.lastName)}
               helperText={touched.lastName && errors.lastName}
+              disabled={isSubmitting}
             />
 
             <RelationshipTypeField
               errors={errors}
               handleChange={handleChange}
               values={values}
+              disabled={isSubmitting}
             />
-            <Birthday />
+            <Birthday
+              errors={errors}
+              handleChange={handleChange}
+              values={values}
+              disabled={isSubmitting}
+            />
             <TextField
               id="email"
               name="email"
@@ -166,6 +174,7 @@ export default function PersonForm({ id, person }: Props) {
               onChange={handleChange}
               error={touched.email && Boolean(errors.email)}
               helperText={touched.email && errors.email}
+              disabled={isSubmitting}
             />
 
             <TextField
@@ -177,6 +186,16 @@ export default function PersonForm({ id, person }: Props) {
               onChange={handleChange}
               error={touched.address && Boolean(errors.address)}
               helperText={touched.address && errors.address}
+              disabled={isSubmitting}
+            />
+
+            <Links
+              values={values}
+              touched={touched}
+              errors={errors}
+              handleChange={handleChange}
+              handleBlur={handleBlur}
+              disabled={isSubmitting}
             />
 
             <TextField
@@ -190,14 +209,7 @@ export default function PersonForm({ id, person }: Props) {
               onChange={handleChange}
               error={touched.notes && Boolean(errors.notes)}
               helperText={touched.notes && errors.notes}
-            />
-
-            <Links
-              values={values}
-              touched={touched}
-              errors={errors}
-              handleChange={handleChange}
-              handleBlur={handleBlur}
+              disabled={isSubmitting}
             />
 
             <Box sx={{ display: 'flex' }}>
@@ -216,6 +228,7 @@ export default function PersonForm({ id, person }: Props) {
                   color="warning"
                   sx={{ maxWidth: 200, ml: 2 }}
                   onClick={handleDeletePerson}
+                  disabled={isSubmitting}
                 >
                   Delete Person
                 </Button>

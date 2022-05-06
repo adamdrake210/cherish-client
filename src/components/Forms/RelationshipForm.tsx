@@ -132,6 +132,7 @@ export default function RelationshipForm({ id, relation }: Props) {
               errors={errors}
               handleChange={handleChange}
               values={values}
+              disabled={isSubmitting}
             />
             <TextField
               id="firstName"
@@ -142,6 +143,7 @@ export default function RelationshipForm({ id, relation }: Props) {
               onChange={handleChange}
               error={touched.firstName && Boolean(errors.firstName)}
               helperText={touched.firstName && errors.firstName}
+              disabled={isSubmitting}
             />
             <TextField
               id="lastName"
@@ -152,9 +154,15 @@ export default function RelationshipForm({ id, relation }: Props) {
               onChange={handleChange}
               error={touched.lastName && Boolean(errors.lastName)}
               helperText={touched.lastName && errors.lastName}
+              disabled={isSubmitting}
             />
 
-            <Birthday />
+            <Birthday
+              errors={errors}
+              handleChange={handleChange}
+              values={values}
+              disabled={isSubmitting}
+            />
             <TextField
               id="email"
               name="email"
@@ -164,6 +172,7 @@ export default function RelationshipForm({ id, relation }: Props) {
               onChange={handleChange}
               error={touched.email && Boolean(errors.email)}
               helperText={touched.email && errors.email}
+              disabled={isSubmitting}
             />
 
             <TextField
@@ -175,6 +184,7 @@ export default function RelationshipForm({ id, relation }: Props) {
               onChange={handleChange}
               error={touched.address && Boolean(errors.address)}
               helperText={touched.address && errors.address}
+              disabled={isSubmitting}
             />
 
             <Links
@@ -183,6 +193,7 @@ export default function RelationshipForm({ id, relation }: Props) {
               errors={errors}
               handleChange={handleChange}
               handleBlur={handleBlur}
+              disabled={isSubmitting}
             />
             <TextField
               id="notes"
@@ -195,6 +206,7 @@ export default function RelationshipForm({ id, relation }: Props) {
               onChange={handleChange}
               error={touched.notes && Boolean(errors.notes)}
               helperText={touched.notes && errors.notes}
+              disabled={isSubmitting}
             />
 
             <Box sx={{ display: 'flex' }}>
@@ -212,6 +224,7 @@ export default function RelationshipForm({ id, relation }: Props) {
                 color="warning"
                 sx={{ maxWidth: 200, ml: 2 }}
                 onClick={handleDeletePerson}
+                disabled={isSubmitting}
               >
                 Delete Relation
               </Button>

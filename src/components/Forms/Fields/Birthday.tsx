@@ -1,61 +1,114 @@
-import React from 'react';
-import { Field, ErrorMessage } from 'formik';
+import React, { ReactNode } from 'react';
 import { daysArray, monthsArray } from '@/constants/constants';
 import { createYearsArray } from '@/helpers/dateHelpers';
-import { Typography } from '@mui/material';
+import {
+  Box,
+  InputLabel,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+  Typography,
+} from '@mui/material';
 
-export default function Birthday() {
+type Props = {
+  errors: any;
+  values: any;
+  handleChange: (event: SelectChangeEvent<string>, child: ReactNode) => void;
+  disabled: boolean;
+};
+
+export default function Birthday({
+  errors,
+  handleChange,
+  values,
+  disabled,
+}: Props) {
   return (
-    <div className="field-container">
-      <div className="field field-birthday">
-        <div className="input-fields">
-          <label htmlFor="birthday">Birthday</label>
-          <Field as="select" name="birthday" className="month-input">
-            <option value="" disabled hidden>
-              Day
-            </option>
-            {daysArray.slice(1).map(day => (
-              <option key={day} value={day}>
-                {day}
-              </option>
-            ))}
-          </Field>
-          <Field as="select" name="birthmonth" className="month-input">
-            <option value="" disabled hidden>
-              Month
-            </option>
-            {monthsArray.map(month => (
-              <option key={month} value={month}>
-                {month}
-              </option>
-            ))}
-          </Field>
-        </div>
+    <div>
+      <div>
+        <Box>
+          <InputLabel htmlFor="birthday" id="action-type-select-label">
+            Birthday
+          </InputLabel>
+          <Box
+            sx={{
+              display: 'flex',
+              width: '100%',
+            }}
+          >
+            <Select
+              name="birthday"
+              labelId="action-type-select-label"
+              id="action-type-select"
+              label="Day"
+              value={values.birthday}
+              error={errors.birthday}
+              onChange={handleChange}
+              sx={{ mt: 1, mb: 2, minWidth: 60 }}
+              disabled={disabled}
+            >
+              {daysArray.slice(1).map(day => (
+                <MenuItem key={day} value={day}>
+                  {day}
+                </MenuItem>
+              ))}
+            </Select>
 
-        <div className="input-fields">
-          <label htmlFor="birthyear">Year of Birth</label>
+            <Select
+              name="birthmonth"
+              labelId="action-type-select-label"
+              id="action-type-select"
+              label="Month"
+              value={values.birthmonth}
+              error={errors.birthmonth}
+              onChange={handleChange}
+              sx={{ mt: 1, mb: 2, ml: 2, minWidth: 200 }}
+              disabled={disabled}
+            >
+              {monthsArray.map(month => (
+                <MenuItem key={month} value={month}>
+                  {month}
+                </MenuItem>
+              ))}
+            </Select>
+          </Box>
+        </Box>
 
-          <Field as="select" name="birthyear" className="month-input">
-            <option value="" disabled hidden>
-              Year
-            </option>
+        <div>
+          <InputLabel htmlFor="birthyear" id="action-type-select-label">
+            Year of Birth
+          </InputLabel>
+
+          <Select
+            name="birthyear"
+            labelId="action-type-select-label"
+            id="action-type-select"
+            label="Month"
+            value={values.birthyear}
+            error={errors.birthyear}
+            onChange={handleChange}
+            sx={{ mt: 1, mb: 2, minWidth: 200 }}
+            disabled={disabled}
+          >
             {createYearsArray('June 26, 1915 11:13:00')
               .reverse()
               .map(year => (
-                <option key={year} value={year}>
+                <MenuItem key={year} value={year}>
                   {year}
-                </option>
+                </MenuItem>
               ))}
-          </Field>
+          </Select>
         </div>
-        <div className="helper-label">
-          <Typography component="p" variant="body2" gutterBottom>
+        <Box sx={{ mb: 2 }}>
+          <Typography
+            component="p"
+            variant="body2"
+            gutterBottom
+            sx={{ fontStyle: 'italic' }}
+          >
             If you don&apos;t know the brithday you can leave it blank
           </Typography>
-        </div>
-      </div>
-      <div className="error-message">
-        <ErrorMessage name="birthday" component="div" />
+        </Box>
       </div>
     </div>
   );

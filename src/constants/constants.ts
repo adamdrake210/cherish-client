@@ -45,3 +45,7 @@ export const RQ_KEY_RELATIONSHIP = 'relationship';
 export const RQ_KEY_RELATIONSHIPS = 'relationships';
 export const RQ_KEY_PERSON = 'person';
 export const RQ_KEY_PEOPLE = 'people';
+
+// URLs
+export const LOCAL_DEV_URL = 'http://localhost:3000/';
+export const PROD_URL = 'https://cherish-client.vercel.app/';

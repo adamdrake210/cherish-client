@@ -1,2 +1,1 @@
 - Email notifications for bdays
-- github action for tsc

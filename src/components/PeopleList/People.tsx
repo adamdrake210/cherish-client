@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { Box, List, Typography, Link as MuiLink } from '@mui/material';
+import { Box, List, Typography, Link as MuiLink, Button } from '@mui/material';
 
 import { getPeople } from '@/services/firebase/firebaseapi';
 import { useUserContext } from '@/context/userContext';
@@ -11,7 +11,7 @@ import { PeopleDetail } from './PeopleDetail';
 import { ROUTE } from '@/routes/routeConstants';
 import { useQuery } from 'react-query';
 import Loading from '../Common/Loaders/Loading';
-import { RQ_KEY_PEOPLE } from '@/constants/constants';
+import { LOCAL_DEV_URL, PROD_URL, RQ_KEY_PEOPLE } from '@/constants/constants';
 
 function People() {
   const [peopleList, setPeopleList] = useState([]);
@@ -48,6 +48,25 @@ function People() {
     setFilteredList(sortedNewList);
   }
 
+  const handleEmailSend = async () => {
+    const res = await fetch(
+      `${
+        process.env.NODE_ENV !== 'production' ? LOCAL_DEV_URL : PROD_URL
+      }api/send-email-api`,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        method: 'POST',
+      },
+    );
+
+    const formattedResponse = await res.json();
+    // eslint-disable-next-line no-console
+    console.log('formattedResponse:', formattedResponse);
+    return formattedResponse;
+  };
+
   useEffect(() => {
     setPeopleList(people?.docs.map(person => person));
     setFilteredList(people?.docs.map(person => person));
@@ -55,6 +74,10 @@ function People() {
 
   return (
     <Loading error={error as Error} isError={isError} isLoading={isLoading}>
+      <Button variant="contained" onClick={handleEmailSend}>
+        Send Email
+      </Button>
+
       <SearchField handleChange={handleChange} />
       <Typography component="h2" variant="h4" sx={{ mt: 2 }}>
         All Contacts

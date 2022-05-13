@@ -59,7 +59,7 @@ function People() {
       <Typography component="h2" variant="h4" sx={{ mt: 2 }}>
         All Contacts
       </Typography>
-      {filteredList?.length > 0 ? (
+      {filteredList && sortLastName(filteredList).length > 0 ? (
         <List sx={{ maxWidth: 500, width: '100%', mt: 0 }}>
           {filteredList.map(person => (
             <PeopleDetail key={person.id} person={person} />

@@ -1,9 +1,9 @@
 export function sortLastName(array: Array<any>) {
   return array.sort((a, b) => {
-    if (a.lastName > b.lastName) {
+    if (a.data().lastName > b.data().lastName) {
       return 1;
     }
-    if (b.lastName > a.lastName) {
+    if (b.data().lastName > a.data().lastName) {
       return -1;
     }
     return 0;
